@@ -35,3 +35,10 @@ Photos are exported at 2000px (full) and 900px (thumbnail), converted to sRGB, w
 ## Hosting
 
 GitHub Pages from `main` (root) with the custom domain `dorianbailey.com`. DNS lives at Squarespace: four A records to 185.199.108–111.153 and `www` CNAME to `dorianbailey.github.io`.
+
+## Features
+
+- **What would I keep?** (`/better-selling/`, `js/calc.js`): payout = total sales - 20% - $995, the published standard terms.
+- **Roll a detour** (`/oddway/`, `js/detour.js`): deals one random public stop live from OddWay's Supabase index, read-only with the project's publishable key. Category counts in the script are only used to pick a random offset.
+- **The television** (`/metazoo/`, `js/tv.js`): plays the latest Bailey MetaZoo shorts from YouTube's privacy-enhanced player. `tools/youtube.py` refreshes `assets/data/youtube.json` from the channel's public feed; `.github/workflows/youtube.yml` runs it every six hours, rebuilds the pages and publishes.
+- **Easter eggs** (`js/main.js`): Mothman's eyes in the footer, and typing "oddway" anywhere.

@@ -122,6 +122,36 @@
       </div>
     </section>
 
+    <section class="section band--dark" aria-labelledby="calc-title">
+      <div class="wrap split calc" data-calc data-fee="995" data-rate="0.2">
+        <div>
+          <h2 class="section-title" id="calc-title">What would I keep?</h2>
+          <p class="section-intro">Slide to what you think your sale might bring in. The math uses the standard terms: a $995 flat fee and 20% of total sales.</p>
+          <label class="calc__label" for="calc-total">Estimated total sales</label>
+          <div class="calc__input">
+            <span aria-hidden="true">$</span>
+            <input id="calc-total" type="number" inputmode="numeric" min="0" max="250000" step="250" value="10000">
+          </div>
+          <input class="calc__range" type="range" min="2000" max="40000" step="250" value="10000" aria-label="Estimated total sales" data-calc-range>
+          <div class="calc__presets">
+            <button type="button" data-calc-preset="8000">$8,000 <em>a past weekend</em></button>
+            <button type="button" data-calc-preset="16000">$16,000 <em>the best weekend so far</em></button>
+          </div>
+        </div>
+        <div class="calc__result" aria-live="polite">
+          <p class="calc__kicker">You would keep</p>
+          <p class="calc__big" data-calc-out="keep">$7,005</p>
+          <dl class="calc__lines">
+            <div><dt>Total sales</dt><dd data-calc-out="total">$10,000</dd></div>
+            <div><dt>Commission, 20%</dt><dd data-calc-out="commission">&minus;$2,000</dd></div>
+            <div><dt>Flat fee</dt><dd>&minus;$995</dd></div>
+          </dl>
+          <p class="calc__note" data-calc-out="note">An estimate, not a quote. Removal of whatever is left is free either way.</p>
+          <div class="btn-row"><a class="btn" href="https://bettersellingwithbailey.com" rel="noopener">Book a walkthrough</a></div>
+        </div>
+      </div>
+    </section>
+
     <section class="section band--raised section--rule" aria-labelledby="clients-title">
       <div class="wrap split">
         <div>
@@ -163,6 +193,7 @@
   </main>
 
   <footer class="site-footer">
+    <span class="mothman" aria-hidden="true"><i></i><i></i></span>
     <div class="wrap site-footer__inner">
       <div class="site-footer__mark">
         <svg class="seal seal--deboss" width="56" height="56" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
@@ -186,5 +217,6 @@
   </footer>
 
   <script src="../js/main.js" defer></script>
+  <script src="../js/calc.js" defer></script>
 </body>
 </html>

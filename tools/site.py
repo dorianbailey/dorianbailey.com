@@ -111,6 +111,7 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
   </main>
 
   <footer class="site-footer">
+    <span class="mothman" aria-hidden="true"><i></i><i></i></span>
     <div class="wrap site-footer__inner">
       <div class="site-footer__mark">
         {seal(56, "seal seal--deboss")}
@@ -336,7 +337,7 @@ ORDER = [("better-selling", "I", "Better Selling With Bailey"),
          ("photography", "IV", "Photography")]
 
 
-def entry(slug, key, title, desc, standfirst, prose, particulars, plates, links, head_print=None, extra=""):
+def entry(slug, key, title, desc, standfirst, prose, particulars, plates, links, head_print=None, extra="", js=None):
     idx = [o[0] for o in ORDER].index(slug)
     num = ORDER[idx][1]
     prev_ = ORDER[idx - 1] if idx > 0 else None
@@ -386,7 +387,7 @@ def entry(slug, key, title, desc, standfirst, prose, particulars, plates, links,
     </section>
 """
 
-    page(f"{slug}/index.html", key, f"{title} | Dorian Bailey", desc, f"""{head}
+    page(f"{slug}/index.html", key, f"{title} | Dorian Bailey", desc, extra_js=(f'  <script src="../js/{js}" defer></script>\n' if js else ""), body=f"""{head}
 
     <section class="section">
       <div class="wrap entry">
@@ -452,6 +453,36 @@ bswb_extra = f"""
       </div>
     </section>
 
+    <section class="section band--dark" aria-labelledby="calc-title">
+      <div class="wrap split calc" data-calc data-fee="995" data-rate="0.2">
+        <div>
+          <h2 class="section-title" id="calc-title">What would I keep?</h2>
+          <p class="section-intro">Slide to what you think your sale might bring in. The math uses the standard terms: a $995 flat fee and 20% of total sales.</p>
+          <label class="calc__label" for="calc-total">Estimated total sales</label>
+          <div class="calc__input">
+            <span aria-hidden="true">$</span>
+            <input id="calc-total" type="number" inputmode="numeric" min="0" max="250000" step="250" value="10000">
+          </div>
+          <input class="calc__range" type="range" min="2000" max="40000" step="250" value="10000" aria-label="Estimated total sales" data-calc-range>
+          <div class="calc__presets">
+            <button type="button" data-calc-preset="8000">$8,000 <em>a past weekend</em></button>
+            <button type="button" data-calc-preset="16000">$16,000 <em>the best weekend so far</em></button>
+          </div>
+        </div>
+        <div class="calc__result" aria-live="polite">
+          <p class="calc__kicker">You would keep</p>
+          <p class="calc__big" data-calc-out="keep">$7,005</p>
+          <dl class="calc__lines">
+            <div><dt>Total sales</dt><dd data-calc-out="total">$10,000</dd></div>
+            <div><dt>Commission, 20%</dt><dd data-calc-out="commission">&minus;$2,000</dd></div>
+            <div><dt>Flat fee</dt><dd>&minus;$995</dd></div>
+          </dl>
+          <p class="calc__note" data-calc-out="note">An estimate, not a quote. Removal of whatever is left is free either way.</p>
+          <div class="btn-row"><a class="btn" href="{LINKS['bswb']}" rel="noopener">Book a walkthrough</a></div>
+        </div>
+      </div>
+    </section>
+
     <section class="section band--raised section--rule" aria-labelledby="clients-title">
       <div class="wrap split">
         <div>
@@ -495,7 +526,7 @@ entry("better-selling", "selling", "Better Selling With Bailey",
       [],
       [("Visit bettersellingwithbailey.com", LINKS["bswb"]), ("Facebook", LINKS["bswb_fb"])],
       head_print=("../assets/img/dorian-bailey.jpg", "Dorian Bailey in a Better Selling With Bailey polo", 900, 1200),
-      extra=bswb_extra)
+      extra=bswb_extra, js="calc.js")
 
 # ---------------------------------------------------------------- II. Take The OddWay
 ODD_STEPS = [
@@ -532,6 +563,33 @@ odd_extra = f"""
       </div>
     </section>
 
+    <section class="section band--dark" aria-labelledby="detour-title">
+      <div class="wrap detour" data-detour>
+        <div class="detour__controls">
+          <h2 class="section-title" id="detour-title">Roll a detour</h2>
+          <p class="section-intro">One stop at a time, dealt live from OddWay&rsquo;s index of nearly 7,000 places. Pick a kind of strange, or leave it to chance.</p>
+          <div class="chips" role="group" aria-label="Kind of stop">
+            <button type="button" class="chip" data-cat="" aria-pressed="true">Any</button>
+            <button type="button" class="chip" data-cat="cryptids" aria-pressed="false">Cryptids</button>
+            <button type="button" class="chip" data-cat="folklore" aria-pressed="false">Folklore</button>
+            <button type="button" class="chip" data-cat="haunted" aria-pressed="false">Haunted</button>
+            <button type="button" class="chip" data-cat="ufos" aria-pressed="false">UFOs</button>
+            <button type="button" class="chip" data-cat="weird-history" aria-pressed="false">Weird history</button>
+            <button type="button" class="chip" data-cat="museums" aria-pressed="false">Museums</button>
+            <button type="button" class="chip" data-cat="roadside-oddities" aria-pressed="false">Roadside oddities</button>
+          </div>
+          <div class="btn-row"><button type="button" class="btn" data-detour-roll>Roll a detour</button></div>
+        </div>
+        <article class="atlas" aria-live="polite" data-detour-card>
+          <p class="atlas__cat" data-f="cat">Stop no. &mdash;</p>
+          <h3 class="atlas__name" data-f="name">Somewhere strange</h3>
+          <p class="atlas__place" data-f="place">Anywhere in the United States</p>
+          <p class="atlas__desc" data-f="desc">Press the button and OddWay will deal you a real stop: a cryptid museum, a haunted inn, a ship parked on a bluff.</p>
+          <p class="atlas__go"><a data-f="link" href="https://taketheoddway.com" rel="noopener">Open OddWay</a></p>
+        </article>
+      </div>
+    </section>
+
     <section class="section section--rule" aria-labelledby="next-title">
       <div class="wrap split">
         <h2 class="section-title" id="next-title">Next on the road</h2>
@@ -558,12 +616,9 @@ entry("oddway", "oddway", "Take The OddWay",
        P("north-east", 2, "<em>Halloween, from North East</em>")],
       [("Visit taketheoddway.com", LINKS["oddway"]), ("Shop the OddWay", LINKS["shop"])],
       head_print=HP("green-eyes", 7),
-      extra=odd_extra)
+      extra=odd_extra, js="detour.js")
 
 # ---------------------------------------------------------------- III. Bailey MetaZoo
-FILMS = ["The Squonk Might Be the Saddest Cryptid Ever", "Old Scratch Is Back in MetaZoo",
-         "Ohio Has a Frogman Problem: the Loveland Frogman", "What Cryptid Haunts Your State?",
-         "Escape Polybius: a ten-pack giveaway", "Salem Nights, a new limited release"]
 VHS = [
     ("The tape", "Hands slide a cassette into a VCR, shot moody and close, with the deck&rsquo;s clunk on the beat."),
     ("Warm-up", "An old CRT clicks on and warms to snow as the camera pushes toward the glass."),
@@ -572,7 +627,57 @@ VHS = [
     ("The hero", "Tracking drops, a beat of dead air, then the hero card slams in with its own sound."),
     ("Switch-off", "The picture squeezes to a line, then a dot, and loops back to the start."),
 ]
+YT = json.load(open(ROOT / "assets/data/youtube.json"))["videos"]
+MON = ["JAN.", "FEB.", "MAR.", "APR.", "MAY", "JUNE", "JULY", "AUG.", "SEPT.", "OCT.", "NOV.", "DEC."]
+MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+
+def osd_date(d):
+    y, m, dd = d.split("-")
+    return f"{MON[int(m) - 1]} {int(dd)} {y}"
+
+
+def long_date(d):
+    y, m, dd = d.split("-")
+    return f"{int(dd)} {MONTHS[int(m) - 1]} {y}"
+
+
+tapes = "\n".join(f"""            <li><button type="button" class="tape" data-id="{v['id']}" data-title="{html.escape(v['title'])}" data-date="{osd_date(v['published'])}" aria-pressed="{'true' if i == 0 else 'false'}">
+              <span class="tape__title">{html.escape(v['title'])}</span>
+              <span class="tape__date">{long_date(v['published'])}</span>
+            </button></li>""" for i, v in enumerate(YT[:8]))
+latest = YT[0]
+
 mz_extra = f"""
+    <section class="section band--dark" aria-labelledby="tv-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 class="section-title" id="tv-title">Now playing</h2>
+          <a class="text-link" href="{LINKS['yt']}" rel="noopener">The channel on YouTube</a>
+        </div>
+        <div class="tv-set">
+          <div class="tv" data-tv>
+            <div class="tv__cabinet">
+              <div class="tv__screen">
+                <canvas class="tv__static" width="160" height="120" aria-hidden="true"></canvas>
+                <div class="tv__player" data-tv-player></div>
+                <div class="tv__osd" aria-hidden="true"><span class="tv__osd-tl" data-tv-state>STOP &#9632;</span><span class="tv__osd-bl" data-tv-date>{osd_date(latest['published'])}</span></div>
+                <button class="tv__insert" type="button" data-tv-insert>Insert tape</button>
+              </div>
+              <div class="tv__panel" aria-hidden="true"><span class="tv__knob"></span><span class="tv__knob tv__knob--small"></span><span class="tv__grille"></span></div>
+            </div>
+            <p class="tv__now"><em>On the tape</em> <span data-tv-title>{html.escape(latest['title'])}</span></p>
+          </div>
+          <div class="tv-guide">
+            <p class="tv-guide__head">Tapes, newest first</p>
+            <ol class="tapes">
+{tapes}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section section--rule" aria-labelledby="vhs-title">
       <div class="wrap">
         <h2 class="section-title" id="vhs-title">The VHS reveal</h2>
@@ -583,16 +688,10 @@ mz_extra = f"""
       </div>
     </section>
 
-    <section class="section band--raised section--rule" aria-labelledby="films-title">
+    <section class="section band--raised section--rule" aria-labelledby="assign-title">
       <div class="wrap split">
+        <h2 class="section-title" id="assign-title">On assignment</h2>
         <div>
-          <h2 class="section-title" id="films-title">Recent films</h2>
-          <ul class="events">
-{chr(10).join(f'            <li><a href="{LINKS["yt"]}" rel="noopener">{f}</a></li>' for f in FILMS)}
-          </ul>
-        </div>
-        <div>
-          <h2 class="section-title">On assignment</h2>
           <p class="section-intro">Event photography for MetaZoo TCG itself.</p>
           <ul class="events">
 {events_list("../photography/")}
@@ -618,7 +717,7 @@ entry("metazoo", "metazoo", "Bailey MetaZoo",
        P("green-eyes", 14, "<em>A MetaZoo card, from Green Eyes</em>")],
       [("Watch on YouTube", LINKS["yt"]), ("Follow on Instagram", LINKS["ig"])],
       head_print=HP("legends", 2),
-      extra=mz_extra)
+      extra=mz_extra, js="tv.js")
 
 # ===================================================================== Photographs
 index_items, sections = [], []

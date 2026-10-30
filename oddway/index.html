@@ -123,6 +123,33 @@
       </div>
     </section>
 
+    <section class="section band--dark" aria-labelledby="detour-title">
+      <div class="wrap detour" data-detour>
+        <div class="detour__controls">
+          <h2 class="section-title" id="detour-title">Roll a detour</h2>
+          <p class="section-intro">One stop at a time, dealt live from OddWay&rsquo;s index of nearly 7,000 places. Pick a kind of strange, or leave it to chance.</p>
+          <div class="chips" role="group" aria-label="Kind of stop">
+            <button type="button" class="chip" data-cat="" aria-pressed="true">Any</button>
+            <button type="button" class="chip" data-cat="cryptids" aria-pressed="false">Cryptids</button>
+            <button type="button" class="chip" data-cat="folklore" aria-pressed="false">Folklore</button>
+            <button type="button" class="chip" data-cat="haunted" aria-pressed="false">Haunted</button>
+            <button type="button" class="chip" data-cat="ufos" aria-pressed="false">UFOs</button>
+            <button type="button" class="chip" data-cat="weird-history" aria-pressed="false">Weird history</button>
+            <button type="button" class="chip" data-cat="museums" aria-pressed="false">Museums</button>
+            <button type="button" class="chip" data-cat="roadside-oddities" aria-pressed="false">Roadside oddities</button>
+          </div>
+          <div class="btn-row"><button type="button" class="btn" data-detour-roll>Roll a detour</button></div>
+        </div>
+        <article class="atlas" aria-live="polite" data-detour-card>
+          <p class="atlas__cat" data-f="cat">Stop no. &mdash;</p>
+          <h3 class="atlas__name" data-f="name">Somewhere strange</h3>
+          <p class="atlas__place" data-f="place">Anywhere in the United States</p>
+          <p class="atlas__desc" data-f="desc">Press the button and OddWay will deal you a real stop: a cryptid museum, a haunted inn, a ship parked on a bluff.</p>
+          <p class="atlas__go"><a data-f="link" href="https://taketheoddway.com" rel="noopener">Open OddWay</a></p>
+        </article>
+      </div>
+    </section>
+
     <section class="section section--rule" aria-labelledby="next-title">
       <div class="wrap split">
         <h2 class="section-title" id="next-title">Next on the road</h2>
@@ -159,6 +186,7 @@
   </main>
 
   <footer class="site-footer">
+    <span class="mothman" aria-hidden="true"><i></i><i></i></span>
     <div class="wrap site-footer__inner">
       <div class="site-footer__mark">
         <svg class="seal seal--deboss" width="56" height="56" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
@@ -182,5 +210,6 @@
   </footer>
 
   <script src="../js/main.js" defer></script>
+  <script src="../js/detour.js" defer></script>
 </body>
 </html>
