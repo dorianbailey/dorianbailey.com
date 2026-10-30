@@ -15,7 +15,7 @@ NAV = [
     ("better-selling/", "Better Selling", "selling"),
     ("oddway/", "OddWay", "oddway"),
     ("metazoo/", "MetaZoo", "metazoo"),
-    ("photography/", "Photographs", "photo"),
+    ("photography/", "Photography", "photo"),
     ("record/", "Record", "record"),
     ("index.html#correspondence", "Contact", "contact"),
 ]
@@ -29,16 +29,26 @@ LINKS = {
     "erie": "https://www.yourerie.com/news/local-news/star-wars-sale-draws-crowd-in-north-east/",
     "oddway": "https://taketheoddway.com",
     "shop": "https://shoptheoddway.com",
+    "linkedin": "https://www.linkedin.com/in/dorian-bailey/",
+    "vanta": "https://vantahouse.studio",
 }
 
 
-def seal(size, cls="seal"):
-    return f"""<svg class="{cls}" width="{size}" height="{size}" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-          <circle cx="60" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="1.6"/>
-          <circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-width=".8"/>
-          <circle cx="60" cy="6.5" r="1.8" fill="currentColor"/><circle cx="60" cy="113.5" r="1.8" fill="currentColor"/>
-          <circle cx="6.5" cy="60" r="1.8" fill="currentColor"/><circle cx="113.5" cy="60" r="1.8" fill="currentColor"/>
-          <text x="60" y="73" text-anchor="middle" font-family="'Libre Caslon Display', Georgia, serif" font-size="42" fill="currentColor">DB</text>
+def seal(size, cls="seal", foil=None):
+    """The DB monogram seal. foil='<id>' paints it with a gold-foil gradient."""
+    paint = f"url(#{foil})" if foil else "currentColor"
+    defs = f"""
+          <defs><linearGradient id="{foil}" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#8a6b32"/><stop offset=".28" stop-color="#e2cb8c"/>
+            <stop offset=".5" stop-color="#a8894b"/><stop offset=".72" stop-color="#ead7a2"/>
+            <stop offset="1" stop-color="#7d612c"/>
+          </linearGradient></defs>""" if foil else ""
+    return f"""<svg class="{cls}" width="{size}" height="{size}" viewBox="0 0 120 120" aria-hidden="true" focusable="false">{defs}
+          <circle class="seal__ring" pathLength="1" cx="60" cy="60" r="57" fill="none" stroke="{paint}" stroke-width="1.6"/>
+          <circle class="seal__ring seal__ring--inner" pathLength="1" cx="60" cy="60" r="50" fill="none" stroke="{paint}" stroke-width=".8"/>
+          <g class="seal__dots" fill="{paint}"><circle cx="60" cy="6.5" r="1.8"/><circle cx="60" cy="113.5" r="1.8"/>
+          <circle cx="6.5" cy="60" r="1.8"/><circle cx="113.5" cy="60" r="1.8"/></g>
+          <text class="seal__mono" x="60" y="73" text-anchor="middle" font-family="'Libre Caslon Display', Georgia, serif" font-size="42" fill="{paint}">DB</text>
         </svg>"""
 
 
@@ -48,7 +58,7 @@ def thumb_dims(p):
     return round(w * s), round(h * s)
 
 
-def page(path, key, title, desc, body, extra_js="", og_image="assets/img/dorian-bailey.jpg"):
+def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card.jpg"):
     depth = path.count("/")
     p = "/" if path == "404.html" else "../" * depth
     canonical = SITE + "/" + path.replace("index.html", "")
@@ -69,7 +79,10 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/dorian-
   <meta property="og:description" content="{desc}">
   <meta property="og:url" content="{canonical}">
   <meta property="og:image" content="{SITE}/{og_image}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#1e3a2b">
   <link rel="icon" href="{p}favicon.svg" type="image/svg+xml">
   <link rel="preload" href="{p}assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{p}assets/fonts/libre-caslon-text-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -100,11 +113,12 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/dorian-
   <footer class="site-footer">
     <div class="wrap site-footer__inner">
       <div class="site-footer__mark">
-        {seal(56)}
+        {seal(56, foil="foil-foot")}
         <p>The Collection of Dorian Bailey<br><em>North East, Pennsylvania</em></p>
       </div>
       <ul class="site-footer__links">
         <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
+        <li><a href="{LINKS['linkedin']}" rel="noopener">LinkedIn</a></li>
         <li><a href="{LINKS['ig']}" rel="noopener">Instagram</a></li>
         <li><a href="{LINKS['yt']}" rel="noopener">YouTube</a></li>
         <li><a href="{LINKS['github']}" rel="noopener">GitHub</a></li>
@@ -143,7 +157,7 @@ ENTRIES = [
     ("I", "better-selling/", "Better Selling With Bailey", "Estate sales in Erie County"),
     ("II", "oddway/", "Take The OddWay", "A road-trip guide to the strange"),
     ("III", "metazoo/", "Bailey MetaZoo", "Cryptids and trading cards"),
-    ("IV", "photography/", "Photographs", f"{NUMWORD} collections, {TOTAL} plates"),
+    ("IV", "photography/", "Photography", "Commissions and collections"),
     ("V", "record/", "The Record", "Education, ventures and proficiencies"),
 ]
 
@@ -169,7 +183,7 @@ page("index.html", "home",
      "The collection of Dorian Bailey: Better Selling With Bailey, Take The OddWay, Bailey MetaZoo and photographs, from North East, Pennsylvania.",
      f"""    <section class="frontispiece">
       <div class="wrap frontispiece__inner">
-        {seal(112, "seal seal--large")}
+        {seal(112, "seal seal--large", foil="foil-hero")}
         <p class="frontispiece__pre">The Collection of</p>
         <h1>Dorian Bailey</h1>
         <p class="frontispiece__sub">Ventures, pursuits and photographs<br>from North East, Pennsylvania</p>
@@ -192,9 +206,9 @@ page("index.html", "home",
         </figure>
         <div class="foreword__text">
           <h2 class="section-title" id="foreword-title">Foreword</h2>
-          <p class="lede">I&rsquo;m a lifelong resident of North East, Pennsylvania, and a student of Marketing and Management Information Systems at Penn State Behrend.</p>
-          <p>Long before I started a business, I spent years buying, selling, researching and pricing things of every kind. That became Better Selling With Bailey. A taste for the strange side of the map became Take The OddWay, and a love of cryptid lore and collecting became Bailey MetaZoo. Somewhere along the way I picked up a camera.</p>
-          <p>This site gathers all of it in one place: the work I&rsquo;m paid for and the work I&rsquo;d do anyway.</p>
+          <p class="lede">Born and raised in North East, Pennsylvania, I study Marketing and Management Information Systems at Penn State Behrend.</p>
+          <p>Long before I started a business, I spent years buying, selling, researching and pricing things of every kind. That became Better Selling With Bailey. A taste for the strange side of the map became Take The OddWay, and a love of cryptid lore and collecting became Bailey MetaZoo. Somewhere along the way I picked up a camera, and now photograph events for MetaZoo TCG.</p>
+          <p>By day I&rsquo;m a marketing assistant at <a href="{LINKS['vanta']}" rel="noopener">Vanta House</a>, a video-first content studio here in North East. This site gathers the rest: the work I&rsquo;m paid for and the work I&rsquo;d do anyway.</p>
           <p><a class="text-link" href="record/">Read the record</a></p>
         </div>
       </div>
@@ -217,7 +231,7 @@ page("index.html", "home",
         <h2 class="section-title" id="corr-title">Correspondence</h2>
         <p>For work, collaborations or an estate sale, write to me directly.</p>
         <p class="correspondence__email"><a href="mailto:{EMAIL}">{EMAIL}</a></p>
-        <p class="correspondence__more">Estate sale bookings are handled at <a href="{LINKS['bswb']}" rel="noopener">bettersellingwithbailey.com</a>.</p>
+        <p class="correspondence__more">Also on <a href="{LINKS['linkedin']}" rel="noopener">LinkedIn</a>. Estate sale bookings are handled at <a href="{LINKS['bswb']}" rel="noopener">bettersellingwithbailey.com</a>.</p>
       </div>
     </section>
 
@@ -231,7 +245,9 @@ page("index.html", "home",
       "image": "https://dorianbailey.com/assets/img/dorian-bailey.jpg",
       "homeLocation": "North East, Pennsylvania",
       "alumniOf": "Penn State Behrend",
-      "sameAs": ["{LINKS['github']}", "{LINKS['bswb']}", "{LINKS['oddway']}", "{LINKS['yt']}", "{LINKS['ig']}"]
+      "jobTitle": "Marketing Assistant",
+      "worksFor": {{"@type": "Organization", "name": "Vanta House", "url": "{LINKS['vanta']}"}},
+      "sameAs": ["{LINKS['linkedin']}", "{LINKS['github']}", "{LINKS['bswb']}", "{LINKS['oddway']}", "{LINKS['yt']}", "{LINKS['ig']}"]
     }}
     </script>""")
 
@@ -240,7 +256,7 @@ page("index.html", "home",
 ORDER = [("better-selling", "I", "Better Selling With Bailey"),
          ("oddway", "II", "Take The OddWay"),
          ("metazoo", "III", "Bailey MetaZoo"),
-         ("photography", "IV", "Photographs")]
+         ("photography", "IV", "Photography")]
 
 
 def entry(slug, key, title, desc, standfirst, prose, particulars, plates, links):
@@ -308,11 +324,11 @@ entry("better-selling", "selling", "Better Selling With Bailey",
       """          <p>Better Selling With Bailey prices, stages, promotes and runs estate sales in the client&rsquo;s own home, then clears whatever is left at no charge. Many clients treat it as a cleanout of a garage, basement or collection that happens to pay.</p>
           <p>Every client works with me directly, from the first walkthrough to the last sale of the day. I set the prices, arrange the rooms, write the listings, run the floor and handle the teardown.</p>
           <p>A Star Wars collector&rsquo;s sale in North East drew a crowd through heavy rain and wind in May 2026, and was covered by YourErie.com.</p>""",
-      [("Established", "North East, Pennsylvania"),
+      [("Established", "May 2026, North East, Pennsylvania"),
        ("Region", "Erie County"),
        ("Role", "Founder and owner"),
        ("Returned to sellers", "More than $35,000"),
-       ("Largest single sale", "More than $16,000"),
+       ("Top events", "More than $16,000 and $8,000, each in a single weekend"),
        ("Terms", "$995 flat fee plus 20% commission; leftover removal free"),
        ("Press", f'<a href="{LINKS["erie"]}" rel="noopener">YourErie.com, May 2026</a>')],
       [plate("../assets/img/dorian-bailey.jpg", "Dorian Bailey in a Better Selling With Bailey polo", 900, 1200,
@@ -388,18 +404,51 @@ for c in M["collections"]:
       </div>
     </section>""")
 
-page("photography/index.html", "photo", "Photographs | Dorian Bailey",
-     f"Photographs by Dorian Bailey in {NUMWORD.lower()} collections: Green Eyes, Letchworth, North East, Creatures and Studies.",
+BANNER = COLL["letchworth"]["photos"][1]
+
+page("photography/index.html", "photo", "Photography | Dorian Bailey",
+     f"Photography by Dorian Bailey: event coverage for MetaZoo TCG, work with Vanta House, and {NUMWORD.lower()} collections of portrait, event, landscape and close-up photographs.",
      f"""    <header class="entry-head">
       <div class="wrap">
         <p class="entry-head__num">No. IV</p>
-        <h1>Photographs</h1>
-        <p class="entry-head__standfirst">{TOTAL} plates in {NUMWORD.lower()} collections, made in the autumn of 2026 on a Canon EOS R50.</p>
+        <h1>Photography</h1>
+        <p class="entry-head__standfirst">Event, portrait and landscape photography, from commissioned coverage for MetaZoo TCG to quiet studies close to home. Made on a Canon EOS R50.</p>
       </div>
     </header>
 
-    <section class="section" aria-label="Collections">
+    <figure class="banner">
+      <img src="../assets/photos/{BANNER['file']}" alt="{html.escape(BANNER['alt'])}" width="{BANNER['w']}" height="{BANNER['h']}" fetchpriority="high" decoding="async">
+      <figcaption class="wrap"><em>Letchworth State Park, New York, October 2026</em></figcaption>
+    </figure>
+
+    <section class="section" aria-labelledby="commissions-title">
       <div class="wrap">
+        <h2 class="section-title" id="commissions-title">Commissions</h2>
+        <dl class="ledger">
+          <div class="ledger__row">
+            <dt>Event photographer</dt>
+            <dd>
+              <h3>MetaZoo TCG</h3>
+              <p>Professional coverage at several MetaZoo TCG events: players at the tables, the cards they pull, costumed cryptids, and the crowds that come to see them. Delivered as edited sets for the brand&rsquo;s own use.</p>
+            </dd>
+          </div>
+          <div class="ledger__row">
+            <dt>Marketing assistant <em>since June 2026</em></dt>
+            <dd>
+              <h3><a href="{LINKS['vanta']}" rel="noopener">Vanta House</a></h3>
+              <p>A video-first content studio in North East, Pennsylvania, that turns one long-form film a month into a full system of content for its clients. I support content strategy, social campaigns and SEO across client accounts, and work alongside the team on shoots and video production.</p>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section section--rule" aria-labelledby="collections-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 class="section-title" id="collections-title">Collections</h2>
+          <p class="section-head__note">{TOTAL} plates in {NUMWORD.lower()} collections</p>
+        </div>
         <ol class="coll-index">
 {chr(10).join(index_items)}
         </ol>
@@ -415,15 +464,14 @@ page("photography/index.html", "photo", "Photographs | Dorian Bailey",
 
     <dialog class="lightbox" id="lightbox" aria-label="Photograph viewer">
       <figure>
-        <img src="" alt="">
-        <figcaption></figcaption>
+        <img src="" alt="" decoding="async">
+        <figcaption aria-live="polite"></figcaption>
       </figure>
       <button class="lightbox__btn lightbox__close" type="button" aria-label="Close">&times;</button>
       <button class="lightbox__btn lightbox__prev" type="button" aria-label="Previous photograph">&lsaquo;</button>
       <button class="lightbox__btn lightbox__next" type="button" aria-label="Next photograph">&rsaquo;</button>
     </dialog>""",
-     extra_js='  <script src="../js/gallery.js" defer></script>\n',
-     og_image="assets/photos/" + COLL["letchworth"]["photos"][6]["file"])
+     extra_js='  <script src="../js/gallery.js" defer></script>\n')
 
 # ===================================================================== Record
 page("record/index.html", "record", "The Record | Dorian Bailey",
@@ -432,12 +480,20 @@ page("record/index.html", "record", "The Record | Dorian Bailey",
       <div class="wrap">
         <p class="entry-head__num">No. V</p>
         <h1>The Record</h1>
-        <p class="entry-head__standfirst">Education, ventures and proficiencies, for anyone who would like it all on one page.</p>
+        <p class="entry-head__standfirst">Education, positions, ventures and proficiencies, for anyone who would like it all on one page.</p>
+        <div class="btn-row"><a class="btn" href="../assets/dorian-bailey-record.pdf" download>Download the record (PDF)</a></div>
       </div>
     </header>
 
     <section class="section">
       <div class="wrap">
+        <div class="print-head" aria-hidden="true">
+          {seal(64, "seal print-head__seal")}
+          <div>
+            <p class="print-head__name">Dorian Bailey</p>
+            <p class="print-head__meta">North East, Pennsylvania &nbsp;&middot;&nbsp; {EMAIL} &nbsp;&middot;&nbsp; dorianbailey.com &nbsp;&middot;&nbsp; linkedin.com/in/dorian-bailey</p>
+          </div>
+        </div>
         <dl class="ledger">
           <div class="ledger__row">
             <dt>Education</dt>
@@ -448,16 +504,25 @@ page("record/index.html", "record", "The Record | Dorian Bailey",
             </dd>
           </div>
           <div class="ledger__row">
+            <dt>Positions</dt>
+            <dd>
+              <h3><a href="{LINKS['vanta']}" rel="noopener">Vanta House</a></h3>
+              <p><em>Marketing assistant, June 2026 to present.</em> A video-first content studio in North East. Content strategy and social campaigns across client accounts, SEO and digital campaigns, campaign analysis, and support on shoots and video production.</p>
+              <h3><a href="../photography/">MetaZoo TCG</a></h3>
+              <p><em>Event photographer.</em> Professional photography at several MetaZoo TCG events.</p>
+            </dd>
+          </div>
+          <div class="ledger__row">
             <dt>Ventures</dt>
             <dd>
               <h3><a href="../better-selling/">Better Selling With Bailey</a></h3>
-              <p><em>Founder and owner.</em> Estate sale management across Erie County. More than $35,000 returned to sellers, with a largest single sale above $16,000. Pricing, staging, promotion, day-of sales and cleanup, all handled personally.</p>
+              <p><em>Founder and owner, May 2026 to present.</em> Estate sale management across Erie County. More than $35,000 in client sales, including events of more than $16,000 and $8,000 in a single weekend. Valuation, pricing, promotion, day-of sales and cleanup, all handled personally.</p>
               <h3><a href="../oddway/">Take The OddWay</a></h3>
               <p><em>Founder and builder.</em> A road-trip discovery platform for cryptids, folklore, haunted places and roadside oddities, designed and built end to end in Next.js, TypeScript and Supabase, with its own shop.</p>
               <h3><a href="../metazoo/">Bailey MetaZoo</a></h3>
               <p><em>Creator.</em> Short-form video on MetaZoo and cryptid folklore for YouTube and Instagram, including the VHS card-reveal series.</p>
-              <h3><a href="../photography/">Photographs</a></h3>
-              <p><em>Photographer.</em> Portrait, event, landscape and close-up work, collected in {NUMWORD.lower()} series of {TOTAL} plates.</p>
+              <h3><a href="../photography/">Photography</a></h3>
+              <p><em>Photographer.</em> Event, portrait, landscape and close-up work, collected in {NUMWORD.lower()} series of {TOTAL} plates.</p>
             </dd>
           </div>
           <div class="ledger__row">
@@ -469,21 +534,21 @@ page("record/index.html", "record", "The Record | Dorian Bailey",
           <div class="ledger__row">
             <dt>Proficiencies</dt>
             <dd>
-              <p>Marketing strategy, social media and content, sales and pricing, event management, customer relations.</p>
-              <p>Photography and Adobe Lightroom and Photoshop; short-form video.</p>
+              <p>Marketing strategy, SEO, social media and content, sales and pricing, data analysis, event management, customer relations.</p>
+              <p>Photography and Adobe Lightroom and Photoshop; short-form video and video production.</p>
               <p>HTML and CSS, Next.js and React, TypeScript, Supabase, Git and GitHub, and AI tools.</p>
             </dd>
           </div>
-          <div class="ledger__row">
+          <div class="ledger__row ledger__row--screen">
             <dt>Correspondence</dt>
-            <dd><p><a href="mailto:{EMAIL}">{EMAIL}</a></p></dd>
+            <dd><p><a href="mailto:{EMAIL}">{EMAIL}</a><br><a href="{LINKS['linkedin']}" rel="noopener">linkedin.com/in/dorian-bailey</a></p></dd>
           </div>
         </dl>
       </div>
     </section>
 
     <nav class="wrap entry-nav" aria-label="Collection">
-      <a class="entry-nav__prev" href="../photography/"><em>Previous</em> IV. Photographs</a>
+      <a class="entry-nav__prev" href="../photography/"><em>Previous</em> IV. Photography</a>
       <a class="entry-nav__next" href="../index.html"><em>Back to</em> Contents</a>
     </nav>""")
 

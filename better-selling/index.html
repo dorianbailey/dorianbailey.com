@@ -11,8 +11,11 @@
   <meta property="og:title" content="Better Selling With Bailey | Dorian Bailey">
   <meta property="og:description" content="Better Selling With Bailey is Dorian Bailey's estate sale company in Erie County, Pennsylvania.">
   <meta property="og:url" content="https://dorianbailey.com/better-selling/">
-  <meta property="og:image" content="https://dorianbailey.com/assets/img/dorian-bailey.jpg">
+  <meta property="og:image" content="https://dorianbailey.com/assets/img/og-card.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#1e3a2b">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="preload" href="../assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/fonts/libre-caslon-text-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -25,11 +28,11 @@
     <div class="wrap site-header__inner">
       <a class="site-mark" href="../index.html">
         <svg class="seal" width="34" height="34" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-          <circle cx="60" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="1.6"/>
-          <circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-width=".8"/>
-          <circle cx="60" cy="6.5" r="1.8" fill="currentColor"/><circle cx="60" cy="113.5" r="1.8" fill="currentColor"/>
-          <circle cx="6.5" cy="60" r="1.8" fill="currentColor"/><circle cx="113.5" cy="60" r="1.8" fill="currentColor"/>
-          <text x="60" y="73" text-anchor="middle" font-family="'Libre Caslon Display', Georgia, serif" font-size="42" fill="currentColor">DB</text>
+          <circle class="seal__ring" pathLength="1" cx="60" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <circle class="seal__ring seal__ring--inner" pathLength="1" cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-width=".8"/>
+          <g class="seal__dots" fill="currentColor"><circle cx="60" cy="6.5" r="1.8"/><circle cx="60" cy="113.5" r="1.8"/>
+          <circle cx="6.5" cy="60" r="1.8"/><circle cx="113.5" cy="60" r="1.8"/></g>
+          <text class="seal__mono" x="60" y="73" text-anchor="middle" font-family="'Libre Caslon Display', Georgia, serif" font-size="42" fill="currentColor">DB</text>
         </svg>
         <span>Dorian Bailey</span>
       </a>
@@ -39,7 +42,7 @@
           <li><a href="../better-selling/" aria-current="page">Better Selling</a></li>
           <li><a href="../oddway/">OddWay</a></li>
           <li><a href="../metazoo/">MetaZoo</a></li>
-          <li><a href="../photography/">Photographs</a></li>
+          <li><a href="../photography/">Photography</a></li>
           <li><a href="../record/">Record</a></li>
           <li><a href="../index.html#correspondence">Contact</a></li>
         </ul>
@@ -70,11 +73,11 @@
         <aside class="particulars" aria-labelledby="particulars-title">
           <h2 id="particulars-title">Particulars</h2>
           <dl>
-            <div><dt>Established</dt><dd>North East, Pennsylvania</dd></div>
+            <div><dt>Established</dt><dd>May 2026, North East, Pennsylvania</dd></div>
             <div><dt>Region</dt><dd>Erie County</dd></div>
             <div><dt>Role</dt><dd>Founder and owner</dd></div>
             <div><dt>Returned to sellers</dt><dd>More than $35,000</dd></div>
-            <div><dt>Largest single sale</dt><dd>More than $16,000</dd></div>
+            <div><dt>Top events</dt><dd>More than $16,000 and $8,000, each in a single weekend</dd></div>
             <div><dt>Terms</dt><dd>$995 flat fee plus 20% commission; leftover removal free</dd></div>
             <div><dt>Press</dt><dd><a href="https://www.yourerie.com/news/local-news/star-wars-sale-draws-crowd-in-north-east/" rel="noopener">YourErie.com, May 2026</a></dd></div>
           </dl>
@@ -103,16 +106,22 @@
     <div class="wrap site-footer__inner">
       <div class="site-footer__mark">
         <svg class="seal" width="56" height="56" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-          <circle cx="60" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="1.6"/>
-          <circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-width=".8"/>
-          <circle cx="60" cy="6.5" r="1.8" fill="currentColor"/><circle cx="60" cy="113.5" r="1.8" fill="currentColor"/>
-          <circle cx="6.5" cy="60" r="1.8" fill="currentColor"/><circle cx="113.5" cy="60" r="1.8" fill="currentColor"/>
-          <text x="60" y="73" text-anchor="middle" font-family="'Libre Caslon Display', Georgia, serif" font-size="42" fill="currentColor">DB</text>
+          <defs><linearGradient id="foil-foot" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#8a6b32"/><stop offset=".28" stop-color="#e2cb8c"/>
+            <stop offset=".5" stop-color="#a8894b"/><stop offset=".72" stop-color="#ead7a2"/>
+            <stop offset="1" stop-color="#7d612c"/>
+          </linearGradient></defs>
+          <circle class="seal__ring" pathLength="1" cx="60" cy="60" r="57" fill="none" stroke="url(#foil-foot)" stroke-width="1.6"/>
+          <circle class="seal__ring seal__ring--inner" pathLength="1" cx="60" cy="60" r="50" fill="none" stroke="url(#foil-foot)" stroke-width=".8"/>
+          <g class="seal__dots" fill="url(#foil-foot)"><circle cx="60" cy="6.5" r="1.8"/><circle cx="60" cy="113.5" r="1.8"/>
+          <circle cx="6.5" cy="60" r="1.8"/><circle cx="113.5" cy="60" r="1.8"/></g>
+          <text class="seal__mono" x="60" y="73" text-anchor="middle" font-family="'Libre Caslon Display', Georgia, serif" font-size="42" fill="url(#foil-foot)">DB</text>
         </svg>
         <p>The Collection of Dorian Bailey<br><em>North East, Pennsylvania</em></p>
       </div>
       <ul class="site-footer__links">
         <li><a href="mailto:dorianbailey814@gmail.com">dorianbailey814@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/dorian-bailey/" rel="noopener">LinkedIn</a></li>
         <li><a href="https://www.instagram.com/baileymetazoo/" rel="noopener">Instagram</a></li>
         <li><a href="https://www.youtube.com/@baileymetazoo" rel="noopener">YouTube</a></li>
         <li><a href="https://github.com/dorianbailey" rel="noopener">GitHub</a></li>
