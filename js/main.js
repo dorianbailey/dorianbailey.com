@@ -20,6 +20,15 @@
     window.matchMedia('(min-width: 901px)').addEventListener('change', function (m) { if (m.matches) setOpen(false); });
   }
 
+
+  // Pause the home collage while it is scrolled out of view
+  var hero = document.querySelector('.frontispiece');
+  if (hero && document.querySelector('.collage') && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      hero.classList.toggle('is-offscreen', !entries[0].isIntersecting);
+    }).observe(hero);
+  }
+
   var year = document.querySelector('[data-year]');
   if (year) year.textContent = new Date().getFullYear();
 })();

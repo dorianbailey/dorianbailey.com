@@ -152,6 +152,25 @@ def photo(cid, n):
     return ph, w, h
 
 
+# ---------------------------------------------------------------- Home collage
+HERO = json.load(open(ROOT / "assets/photos/hero.json"))
+ROWS, ROW_H, GAP, SPEED = 5, 190, 12, 40   # row height in px at desktop, px/second
+
+
+def collage():
+    rows = [HERO[i::ROWS] for i in range(ROWS)]
+    out = []
+    for r, items in enumerate(rows):
+        # Each set is repeated so it is wider than any screen; the track holds two sets and slides by one.
+        one = items * 2
+        set_w = sum(round(it["w"] * ROW_H / it["h"]) + GAP for it in one)
+        dur = round(set_w / SPEED)
+        imgs = "".join(f'<img src="assets/photos/{it["file"]}" alt="" width="{it["w"]}" height="{it["h"]}" decoding="async">' for it in one)
+        rev = " collage__row--rev" if r % 2 else ""
+        out.append(f'          <div class="collage__row{rev}" style="--dur: {dur}s"><div class="collage__track">{imgs}{imgs}</div></div>')
+    return "\n".join(out)
+
+
 # ===================================================================== Home
 ENTRIES = [
     ("I", "better-selling/", "Better Selling With Bailey", "Estate sales in Erie County"),
@@ -206,6 +225,11 @@ page("index.html", "home",
      "Dorian Bailey",
      "The collection of Dorian Bailey: Better Selling With Bailey, Take The OddWay, Bailey MetaZoo and photography for MetaZoo TCG, from North East, Pennsylvania.",
      f"""    <section class="frontispiece">
+      <div class="collage" aria-hidden="true">
+        <div class="collage__wall">
+{collage()}
+        </div>
+      </div>
       <div class="wrap frontispiece__inner">
         {seal(112, "seal seal--large seal--deboss")}
         <p class="frontispiece__pre">The Collection of</p>

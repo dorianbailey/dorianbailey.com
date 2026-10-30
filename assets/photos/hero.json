@@ -1,0 +1,254 @@
+[
+ {
+  "file": "hero/h-01.jpg",
+  "w": 256,
+  "h": 320,
+  "from": "legends"
+ },
+ {
+  "file": "hero/h-02.jpg",
+  "w": 256,
+  "h": 320,
+  "from": "mothman"
+ },
+ {
+  "file": "hero/h-03.jpg",
+  "w": 180,
+  "h": 320,
+  "from": "green-eyes"
+ },
+ {
+  "file": "hero/h-04.jpg",
+  "w": 414,
+  "h": 320,
+  "from": "letchworth"
+ },
+ {
+  "file": "hero/h-05.jpg",
+  "w": 414,
+  "h": 320,
+  "from": "north-east"
+ },
+ {
+  "file": "hero/h-06.jpg",
+  "w": 213,
+  "h": 320,
+  "from": "creatures"
+ },
+ {
+  "file": "hero/h-07.jpg",
+  "w": 247,
+  "h": 320,
+  "from": "studies"
+ },
+ {
+  "file": "hero/h-08.jpg",
+  "w": 213,
+  "h": 320,
+  "from": "legends"
+ },
+ {
+  "file": "hero/h-09.jpg",
+  "w": 256,
+  "h": 320,
+  "from": "mothman"
+ },
+ {
+  "file": "hero/h-10.jpg",
+  "w": 180,
+  "h": 320,
+  "from": "green-eyes"
+ },
+ {
+  "file": "hero/h-11.jpg",
+  "w": 414,
+  "h": 320,
+  "from": "letchworth"
+ },
+ {
+  "file": "hero/h-12.jpg",
+  "w": 248,
+  "h": 320,
+  "from": "north-east"
+ },
+ {
+  "file": "hero/h-13.jpg",
+  "w": 414,
+  "h": 320,
+  "from": "creatures"
+ },
+ {
+  "file": "hero/h-14.jpg",
+  "w": 414,
+  "h": 320,
+  "from": "studies"
+ },
+ {
+  "file": "hero/h-15.jpg",
+  "w": 256,
+  "h": 320,
+  "from": "legends"
+ },
+ {
+  "file": "hero/h-16.jpg",
+  "w": 256,
+  "h": 320,
+  "from": "mothman"
+ },
+ {
+  "file": "hero/h-17.jpg",
+  "w": 180,
+  "h": 320,
+  "from": "green-eyes"
+ },
+ {
+  "file": "hero/h-18.jpg",
+  "w": 414,
+  "h": 320,
+  "from": "letchworth"
+ },
+ {
+  "file": "hero/h-19.jpg",
+  "w": 247,
+  "h": 320,
+  "from": "north-east"
+ },
+ {
+  "file": "hero/h-20.jpg",
+  "w": 414,
+  "h": 320,
+  "from": "creatures"
+ },
+ {
+  "file": "hero/h-21.jpg",
+  "w": 414,
+  "h": 320,
+  "from": "studies"
+ },
+ {
+  "file": "hero/h-22.jpg",
+  "w": 256,
+  "h": 320,
+  "from": "legends"
+ },
+ {
+  "file": "hero/h-23.jpg",
+  "w": 256,
+  "h": 320,
+  "from": "mothman"
+ },
+ {
+  "file": "hero/h-24.jpg",
+  "w": 240,
+  "h": 320,
+  "from": "green-eyes"
+ },
+ {
+  "file": "hero/h-25.jpg",
+  "w": 414,
+  "h": 320,
+  "from": "letchworth"
+ },
+ {
+  "file": "hero/h-26.jpg",
+  "w": 415,
+  "h": 320,
+  "from": "north-east"
+ },
+ {
+  "file": "hero/h-27.jpg",
+  "w": 414,
+  "h": 320,
+  "from": "creatures"
+ },
+ {
+  "file": "hero/h-28.jpg",
+  "w": 414,
+  "h": 320,
+  "from": "studies"
+ },
+ {
+  "file": "hero/h-29.jpg",
+  "w": 256,
+  "h": 320,
+  "from": "legends"
+ },
+ {
+  "file": "hero/h-30.jpg",
+  "w": 256,
+  "h": 320,
+  "from": "mothman"
+ },
+ {
+  "file": "hero/h-31.jpg",
+  "w": 180,
+  "h": 320,
+  "from": "green-eyes"
+ },
+ {
+  "file": "hero/h-32.jpg",
+  "w": 180,
+  "h": 320,
+  "from": "letchworth"
+ },
+ {
+  "file": "hero/h-33.jpg",
+  "w": 480,
+  "h": 320,
+  "from": "north-east"
+ },
+ {
+  "file": "hero/h-34.jpg",
+  "w": 414,
+  "h": 320,
+  "from": "creatures"
+ },
+ {
+  "file": "hero/h-35.jpg",
+  "w": 256,
+  "h": 320,
+  "from": "legends"
+ },
+ {
+  "file": "hero/h-36.jpg",
+  "w": 256,
+  "h": 320,
+  "from": "mothman"
+ },
+ {
+  "file": "hero/h-37.jpg",
+  "w": 427,
+  "h": 320,
+  "from": "green-eyes"
+ },
+ {
+  "file": "hero/h-38.jpg",
+  "w": 414,
+  "h": 320,
+  "from": "north-east"
+ },
+ {
+  "file": "hero/h-39.jpg",
+  "w": 415,
+  "h": 320,
+  "from": "creatures"
+ },
+ {
+  "file": "hero/h-40.jpg",
+  "w": 256,
+  "h": 320,
+  "from": "legends"
+ },
+ {
+  "file": "hero/h-41.jpg",
+  "w": 256,
+  "h": 320,
+  "from": "legends"
+ },
+ {
+  "file": "hero/h-42.jpg",
+  "w": 256,
+  "h": 320,
+  "from": "legends"
+ }
+]
