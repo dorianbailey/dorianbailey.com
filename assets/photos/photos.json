@@ -1,1 +1,763 @@
-[]
+{
+ "collections": [
+  {
+   "id": "port-farms",
+   "numeral": "I",
+   "title": "Port Farms",
+   "place": "Waterford, Pennsylvania",
+   "date": "October 2026",
+   "note": "An autumn portrait session among the pumpkins, mums and corn rows of a farm that has stood since 1897.",
+   "cover": "port-farms/t-port-farms-11.jpg",
+   "photos": [
+    {
+     "file": "port-farms/port-farms-01.jpg",
+     "thumb": "port-farms/t-port-farms-01.jpg",
+     "alt": "Woman in a leather jacket seated among pumpkins",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-02.jpg",
+     "thumb": "port-farms/t-port-farms-02.jpg",
+     "alt": "Woman holding a small pumpkin to her face",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-03.jpg",
+     "thumb": "port-farms/t-port-farms-03.jpg",
+     "alt": "Seated portrait on a pumpkin crate under an orange maple",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-04.jpg",
+     "thumb": "port-farms/t-port-farms-04.jpg",
+     "alt": "Seated portrait among pumpkins under an orange maple",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-05.jpg",
+     "thumb": "port-farms/t-port-farms-05.jpg",
+     "alt": "Seated portrait beside the pumpkin display",
+     "w": 1429,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-06.jpg",
+     "thumb": "port-farms/t-port-farms-06.jpg",
+     "alt": "Portrait with a white pumpkin beside the Port Farms sign",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-07.jpg",
+     "thumb": "port-farms/t-port-farms-07.jpg",
+     "alt": "Close portrait with a white pumpkin beside the Port Farms sign",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-08.jpg",
+     "thumb": "port-farms/t-port-farms-08.jpg",
+     "alt": "Standing portrait with a pumpkin under the maple",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-09.jpg",
+     "thumb": "port-farms/t-port-farms-09.jpg",
+     "alt": "Standing portrait with a pumpkin, autumn leaves overhead",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-10.jpg",
+     "thumb": "port-farms/t-port-farms-10.jpg",
+     "alt": "Standing portrait with a pumpkin in the farm market",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-11.jpg",
+     "thumb": "port-farms/t-port-farms-11.jpg",
+     "alt": "Standing portrait with a pumpkin beneath an orange maple",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-12.jpg",
+     "thumb": "port-farms/t-port-farms-12.jpg",
+     "alt": "Portrait holding a pumpkin, glancing aside",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-13.jpg",
+     "thumb": "port-farms/t-port-farms-13.jpg",
+     "alt": "Portrait holding a pumpkin under autumn leaves",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-14.jpg",
+     "thumb": "port-farms/t-port-farms-14.jpg",
+     "alt": "A crate of pumpkins and gourds",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-15.jpg",
+     "thumb": "port-farms/t-port-farms-15.jpg",
+     "alt": "Rows of yellow and orange mums",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-16.jpg",
+     "thumb": "port-farms/t-port-farms-16.jpg",
+     "alt": "Yellow, orange and pink mums",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-17.jpg",
+     "thumb": "port-farms/t-port-farms-17.jpg",
+     "alt": "Kneeling portrait among the mums",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-18.jpg",
+     "thumb": "port-farms/t-port-farms-18.jpg",
+     "alt": "Walking away down a corn maze path",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-19.jpg",
+     "thumb": "port-farms/t-port-farms-19.jpg",
+     "alt": "Portrait in a brown sweater in the corn",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-20.jpg",
+     "thumb": "port-farms/t-port-farms-20.jpg",
+     "alt": "Standing in a corn maze",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-21.jpg",
+     "thumb": "port-farms/t-port-farms-21.jpg",
+     "alt": "Portrait in front of dry corn stalks",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-22.jpg",
+     "thumb": "port-farms/t-port-farms-22.jpg",
+     "alt": "Looking down in the corn maze",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-23.jpg",
+     "thumb": "port-farms/t-port-farms-23.jpg",
+     "alt": "Standing at the end of a corn row",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-24.jpg",
+     "thumb": "port-farms/t-port-farms-24.jpg",
+     "alt": "Full-length portrait in the corn maze",
+     "w": 1333,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-25.jpg",
+     "thumb": "port-farms/t-port-farms-25.jpg",
+     "alt": "Hands in pockets in the corn maze",
+     "w": 1333,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-26.jpg",
+     "thumb": "port-farms/t-port-farms-26.jpg",
+     "alt": "A couple's selfie against a bright autumn sky",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-27.jpg",
+     "thumb": "port-farms/t-port-farms-27.jpg",
+     "alt": "Walking into the corn",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-28.jpg",
+     "thumb": "port-farms/t-port-farms-28.jpg",
+     "alt": "Corn stalks against the sun",
+     "w": 1333,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-29.jpg",
+     "thumb": "port-farms/t-port-farms-29.jpg",
+     "alt": "Standing on the maze path",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-30.jpg",
+     "thumb": "port-farms/t-port-farms-30.jpg",
+     "alt": "Portrait on a sunlit corn path",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-31.jpg",
+     "thumb": "port-farms/t-port-farms-31.jpg",
+     "alt": "Close portrait among the corn",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-32.jpg",
+     "thumb": "port-farms/t-port-farms-32.jpg",
+     "alt": "Brown sweater and jeans on the lawn",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-33.jpg",
+     "thumb": "port-farms/t-port-farms-33.jpg",
+     "alt": "Leather jacket and jeans on the lawn",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-34.jpg",
+     "thumb": "port-farms/t-port-farms-34.jpg",
+     "alt": "A field of pumpkins in the sun",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-35.jpg",
+     "thumb": "port-farms/t-port-farms-35.jpg",
+     "alt": "Seated in the pumpkin patch",
+     "w": 1333,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-36.jpg",
+     "thumb": "port-farms/t-port-farms-36.jpg",
+     "alt": "Holding a pumpkin overhead",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-37.jpg",
+     "thumb": "port-farms/t-port-farms-37.jpg",
+     "alt": "A pumpkin held in place of a face",
+     "w": 2000,
+     "h": 1333
+    },
+    {
+     "file": "port-farms/port-farms-38.jpg",
+     "thumb": "port-farms/t-port-farms-38.jpg",
+     "alt": "Holding a large pumpkin in the patch",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "port-farms/port-farms-39.jpg",
+     "thumb": "port-farms/t-port-farms-39.jpg",
+     "alt": "A pumpkin for a head, farm fields behind",
+     "w": 2000,
+     "h": 1333
+    },
+    {
+     "file": "port-farms/port-farms-40.jpg",
+     "thumb": "port-farms/t-port-farms-40.jpg",
+     "alt": "Crouching among the pumpkins",
+     "w": 1600,
+     "h": 2000
+    }
+   ]
+  },
+  {
+   "id": "green-eyes",
+   "numeral": "II",
+   "title": "Green Eyes",
+   "place": "Green Eyes Festival, Chickamauga, Georgia",
+   "date": "October 2026",
+   "note": "A day of cryptids, costumes and card tables at a festival named for the battlefield legend of Ole’ Green Eyes.",
+   "cover": "green-eyes/t-green-eyes-04.jpg",
+   "photos": [
+    {
+     "file": "green-eyes/green-eyes-01.jpg",
+     "thumb": "green-eyes/t-green-eyes-01.jpg",
+     "alt": "A small cryptid plush hanging from a vendor tent",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "green-eyes/green-eyes-02.jpg",
+     "thumb": "green-eyes/t-green-eyes-02.jpg",
+     "alt": "Card players at a folding table in the street",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "green-eyes/green-eyes-03.jpg",
+     "thumb": "green-eyes/t-green-eyes-03.jpg",
+     "alt": "Browsing a binder of trading cards",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "green-eyes/green-eyes-04.jpg",
+     "thumb": "green-eyes/t-green-eyes-04.jpg",
+     "alt": "A Bigfoot costume waving beside a festival-goer",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "green-eyes/green-eyes-05.jpg",
+     "thumb": "green-eyes/t-green-eyes-05.jpg",
+     "alt": "Bigfoot mid-stride, in black and white",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "green-eyes/green-eyes-06.jpg",
+     "thumb": "green-eyes/t-green-eyes-06.jpg",
+     "alt": "Bigfoot waving as a child laughs",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "green-eyes/green-eyes-07.jpg",
+     "thumb": "green-eyes/t-green-eyes-07.jpg",
+     "alt": "Mothman and Bigfoot side by side",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "green-eyes/green-eyes-08.jpg",
+     "thumb": "green-eyes/t-green-eyes-08.jpg",
+     "alt": "Smiling over a card pull",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "green-eyes/green-eyes-09.jpg",
+     "thumb": "green-eyes/t-green-eyes-09.jpg",
+     "alt": "A card match at a street table",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "green-eyes/green-eyes-10.jpg",
+     "thumb": "green-eyes/t-green-eyes-10.jpg",
+     "alt": "A father and son sorting cards, a Stormtrooper behind",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "green-eyes/green-eyes-11.jpg",
+     "thumb": "green-eyes/t-green-eyes-11.jpg",
+     "alt": "Costumed characters on the festival stage",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "green-eyes/green-eyes-12.jpg",
+     "thumb": "green-eyes/t-green-eyes-12.jpg",
+     "alt": "A chicken costume on stage",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "green-eyes/green-eyes-13.jpg",
+     "thumb": "green-eyes/t-green-eyes-13.jpg",
+     "alt": "A photographer in a MetaZoo cap behind a vintage camera",
+     "w": 1500,
+     "h": 2000
+    },
+    {
+     "file": "green-eyes/green-eyes-14.jpg",
+     "thumb": "green-eyes/t-green-eyes-14.jpg",
+     "alt": "A MetaZoo card in a binder sleeve",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "green-eyes/green-eyes-15.jpg",
+     "thumb": "green-eyes/t-green-eyes-15.jpg",
+     "alt": "A Jigsaw puppet on a tricycle with a smiling fan",
+     "w": 2000,
+     "h": 1500
+    }
+   ]
+  },
+  {
+   "id": "letchworth",
+   "numeral": "III",
+   "title": "Letchworth",
+   "place": "Letchworth State Park, New York",
+   "date": "October 2026",
+   "note": "The Genesee River gorge in early autumn: high falls, a railroad bridge, a passing rainbow, and the friends on the trail.",
+   "cover": "letchworth/t-letchworth-07.jpg",
+   "photos": [
+    {
+     "file": "letchworth/letchworth-01.jpg",
+     "thumb": "letchworth/t-letchworth-01.jpg",
+     "alt": "On a fallen log in the forest",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "letchworth/letchworth-02.jpg",
+     "thumb": "letchworth/t-letchworth-02.jpg",
+     "alt": "The gorge and a distant waterfall framed by autumn leaves",
+     "w": 2000,
+     "h": 1546
+    },
+    {
+     "file": "letchworth/letchworth-03.jpg",
+     "thumb": "letchworth/t-letchworth-03.jpg",
+     "alt": "A hiker with trekking poles above the river",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "letchworth/letchworth-04.jpg",
+     "thumb": "letchworth/t-letchworth-04.jpg",
+     "alt": "A thumbs-up above the rushing river",
+     "w": 2000,
+     "h": 1546
+    },
+    {
+     "file": "letchworth/letchworth-05.jpg",
+     "thumb": "letchworth/t-letchworth-05.jpg",
+     "alt": "Falls pouring into the gorge",
+     "w": 1125,
+     "h": 2000
+    },
+    {
+     "file": "letchworth/letchworth-06.jpg",
+     "thumb": "letchworth/t-letchworth-06.jpg",
+     "alt": "A rainbow across the gorge wall",
+     "w": 2000,
+     "h": 1546
+    },
+    {
+     "file": "letchworth/letchworth-07.jpg",
+     "thumb": "letchworth/t-letchworth-07.jpg",
+     "alt": "Mist rising beneath the railroad bridge",
+     "w": 2000,
+     "h": 1545
+    },
+    {
+     "file": "letchworth/letchworth-08.jpg",
+     "thumb": "letchworth/t-letchworth-08.jpg",
+     "alt": "Arms crossed at the overlook below the bridge",
+     "w": 2000,
+     "h": 1545
+    },
+    {
+     "file": "letchworth/letchworth-09.jpg",
+     "thumb": "letchworth/t-letchworth-09.jpg",
+     "alt": "A hiker in red at the stone railing below the bridge",
+     "w": 1125,
+     "h": 2000
+    }
+   ]
+  },
+  {
+   "id": "north-east",
+   "numeral": "IV",
+   "title": "North East",
+   "place": "North East, Pennsylvania",
+   "date": "September–October 2026",
+   "note": "Home: Halloween porches after dark, the park in full color, and the Wine Fest run through town.",
+   "cover": "north-east/t-north-east-05.jpg",
+   "photos": [
+    {
+     "file": "north-east/north-east-01.jpg",
+     "thumb": "north-east/t-north-east-01.jpg",
+     "alt": "Street signs at the corner of Gibson and North Mill at night",
+     "w": 2000,
+     "h": 1545
+    },
+    {
+     "file": "north-east/north-east-02.jpg",
+     "thumb": "north-east/t-north-east-02.jpg",
+     "alt": "Giant skeletons and a skeleton dog on a lawn",
+     "w": 1548,
+     "h": 2000
+    },
+    {
+     "file": "north-east/north-east-03.jpg",
+     "thumb": "north-east/t-north-east-03.jpg",
+     "alt": "A porch glowing with Halloween lights",
+     "w": 1544,
+     "h": 2000
+    },
+    {
+     "file": "north-east/north-east-04.jpg",
+     "thumb": "north-east/t-north-east-04.jpg",
+     "alt": "A skeleton lounging in magenta light",
+     "w": 1546,
+     "h": 2000
+    },
+    {
+     "file": "north-east/north-east-05.jpg",
+     "thumb": "north-east/t-north-east-05.jpg",
+     "alt": "A lit fountain statue at night",
+     "w": 1543,
+     "h": 2000
+    },
+    {
+     "file": "north-east/north-east-06.jpg",
+     "thumb": "north-east/t-north-east-06.jpg",
+     "alt": "Witch figures around a cauldron in violet light",
+     "w": 2000,
+     "h": 1543
+    },
+    {
+     "file": "north-east/north-east-07.jpg",
+     "thumb": "north-east/t-north-east-07.jpg",
+     "alt": "A white statue and a pink ribbon flag among red maples",
+     "w": 2000,
+     "h": 1333
+    },
+    {
+     "file": "north-east/north-east-08.jpg",
+     "thumb": "north-east/t-north-east-08.jpg",
+     "alt": "The park path under autumn trees",
+     "w": 2000,
+     "h": 1125
+    },
+    {
+     "file": "north-east/north-east-09.jpg",
+     "thumb": "north-east/t-north-east-09.jpg",
+     "alt": "Runners on a residential street",
+     "w": 1914,
+     "h": 1479
+    },
+    {
+     "file": "north-east/north-east-10.jpg",
+     "thumb": "north-east/t-north-east-10.jpg",
+     "alt": "A runner and a young racer mid-stride",
+     "w": 1914,
+     "h": 1479
+    },
+    {
+     "file": "north-east/north-east-11.jpg",
+     "thumb": "north-east/t-north-east-11.jpg",
+     "alt": "Walking the course with a setter",
+     "w": 1917,
+     "h": 1479
+    },
+    {
+     "file": "north-east/north-east-12.jpg",
+     "thumb": "north-east/t-north-east-12.jpg",
+     "alt": "A shaggy black dog on the course",
+     "w": 1921,
+     "h": 1486
+    }
+   ]
+  },
+  {
+   "id": "creatures",
+   "numeral": "V",
+   "title": "Creatures",
+   "place": "Pennsylvania",
+   "date": "September–October 2026",
+   "note": "Cats in window light, a poodle at the water bowl, horses, goats, and one woolly bear crossing the leaves.",
+   "cover": "creatures/t-creatures-04.jpg",
+   "photos": [
+    {
+     "file": "creatures/creatures-01.jpg",
+     "thumb": "creatures/t-creatures-01.jpg",
+     "alt": "A cream cat resting on a leather chair",
+     "w": 1333,
+     "h": 2000
+    },
+    {
+     "file": "creatures/creatures-02.jpg",
+     "thumb": "creatures/t-creatures-02.jpg",
+     "alt": "A cream cat, eyes half closed",
+     "w": 2000,
+     "h": 1546
+    },
+    {
+     "file": "creatures/creatures-03.jpg",
+     "thumb": "creatures/t-creatures-03.jpg",
+     "alt": "A Siamese stepping toward the camera",
+     "w": 2000,
+     "h": 1546
+    },
+    {
+     "file": "creatures/creatures-04.jpg",
+     "thumb": "creatures/t-creatures-04.jpg",
+     "alt": "A Siamese with blue eyes, head tilted on a table",
+     "w": 2000,
+     "h": 1546
+    },
+    {
+     "file": "creatures/creatures-05.jpg",
+     "thumb": "creatures/t-creatures-05.jpg",
+     "alt": "A Siamese in profile",
+     "w": 2000,
+     "h": 1546
+    },
+    {
+     "file": "creatures/creatures-06.jpg",
+     "thumb": "creatures/t-creatures-06.jpg",
+     "alt": "A Siamese mid-yawn on the floor",
+     "w": 2000,
+     "h": 1545
+    },
+    {
+     "file": "creatures/creatures-07.jpg",
+     "thumb": "creatures/t-creatures-07.jpg",
+     "alt": "A cream cat curled on a windowsill",
+     "w": 2000,
+     "h": 1545
+    },
+    {
+     "file": "creatures/creatures-08.jpg",
+     "thumb": "creatures/t-creatures-08.jpg",
+     "alt": "A cream cat beside a lion mask in the window",
+     "w": 2000,
+     "h": 1545
+    },
+    {
+     "file": "creatures/creatures-09.jpg",
+     "thumb": "creatures/t-creatures-09.jpg",
+     "alt": "A Siamese portrait",
+     "w": 2000,
+     "h": 1545
+    },
+    {
+     "file": "creatures/creatures-10.jpg",
+     "thumb": "creatures/t-creatures-10.jpg",
+     "alt": "A poodle in a bandana drinking from a bowl",
+     "w": 2000,
+     "h": 1546
+    },
+    {
+     "file": "creatures/creatures-11.jpg",
+     "thumb": "creatures/t-creatures-11.jpg",
+     "alt": "A woolly bear caterpillar among fallen leaves",
+     "w": 2000,
+     "h": 1546
+    },
+    {
+     "file": "creatures/creatures-12.jpg",
+     "thumb": "creatures/t-creatures-12.jpg",
+     "alt": "Two dark horses in harness",
+     "w": 2000,
+     "h": 1544
+    },
+    {
+     "file": "creatures/creatures-13.jpg",
+     "thumb": "creatures/t-creatures-13.jpg",
+     "alt": "A brown goat at the fence",
+     "w": 2000,
+     "h": 1497
+    },
+    {
+     "file": "creatures/creatures-14.jpg",
+     "thumb": "creatures/t-creatures-14.jpg",
+     "alt": "A black goat in dappled light",
+     "w": 2000,
+     "h": 1540
+    }
+   ]
+  },
+  {
+   "id": "studies",
+   "numeral": "VI",
+   "title": "Studies",
+   "place": "Penn State Behrend and elsewhere",
+   "date": "September–October 2026",
+   "note": "Close looks at small things: fungi on fallen wood, asters, a weed in shale, and an eye.",
+   "cover": "studies/t-studies-06.jpg",
+   "photos": [
+    {
+     "file": "studies/studies-01.jpg",
+     "thumb": "studies/t-studies-01.jpg",
+     "alt": "Ferns and fallen logs in the woods",
+     "w": 1546,
+     "h": 2000
+    },
+    {
+     "file": "studies/studies-02.jpg",
+     "thumb": "studies/t-studies-02.jpg",
+     "alt": "A graffiti-covered trail sign in the woods",
+     "w": 1546,
+     "h": 2000
+    },
+    {
+     "file": "studies/studies-03.jpg",
+     "thumb": "studies/t-studies-03.jpg",
+     "alt": "A small flowering plant growing from shale",
+     "w": 1546,
+     "h": 2000
+    },
+    {
+     "file": "studies/studies-04.jpg",
+     "thumb": "studies/t-studies-04.jpg",
+     "alt": "White asters with a ladybug",
+     "w": 1546,
+     "h": 2000
+    },
+    {
+     "file": "studies/studies-05.jpg",
+     "thumb": "studies/t-studies-05.jpg",
+     "alt": "Pale bracket fungus on a dark stump",
+     "w": 2000,
+     "h": 1546
+    },
+    {
+     "file": "studies/studies-06.jpg",
+     "thumb": "studies/t-studies-06.jpg",
+     "alt": "Orange chicken-of-the-woods on a stump",
+     "w": 2000,
+     "h": 1546
+    },
+    {
+     "file": "studies/studies-07.jpg",
+     "thumb": "studies/t-studies-07.jpg",
+     "alt": "Orange fungus spreading across a log",
+     "w": 2000,
+     "h": 1545
+    },
+    {
+     "file": "studies/studies-08.jpg",
+     "thumb": "studies/t-studies-08.jpg",
+     "alt": "A photographer at work among yellow leaves",
+     "w": 2000,
+     "h": 1545
+    },
+    {
+     "file": "studies/studies-09.jpg",
+     "thumb": "studies/t-studies-09.jpg",
+     "alt": "A close study of a green-blue eye",
+     "w": 1669,
+     "h": 1289
+    }
+   ]
+  }
+ ]
+}
