@@ -1,299 +1,8 @@
 {
  "collections": [
   {
-   "id": "port-farms",
-   "numeral": "I",
-   "title": "Port Farms",
-   "place": "Waterford, Pennsylvania",
-   "date": "October 2026",
-   "note": "An autumn portrait session among the pumpkins, mums and corn rows of a farm that has stood since 1897.",
-   "cover": "port-farms/t-port-farms-11.jpg",
-   "photos": [
-    {
-     "file": "port-farms/port-farms-01.jpg",
-     "thumb": "port-farms/t-port-farms-01.jpg",
-     "alt": "Woman in a leather jacket seated among pumpkins",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-02.jpg",
-     "thumb": "port-farms/t-port-farms-02.jpg",
-     "alt": "Woman holding a small pumpkin to her face",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-03.jpg",
-     "thumb": "port-farms/t-port-farms-03.jpg",
-     "alt": "Seated portrait on a pumpkin crate under an orange maple",
-     "w": 1125,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-04.jpg",
-     "thumb": "port-farms/t-port-farms-04.jpg",
-     "alt": "Seated portrait among pumpkins under an orange maple",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-05.jpg",
-     "thumb": "port-farms/t-port-farms-05.jpg",
-     "alt": "Seated portrait beside the pumpkin display",
-     "w": 1429,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-06.jpg",
-     "thumb": "port-farms/t-port-farms-06.jpg",
-     "alt": "Portrait with a white pumpkin beside the Port Farms sign",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-07.jpg",
-     "thumb": "port-farms/t-port-farms-07.jpg",
-     "alt": "Close portrait with a white pumpkin beside the Port Farms sign",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-08.jpg",
-     "thumb": "port-farms/t-port-farms-08.jpg",
-     "alt": "Standing portrait with a pumpkin under the maple",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-09.jpg",
-     "thumb": "port-farms/t-port-farms-09.jpg",
-     "alt": "Standing portrait with a pumpkin, autumn leaves overhead",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-10.jpg",
-     "thumb": "port-farms/t-port-farms-10.jpg",
-     "alt": "Standing portrait with a pumpkin in the farm market",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-11.jpg",
-     "thumb": "port-farms/t-port-farms-11.jpg",
-     "alt": "Standing portrait with a pumpkin beneath an orange maple",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-12.jpg",
-     "thumb": "port-farms/t-port-farms-12.jpg",
-     "alt": "Portrait holding a pumpkin, glancing aside",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-13.jpg",
-     "thumb": "port-farms/t-port-farms-13.jpg",
-     "alt": "Portrait holding a pumpkin under autumn leaves",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-14.jpg",
-     "thumb": "port-farms/t-port-farms-14.jpg",
-     "alt": "A crate of pumpkins and gourds",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-15.jpg",
-     "thumb": "port-farms/t-port-farms-15.jpg",
-     "alt": "Rows of yellow and orange mums",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-16.jpg",
-     "thumb": "port-farms/t-port-farms-16.jpg",
-     "alt": "Yellow, orange and pink mums",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-17.jpg",
-     "thumb": "port-farms/t-port-farms-17.jpg",
-     "alt": "Kneeling portrait among the mums",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-18.jpg",
-     "thumb": "port-farms/t-port-farms-18.jpg",
-     "alt": "Walking away down a corn maze path",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-19.jpg",
-     "thumb": "port-farms/t-port-farms-19.jpg",
-     "alt": "Portrait in a brown sweater in the corn",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-20.jpg",
-     "thumb": "port-farms/t-port-farms-20.jpg",
-     "alt": "Standing in a corn maze",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-21.jpg",
-     "thumb": "port-farms/t-port-farms-21.jpg",
-     "alt": "Portrait in front of dry corn stalks",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-22.jpg",
-     "thumb": "port-farms/t-port-farms-22.jpg",
-     "alt": "Looking down in the corn maze",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-23.jpg",
-     "thumb": "port-farms/t-port-farms-23.jpg",
-     "alt": "Standing at the end of a corn row",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-24.jpg",
-     "thumb": "port-farms/t-port-farms-24.jpg",
-     "alt": "Full-length portrait in the corn maze",
-     "w": 1333,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-25.jpg",
-     "thumb": "port-farms/t-port-farms-25.jpg",
-     "alt": "Hands in pockets in the corn maze",
-     "w": 1333,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-26.jpg",
-     "thumb": "port-farms/t-port-farms-26.jpg",
-     "alt": "A couple's selfie against a bright autumn sky",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-27.jpg",
-     "thumb": "port-farms/t-port-farms-27.jpg",
-     "alt": "Walking into the corn",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-28.jpg",
-     "thumb": "port-farms/t-port-farms-28.jpg",
-     "alt": "Corn stalks against the sun",
-     "w": 1333,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-29.jpg",
-     "thumb": "port-farms/t-port-farms-29.jpg",
-     "alt": "Standing on the maze path",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-30.jpg",
-     "thumb": "port-farms/t-port-farms-30.jpg",
-     "alt": "Portrait on a sunlit corn path",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-31.jpg",
-     "thumb": "port-farms/t-port-farms-31.jpg",
-     "alt": "Close portrait among the corn",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-32.jpg",
-     "thumb": "port-farms/t-port-farms-32.jpg",
-     "alt": "Brown sweater and jeans on the lawn",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-33.jpg",
-     "thumb": "port-farms/t-port-farms-33.jpg",
-     "alt": "Leather jacket and jeans on the lawn",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-34.jpg",
-     "thumb": "port-farms/t-port-farms-34.jpg",
-     "alt": "A field of pumpkins in the sun",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-35.jpg",
-     "thumb": "port-farms/t-port-farms-35.jpg",
-     "alt": "Seated in the pumpkin patch",
-     "w": 1333,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-36.jpg",
-     "thumb": "port-farms/t-port-farms-36.jpg",
-     "alt": "Holding a pumpkin overhead",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-37.jpg",
-     "thumb": "port-farms/t-port-farms-37.jpg",
-     "alt": "A pumpkin held in place of a face",
-     "w": 2000,
-     "h": 1333
-    },
-    {
-     "file": "port-farms/port-farms-38.jpg",
-     "thumb": "port-farms/t-port-farms-38.jpg",
-     "alt": "Holding a large pumpkin in the patch",
-     "w": 1600,
-     "h": 2000
-    },
-    {
-     "file": "port-farms/port-farms-39.jpg",
-     "thumb": "port-farms/t-port-farms-39.jpg",
-     "alt": "A pumpkin for a head, farm fields behind",
-     "w": 2000,
-     "h": 1333
-    },
-    {
-     "file": "port-farms/port-farms-40.jpg",
-     "thumb": "port-farms/t-port-farms-40.jpg",
-     "alt": "Crouching among the pumpkins",
-     "w": 1600,
-     "h": 2000
-    }
-   ]
-  },
-  {
    "id": "green-eyes",
-   "numeral": "II",
+   "numeral": "I",
    "title": "Green Eyes",
    "place": "Green Eyes Festival, Chickamauga, Georgia",
    "date": "October 2026",
@@ -409,7 +118,7 @@
   },
   {
    "id": "letchworth",
-   "numeral": "III",
+   "numeral": "II",
    "title": "Letchworth",
    "place": "Letchworth State Park, New York",
    "date": "October 2026",
@@ -483,7 +192,7 @@
   },
   {
    "id": "north-east",
-   "numeral": "IV",
+   "numeral": "III",
    "title": "North East",
    "place": "North East, Pennsylvania",
    "date": "September–October 2026",
@@ -578,7 +287,7 @@
   },
   {
    "id": "creatures",
-   "numeral": "V",
+   "numeral": "IV",
    "title": "Creatures",
    "place": "Pennsylvania",
    "date": "September–October 2026",
@@ -687,7 +396,7 @@
   },
   {
    "id": "studies",
-   "numeral": "VI",
+   "numeral": "V",
    "title": "Studies",
    "place": "Penn State Behrend and elsewhere",
    "date": "September–October 2026",

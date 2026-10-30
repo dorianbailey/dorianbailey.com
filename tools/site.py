@@ -9,6 +9,7 @@ EMAIL = "dorianbailey814@gmail.com"
 M = json.load(open(ROOT / "assets/photos/photos.json"))
 COLL = {c["id"]: c for c in M["collections"]}
 TOTAL = sum(len(c["photos"]) for c in M["collections"])
+NUMWORD = ["Zero","One","Two","Three","Four","Five","Six","Seven","Eight"][len(M["collections"])]
 
 NAV = [
     ("better-selling/", "Better Selling", "selling"),
@@ -142,7 +143,7 @@ ENTRIES = [
     ("I", "better-selling/", "Better Selling With Bailey", "Estate sales in Erie County"),
     ("II", "oddway/", "Take The OddWay", "A road-trip guide to the strange"),
     ("III", "metazoo/", "Bailey MetaZoo", "Cryptids and trading cards"),
-    ("IV", "photography/", "Photographs", f"Six collections, {TOTAL} plates"),
+    ("IV", "photography/", "Photographs", f"{NUMWORD} collections, {TOTAL} plates"),
     ("V", "record/", "The Record", "Education, ventures and proficiencies"),
 ]
 
@@ -157,7 +158,7 @@ contents = "\n".join(f"""          <li>
 
 selected = []
 for cid, n, cap in [("letchworth", 7, "Letchworth"), ("creatures", 4, "Creatures"),
-                    ("north-east", 5, "North East"), ("port-farms", 11, "Port Farms")]:
+                    ("north-east", 5, "North East"), ("studies", 6, "Studies")]:
     ph, w, h = photo(cid, n)
     selected.append(plate("assets/photos/" + ph["thumb"], ph["alt"], w, h,
                           f"<em>{cap}</em>", href=f"photography/#{cid}"))
@@ -388,12 +389,12 @@ for c in M["collections"]:
     </section>""")
 
 page("photography/index.html", "photo", "Photographs | Dorian Bailey",
-     f"Photographs by Dorian Bailey in six collections: Port Farms, Green Eyes, Letchworth, North East, Creatures and Studies.",
+     f"Photographs by Dorian Bailey in {NUMWORD.lower()} collections: Green Eyes, Letchworth, North East, Creatures and Studies.",
      f"""    <header class="entry-head">
       <div class="wrap">
         <p class="entry-head__num">No. IV</p>
         <h1>Photographs</h1>
-        <p class="entry-head__standfirst">{TOTAL} plates in six collections, made in the autumn of 2026 on a Canon EOS R50 and a PowerShot G7 X Mark II.</p>
+        <p class="entry-head__standfirst">{TOTAL} plates in {NUMWORD.lower()} collections, made in the autumn of 2026 on a Canon EOS R50.</p>
       </div>
     </header>
 
@@ -456,7 +457,7 @@ page("record/index.html", "record", "The Record | Dorian Bailey",
               <h3><a href="../metazoo/">Bailey MetaZoo</a></h3>
               <p><em>Creator.</em> Short-form video on MetaZoo and cryptid folklore for YouTube and Instagram, including the VHS card-reveal series.</p>
               <h3><a href="../photography/">Photographs</a></h3>
-              <p><em>Photographer.</em> Portrait, event, landscape and close-up work, collected in six series of {TOTAL} plates.</p>
+              <p><em>Photographer.</em> Portrait, event, landscape and close-up work, collected in {NUMWORD.lower()} series of {TOTAL} plates.</p>
             </dd>
           </div>
           <div class="ledger__row">
