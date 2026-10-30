@@ -652,3 +652,39 @@ em { font-style: italic; }
 .vhs-sweep__osd--bl { bottom: 6vh; }
 .vhs-sweep.is-out { opacity: 0; }
 .vhs-sweep--calm canvas, .vhs-sweep--calm .vhs-sweep__band { display: none; }
+
+/* ---------- Cryptid Highway ---------- */
+.game__screen { position: relative; }
+.game canvas {
+  display: block; width: 100%; aspect-ratio: 8 / 3; background: #16151a; cursor: pointer;
+  border: 1px solid var(--rule); box-shadow: var(--lift-high); touch-action: manipulation;
+}
+.game canvas:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+.game__panel {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(30rem, calc(100% - 2rem));
+  text-align: center; padding: clamp(1rem, 3vw, 1.75rem); background: rgba(14, 13, 12, 0.84); border: 1px solid var(--on-field-rule);
+}
+.game__panel[hidden] { display: none; }
+.game__panel h3 { font-size: var(--s-36); margin-bottom: 0.5rem; }
+.game__panel p { font-size: var(--s-16); color: var(--on-field-soft); margin-bottom: 0.9rem; }
+.game__panel .btn { margin-top: 0.25rem; }
+.game__kicker { font-style: italic; margin-bottom: 0.35rem !important; }
+.game__stop a { color: var(--on-field); text-decoration-color: var(--brass); }
+.game__controls { display: flex; gap: 0.75rem; justify-content: space-between; margin-top: 1rem; }
+.game__btn {
+  font-family: "VT323", ui-monospace, monospace; font-size: 1.45rem; letter-spacing: 0.05em; line-height: 1;
+  color: var(--ink); background: transparent; border: 1px solid var(--rule-strong); padding: 0.6rem 1.4rem; cursor: pointer;
+  touch-action: manipulation;
+}
+.game__btn span { color: var(--ink-soft); margin-left: 0.4rem; }
+.game__btn:hover { border-color: var(--brass); color: var(--brass); }
+.game:not(.is-running) .game__btn { opacity: 0.6; }
+@media (max-width: 640px) {
+  .game canvas { aspect-ratio: 3 / 2; }
+  .game__panel { padding: 0.9rem; }
+  .game__panel h3 { font-size: var(--s-24); }
+  .game__panel p { font-size: var(--s-14); line-height: 1.45; margin-bottom: 0.6rem; }
+  .game__kicker { display: none; }
+  .game__btn { flex: 1; padding: 0.9rem 0.5rem; }
+  .game__btn span { display: none; }
+}

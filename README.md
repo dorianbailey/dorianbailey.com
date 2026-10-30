@@ -41,4 +41,5 @@ GitHub Pages from `main` (root) with the custom domain `dorianbailey.com`. DNS l
 - **What would I keep?** (`/better-selling/`, `js/calc.js`): payout = total sales - 20% - $995, the published standard terms.
 - **Roll a detour** (`/oddway/`, `js/detour.js`): deals one random public stop live from OddWay's Supabase index, read-only with the project's publishable key. Category counts in the script are only used to pick a random offset.
 - **The television** (`/metazoo/`, `js/tv.js`): plays the latest Bailey MetaZoo shorts from YouTube's privacy-enhanced player. `tools/youtube.py` refreshes `assets/data/youtube.json` from the channel's public feed; `.github/workflows/youtube.yml` runs it every six hours, rebuilds the pages and publishes.
+- **Cryptid Highway** (home page, `js/game.js`): a canvas driving game. Jump obstacles, photograph cryptids; personal best is kept in the visitor's browser; the game-over panel deals a real OddWay cryptid stop.
 - **Easter eggs** (`js/main.js`): Mothman's eyes in the footer, and typing "oddway" anywhere.
