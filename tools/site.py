@@ -354,12 +354,14 @@ entry("metazoo", "metazoo", "Bailey MetaZoo",
       "Bailey MetaZoo is Dorian Bailey's YouTube and Instagram channel on MetaZoo, the cryptid trading card game, and the folklore behind it.",
       "Short films on MetaZoo, the cryptid trading card game, and the folklore behind its cards.",
       """          <p>MetaZoo is a trading card game built from cryptids, folklore and the paranormal. Bailey MetaZoo covers the game and the legends it draws on: the Squonk, the Loveland Frogman, Old Scratch, and which cryptid haunts your state.</p>
-          <p>Alongside the lore there are new set releases, pack openings, giveaways, and a signature format: the VHS reveal, where a tape goes into the deck, the old set flickers on, and the cards flash through static before the best one lands.</p>""",
+          <p>Alongside the lore there are new set releases, pack openings, giveaways, and a signature format: the VHS reveal, where a tape goes into the deck, the old set flickers on, and the cards flash through static before the best one lands.</p>
+          <p>Off camera, I photograph events for MetaZoo TCG itself, including the Green Eyes Festival, the Mothman Festival and Legends. The plates below are from <a href="../photography/#green-eyes">Green Eyes</a>.</p>""",
       [("Platforms", f'<a href="{LINKS["yt"]}" rel="noopener">YouTube</a> and <a href="{LINKS["ig"]}" rel="noopener">Instagram</a>'),
        ("Handle", "@baileymetazoo"),
        ("Subject", "MetaZoo and cryptid folklore"),
        ("Format", "Short vertical video"),
-       ("Role", "Creator, host and editor")],
+       ("Role", "Creator, host and editor"),
+       ("Also", '<a href="../photography/">Event photographer for MetaZoo TCG</a>')],
       [P("green-eyes", 14, "<em>A MetaZoo card, from Green Eyes</em>"),
        P("green-eyes", 13, "<em>A MetaZoo cap, from Green Eyes</em>"),
        P("green-eyes", 3, "<em>The binder, from Green Eyes</em>")],
@@ -377,7 +379,7 @@ for c in M["collections"]:
               <span class="frame"><img src="../assets/photos/{c['cover']}" alt="" width="{w}" height="{h}" loading="lazy" decoding="async"></span>
               <span class="coll-index__num">{c['numeral']}</span>
               <span class="coll-index__title">{c['title']}</span>
-              <span class="coll-index__meta">{c['place']}<br>{n} plates</span>
+              <span class="coll-index__meta">{('Commissioned by ' + c['commission'] + '<br>') if c.get('commission') else ''}{c['place']}<br>{n} plates</span>
             </a>
           </li>""")
     figs = []
@@ -394,7 +396,7 @@ for c in M["collections"]:
           <p class="collection__num">{c['numeral']}</p>
           <div>
             <h2 id="{c['id']}-title">{c['title']}</h2>
-            <p class="collection__meta">{c['place']}, {c['date']}. {n} plates.</p>
+            <p class="collection__meta">{('Commissioned by ' + c['commission'] + '. ') if c.get('commission') else ''}{c['place']}, {c['date']}. {n} plates.</p>
             <p class="collection__note">{c['note']}</p>
           </div>
         </header>
@@ -429,7 +431,12 @@ page("photography/index.html", "photo", "Photography | Dorian Bailey",
             <dt>Event photographer</dt>
             <dd>
               <h3>MetaZoo TCG</h3>
-              <p>Professional coverage at several MetaZoo TCG events: players at the tables, the cards they pull, costumed cryptids, and the crowds that come to see them.</p>
+              <p>Professional coverage of MetaZoo TCG at cryptid festivals: players at the tables, the cards they pull, costumed cryptids, and the crowds that come to see them.</p>
+              <ul class="events">
+                <li><a href="#green-eyes">Green Eyes Festival</a> <em>Chickamauga, Georgia, October 2026</em></li>
+                <li>Mothman Festival <em>Point Pleasant, West Virginia, September 2026</em></li>
+                <li>Legends</li>
+              </ul>
             </dd>
           </div>
           <div class="ledger__row">
@@ -509,7 +516,7 @@ page("record/index.html", "record", "The Record | Dorian Bailey",
               <h3><a href="{LINKS['vanta']}" rel="noopener">Vanta House</a></h3>
               <p><em>Marketing assistant, June 2026 to present.</em> A video-first content studio in North East. Content strategy and social campaigns across client accounts, SEO and digital campaigns, campaign analysis, and support on shoots and video production.</p>
               <h3><a href="../photography/">MetaZoo TCG</a></h3>
-              <p><em>Event photographer.</em> Professional photography at several MetaZoo TCG events.</p>
+              <p><em>Event photographer.</em> Commissioned coverage at the Green Eyes Festival, the Mothman Festival and Legends.</p>
             </dd>
           </div>
           <div class="ledger__row">

@@ -8,6 +8,7 @@ SRGB = ImageCms.createProfile("sRGB")
 
 C = [
  dict(id="green-eyes", numeral="I", title="Green Eyes", place="Green Eyes Festival, Chickamauga, Georgia", date="October 2026",
+      commission="MetaZoo TCG",
       note="A day of cryptids, costumes and card tables at a festival named for the battlefield legend of Ole’ Green Eyes.",
       cover="IMG_2147", photos=[
   ("Green Eyes Edited/IMG_2063","A small cryptid plush hanging from a vendor tent"),
@@ -128,6 +129,6 @@ for c in C:
         e = {"file": f"{c['id']}/{name}", "thumb": f"{c['id']}/t-{name}", "alt": alt, "w": w, "h": h}
         if os.path.basename(src) == c["cover"]: c["coverFile"] = e["thumb"]
         entries.append(e)
-    manifest["collections"].append({k: c[k] for k in ("id","numeral","title","place","date","note")} | {"cover": c["coverFile"], "photos": entries})
+    manifest["collections"].append({k: c[k] for k in ("id","numeral","title","place","date","note","commission") if k in c} | {"cover": c["coverFile"], "photos": entries})
     print(c["id"], len(entries))
 json.dump(manifest, open(os.path.join(OUT, "photos.json"), "w"), indent=1, ensure_ascii=False)
