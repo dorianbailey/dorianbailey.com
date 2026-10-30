@@ -82,7 +82,7 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#1e3a2b">
+  <meta name="theme-color" content="#1c1b19">
   <link rel="icon" href="{p}favicon.svg" type="image/svg+xml">
   <link rel="preload" href="{p}assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{p}assets/fonts/libre-caslon-text-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -113,7 +113,7 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
   <footer class="site-footer">
     <div class="wrap site-footer__inner">
       <div class="site-footer__mark">
-        {seal(56, foil="foil-foot")}
+        {seal(56, "seal seal--deboss")}
         <p>The Collection of Dorian Bailey<br><em>North East, Pennsylvania</em></p>
       </div>
       <ul class="site-footer__links">
@@ -158,7 +158,7 @@ ENTRIES = [
     ("II", "oddway/", "Take The OddWay", "A road-trip guide to the strange"),
     ("III", "metazoo/", "Bailey MetaZoo", "Cryptids and trading cards"),
     ("IV", "photography/", "Photography", "Commissions and collections"),
-    ("V", "record/", "The Record", "Education, ventures and proficiencies"),
+    ("V", "record/", "The Record", "Education, positions and ventures"),
 ]
 
 contents = "\n".join(f"""          <li>
@@ -178,12 +178,36 @@ for cid, n, cap in [("letchworth", 7, "Letchworth"), ("creatures", 4, "Creatures
                           f"<em>{cap}</em>", href=f"photography/#{cid}"))
 selected = "\n          ".join(selected)
 
+FEAT = COLL["legends"]["photos"][25]
+
+EVENTS = [("legends", "Legends", "Two-day tournament, August 2026"),
+          ("mothman", "Mothman Festival", "Point Pleasant, West Virginia, September 2026"),
+          ("green-eyes", "Green Eyes Festival", "Chickamauga, Georgia, October 2026")]
+
+
+def events_list(prefix):
+    return "\n".join(f'            <li><a href="{prefix}#{cid}">{t}</a> <em>{m}</em></li>' for cid, t, m in EVENTS)
+
+
+NOW = [
+    ("Studying", "Marketing and Management Information Systems at Penn State Behrend, class of 2027."),
+    ("Working", f'Marketing assistant at <a href="{LINKS["vanta"]}" rel="noopener">Vanta House</a>: content strategy, social campaigns and SEO for client brands.'),
+    ("Running", '<a href="better-selling/">Better Selling With Bailey</a>, booking estate sales across Erie County.'),
+    ("Building", '<a href="oddway/">Take The OddWay</a>, with an events listing for cryptid festivals next on the roadmap.'),
+    ("Photographing", '<a href="photography/">Events for MetaZoo TCG</a>, three so far this year.'),
+    ("Filming", '<a href="metazoo/">Bailey MetaZoo</a>: short films on cryptid lore and the cards behind it.'),
+]
+now_rows = "\n".join(f"""          <div class="ledger__row">
+            <dt>{k}</dt>
+            <dd><p>{v}</p></dd>
+          </div>""" for k, v in NOW)
+
 page("index.html", "home",
      "Dorian Bailey",
-     "The collection of Dorian Bailey: Better Selling With Bailey, Take The OddWay, Bailey MetaZoo and photographs, from North East, Pennsylvania.",
+     "The collection of Dorian Bailey: Better Selling With Bailey, Take The OddWay, Bailey MetaZoo and photography for MetaZoo TCG, from North East, Pennsylvania.",
      f"""    <section class="frontispiece">
       <div class="wrap frontispiece__inner">
-        {seal(112, "seal seal--large", foil="foil-hero")}
+        {seal(112, "seal seal--large seal--deboss")}
         <p class="frontispiece__pre">The Collection of</p>
         <h1>Dorian Bailey</h1>
         <p class="frontispiece__sub">Ventures, pursuits and photographs<br>from North East, Pennsylvania</p>
@@ -199,10 +223,27 @@ page("index.html", "home",
       </div>
     </section>
 
-    <section class="section section--rule" aria-labelledby="foreword-title">
+    <section class="section section--rule" aria-labelledby="feature-title">
+      <div class="wrap feature">
+        <figure class="feature__media">
+          <a class="frame" href="photography/#legends"><img src="assets/photos/{FEAT['file']}" alt="{html.escape(FEAT['alt'])}" width="{FEAT['w']}" height="{FEAT['h']}" loading="lazy" decoding="async"></a>
+        </figure>
+        <div class="feature__card">
+          <p class="feature__kicker">Featured commission</p>
+          <h2 id="feature-title">MetaZoo TCG, 2026</h2>
+          <p>Three events in three months for MetaZoo TCG: a two-day tournament, the Mothman Festival and the Green Eyes Festival. Players at the tables, prize cards on their easels, costumed cryptids, and the crowds that came to see them.</p>
+          <ul class="events">
+{events_list("photography/")}
+          </ul>
+          <div class="btn-row"><a class="btn" href="photography/">See the commissions</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section band--raised section--rule" aria-labelledby="foreword-title">
       <div class="wrap foreword">
         <figure class="plate foreword__portrait">
-          <div class="frame"><img src="assets/img/dorian-bailey.jpg" alt="Portrait of Dorian Bailey" width="900" height="1200"></div>
+          <div class="frame"><img src="assets/img/dorian-bailey.jpg" alt="Portrait of Dorian Bailey" width="900" height="1200" loading="lazy"></div>
         </figure>
         <div class="foreword__text">
           <h2 class="section-title" id="foreword-title">Foreword</h2>
@@ -214,7 +255,19 @@ page("index.html", "home",
       </div>
     </section>
 
-    <section class="section section--rule" aria-labelledby="plates-title">
+    <section class="section section--rule" aria-labelledby="now-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 class="section-title" id="now-title">Now</h2>
+          <p class="section-head__note">What fills the week, as of October 2026</p>
+        </div>
+        <dl class="ledger ledger--wide">
+{now_rows}
+        </dl>
+      </div>
+    </section>
+
+    <section class="section band--dark" aria-labelledby="plates-title">
       <div class="wrap">
         <div class="section-head">
           <h2 class="section-title" id="plates-title">Selected plates</h2>
@@ -226,10 +279,10 @@ page("index.html", "home",
       </div>
     </section>
 
-    <section class="correspondence" id="correspondence" aria-labelledby="corr-title">
+    <section class="correspondence band--raised" id="correspondence" aria-labelledby="corr-title">
       <div class="wrap wrap--narrow">
         <h2 class="section-title" id="corr-title">Correspondence</h2>
-        <p>For work, collaborations or an estate sale, write to me directly.</p>
+        <p>For work, commissions, collaborations or an estate sale, write to me directly.</p>
         <p class="correspondence__email"><a href="mailto:{EMAIL}">{EMAIL}</a></p>
         <p class="correspondence__more">Also on <a href="{LINKS['linkedin']}" rel="noopener">LinkedIn</a>. Estate sale bookings are handled at <a href="{LINKS['bswb']}" rel="noopener">bettersellingwithbailey.com</a>.</p>
       </div>
@@ -252,34 +305,64 @@ page("index.html", "home",
     </script>""")
 
 
-# ===================================================================== Entries (brand pages)
+# ===================================================================== Entries (venture pages)
 ORDER = [("better-selling", "I", "Better Selling With Bailey"),
          ("oddway", "II", "Take The OddWay"),
          ("metazoo", "III", "Bailey MetaZoo"),
          ("photography", "IV", "Photography")]
 
 
-def entry(slug, key, title, desc, standfirst, prose, particulars, plates, links):
+def entry(slug, key, title, desc, standfirst, prose, particulars, plates, links, head_print=None, extra=""):
     idx = [o[0] for o in ORDER].index(slug)
     num = ORDER[idx][1]
     prev_ = ORDER[idx - 1] if idx > 0 else None
     next_ = ORDER[idx + 1]
     parts = "\n".join(f"            <div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in particulars)
     lk = "\n".join(f'          <a class="btn" href="{h}" rel="noopener">{t}</a>' for t, h in links)
-    pl = "\n          ".join(plates)
     nav = []
     if prev_:
         nav.append(f'<a class="entry-nav__prev" href="../{prev_[0]}/"><em>Previous</em> {prev_[1]}. {prev_[2]}</a>')
     else:
         nav.append('<a class="entry-nav__prev" href="../index.html"><em>Back to</em> Contents</a>')
     nav.append(f'<a class="entry-nav__next" href="../{next_[0]}/"><em>Next</em> {next_[1]}. {next_[2]}</a>')
-    page(f"{slug}/index.html", key, f"{title} | Dorian Bailey", desc, f"""    <header class="entry-head">
+
+    if head_print:
+        src, alt, w, h = head_print
+        head = f"""    <header class="entry-head entry-head--figure">
+      <div class="wrap">
+        <div class="entry-head__text">
+          <p class="entry-head__num">No. {num}</p>
+          <h1>{title}</h1>
+          <p class="entry-head__standfirst">{standfirst}</p>
+        </div>
+        <figure class="entry-head__print">
+          <div class="frame"><img src="{src}" alt="{html.escape(alt)}" width="{w}" height="{h}" fetchpriority="high" decoding="async"></div>
+        </figure>
+      </div>
+    </header>"""
+    else:
+        head = f"""    <header class="entry-head">
       <div class="wrap">
         <p class="entry-head__num">No. {num}</p>
         <h1>{title}</h1>
         <p class="entry-head__standfirst">{standfirst}</p>
       </div>
-    </header>
+    </header>"""
+
+    plates_html = ""
+    if plates:
+        pl = "\n          ".join(plates)
+        plates_html = f"""
+    <section class="section band--dark" aria-label="Plates">
+      <div class="wrap">
+        <div class="plate-row plate-row--{len(plates)}">
+          {pl}
+        </div>
+      </div>
+    </section>
+"""
+
+    page(f"{slug}/index.html", key, f"{title} | Dorian Bailey", desc, f"""{head}
 
     <section class="section">
       <div class="wrap entry">
@@ -297,15 +380,7 @@ def entry(slug, key, title, desc, standfirst, prose, particulars, plates, links)
         </aside>
       </div>
     </section>
-
-    <section class="section section--rule" aria-label="Plates">
-      <div class="wrap">
-        <div class="plate-row plate-row--{len(plates)}">
-          {pl}
-        </div>
-      </div>
-    </section>
-
+{extra}{plates_html}
     <nav class="wrap entry-nav" aria-label="Collection">
       {nav[0]}
       {nav[1]}
@@ -318,54 +393,208 @@ def P(cid, n, cap, link=True):
                  href=f"../photography/#{cid}" if link else None, prefix="../")
 
 
+def HP(cid, n):
+    ph = COLL[cid]["photos"][n - 1]
+    return ("../assets/photos/" + ph["file"], ph["alt"], ph["w"], ph["h"])
+
+
+def steps(items):
+    return "\n".join(f"""          <li>
+            <h3>{t}</h3>
+            <p>{d}</p>
+          </li>""" for t, d in items)
+
+
+# ---------------------------------------------------------------- I. Better Selling With Bailey
+BSWB_STEPS = [
+    ("Walkthrough and pricing", "I assess everything in the home and price it to sell, with you as involved in the decisions as you like."),
+    ("Staging", "Rooms are organized and merchandise is laid out so buyers can browse easily and find what they came for."),
+    ("Promotion", "Listings, Facebook events and local outreach bring the right buyers to the door, whatever the weather."),
+    ("Sale days", "I run the floor: every customer, every sale and every question. You don&rsquo;t need to be there unless you want to be."),
+    ("Cleanup", "Teardown at the end of the sale, and free removal of whatever is left if you want it gone."),
+    ("Proceeds", "The earnings go to you, minus the flat fee and commission agreed before the sale began."),
+]
+SELLS = ["Clothing collections", "Toys and LEGO", "Video games and electronics", "Antiques and vintage",
+         "Sports cards and collectibles", "Trading card collections", "Household goods", "Tools and equipment"]
+
+bswb_extra = f"""
+    <section class="section section--rule" aria-labelledby="process-title">
+      <div class="wrap">
+        <h2 class="section-title" id="process-title">How a sale works</h2>
+        <p class="section-intro">Every sale is hosted at the client&rsquo;s home in Erie County and handled start to finish.</p>
+        <ol class="steps">
+{steps(BSWB_STEPS)}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section band--raised section--rule" aria-labelledby="clients-title">
+      <div class="wrap split">
+        <div>
+          <h2 class="section-title" id="clients-title">From clients</h2>
+          <div class="quotes quotes--stack">
+            <blockquote class="quote">
+              <p>Everything was done for me. Great turnout for the sale. Was better than I hoped for.</p>
+              <cite>Google review</cite>
+            </blockquote>
+            <blockquote class="quote">
+              <p>Great advertising and phenomenal work setting things up and execution of the sale.</p>
+              <cite>Google review</cite>
+            </blockquote>
+          </div>
+        </div>
+        <div>
+          <h2 class="section-title">What sells</h2>
+          <p class="section-intro">The categories that consistently draw buyers at Erie County sales.</p>
+          <ul class="events cols-2">
+{chr(10).join(f"            <li>{s}</li>" for s in SELLS)}
+          </ul>
+          <h3 class="subhead">In the press</h3>
+          <p><a href="{LINKS['erie']}" rel="noopener">YourErie.com, May 2026.</a> A Star Wars collector&rsquo;s sale in North East drew an eager crowd through heavy rain and wind, for a collection of action figures, books and sealed LEGO sets.</p>
+        </div>
+      </div>
+    </section>
+"""
+
 entry("better-selling", "selling", "Better Selling With Bailey",
       "Better Selling With Bailey is Dorian Bailey's estate sale company in Erie County, Pennsylvania.",
       "Estate sales in Erie County, run start to finish by one person, so the people selling keep the proceeds.",
       """          <p>Better Selling With Bailey prices, stages, promotes and runs estate sales in the client&rsquo;s own home, then clears whatever is left at no charge. Many clients treat it as a cleanout of a garage, basement or collection that happens to pay.</p>
-          <p>Every client works with me directly, from the first walkthrough to the last sale of the day. I set the prices, arrange the rooms, write the listings, run the floor and handle the teardown.</p>
-          <p>A Star Wars collector&rsquo;s sale in North East drew a crowd through heavy rain and wind in May 2026, and was covered by YourErie.com.</p>""",
+          <p>Every client works with me directly, from the first walkthrough to the last sale of the day. Some like to be involved in every pricing decision; others would rather hand the whole thing over. Either works.</p>""",
       [("Established", "May 2026, North East, Pennsylvania"),
        ("Region", "Erie County"),
        ("Role", "Founder and owner"),
-       ("Returned to sellers", "More than $35,000"),
+       ("Client sales", "More than $35,000"),
        ("Top events", "More than $16,000 and $8,000, each in a single weekend"),
        ("Terms", "$995 flat fee plus 20% commission; leftover removal free"),
        ("Press", f'<a href="{LINKS["erie"]}" rel="noopener">YourErie.com, May 2026</a>')],
-      [plate("../assets/img/dorian-bailey.jpg", "Dorian Bailey in a Better Selling With Bailey polo", 900, 1200,
-             "<em>The proprietor, in the house colors</em>")],
-      [("Visit bettersellingwithbailey.com", LINKS["bswb"]), ("Facebook", LINKS["bswb_fb"])])
+      [],
+      [("Visit bettersellingwithbailey.com", LINKS["bswb"]), ("Facebook", LINKS["bswb_fb"])],
+      head_print=("../assets/img/dorian-bailey.jpg", "Dorian Bailey in a Better Selling With Bailey polo", 900, 1200),
+      extra=bswb_extra)
+
+# ---------------------------------------------------------------- II. Take The OddWay
+ODD_STEPS = [
+    ("Pick your route", "Give it a start and a finish. OddWay takes care of everything in between, including the two-lane roads you would never have chosen yourself."),
+    ("Find strange stops", "Filter by what you actually want to see, then check how far each stop pulls you off course before you commit to it."),
+    ("Take the OddWay", "Add the good ones to your trip, take the directions with you, and go stand in front of the thing."),
+]
+ODD_CATS = [
+    ("Cryptids", "Creatures people keep reporting and nobody has caught."),
+    ("Folklore", "Stories a place tells about itself, passed down and still repeated."),
+    ("Haunted", "Hotels, theatres, prisons and back roads with a reputation."),
+    ("UFOs", "Sighting sites, crash lore and the towns that kept the file open."),
+    ("Weird history", "Real events too strange to have made the textbook."),
+    ("Museums", "Small, specific collections run by people who care far too much."),
+    ("Roadside oddities", "Giant objects, odd monuments and things built for no clear reason."),
+]
+odd_extra = f"""
+    <section class="section section--rule" aria-labelledby="how-title">
+      <div class="wrap">
+        <h2 class="section-title" id="how-title">How it works</h2>
+        <ol class="steps">
+{steps(ODD_STEPS)}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section band--raised section--rule" aria-labelledby="cats-title">
+      <div class="wrap">
+        <h2 class="section-title" id="cats-title">Seven kinds of strange</h2>
+        <p class="section-intro">Every stop is filed under one of seven categories, so a trip can be all haunted hotels or all giant statues.</p>
+        <dl class="glossary">
+{chr(10).join(f"          <div><dt>{t}</dt><dd>{d}</dd></div>" for t, d in ODD_CATS)}
+        </dl>
+      </div>
+    </section>
+
+    <section class="section section--rule" aria-labelledby="next-title">
+      <div class="wrap split">
+        <h2 class="section-title" id="next-title">Next on the road</h2>
+        <div class="measure">
+          <p>An events listing: cryptid festivals, haunted houses and seasonal mazes, sortable by distance from wherever you are.</p>
+          <p>The hard part is the calendar. Most of these events follow a pattern, like the third weekend in September, rather than a fixed date, so each year&rsquo;s dates will be confirmed by hand. An event listed on the wrong weekend is worse than one not listed at all; nobody should drive four hours to an empty field.</p>
+        </div>
+      </div>
+    </section>
+"""
 
 entry("oddway", "oddway", "Take The OddWay",
       "Take The OddWay is a road-trip discovery platform by Dorian Bailey for finding cryptids, folklore, haunted places and roadside oddities.",
       "A road-trip guide to the strange: cryptids, folklore, haunted places and roadside oddities along your route.",
       """          <p>Give OddWay a route and it finds the detours worth taking: Bigfoot sightings, local legends, haunted hotels, UFO landmarks, odd little museums and giant roadside statues.</p>
-          <p>I designed and built it end to end, from the brand and the research behind every stop to the web app itself, written in Next.js and TypeScript on Supabase. Stops are sorted into seven categories: cryptids, folklore, haunted, UFOs, weird history, museums and roadside oddities.</p>""",
+          <p>I designed and built it end to end, from the brand and the research behind every stop to the web app itself, written in Next.js and TypeScript on Supabase.</p>""",
       [("Founded by", "Dorian Bailey"),
        ("Subject", "Cryptids, folklore and roadside Americana"),
        ("Categories", "Seven"),
        ("Built with", "Next.js, React, TypeScript, Tailwind CSS, Supabase"),
        ("Also", f'<a href="{LINKS["shop"]}" rel="noopener">The OddWay shop</a>')],
-      [P("green-eyes", 7, "<em>Mothman and Bigfoot, from Green Eyes</em>"),
-       P("green-eyes", 5, "<em>Bigfoot, from Green Eyes</em>"),
-       P("letchworth", 7, "<em>The gorge, from Letchworth</em>")],
-      [("Visit taketheoddway.com", LINKS["oddway"]), ("Shop the OddWay", LINKS["shop"])])
+      [P("green-eyes", 5, "<em>Bigfoot, from Green Eyes</em>"),
+       P("letchworth", 7, "<em>The gorge, from Letchworth</em>"),
+       P("north-east", 2, "<em>Halloween, from North East</em>")],
+      [("Visit taketheoddway.com", LINKS["oddway"]), ("Shop the OddWay", LINKS["shop"])],
+      head_print=HP("green-eyes", 7),
+      extra=odd_extra)
+
+# ---------------------------------------------------------------- III. Bailey MetaZoo
+FILMS = ["The Squonk Might Be the Saddest Cryptid Ever", "Old Scratch Is Back in MetaZoo",
+         "Ohio Has a Frogman Problem: the Loveland Frogman", "What Cryptid Haunts Your State?",
+         "Escape Polybius: a ten-pack giveaway", "Salem Nights, a new limited release"]
+VHS = [
+    ("The tape", "Hands slide a cassette into a VCR, shot moody and close, with the deck&rsquo;s clunk on the beat."),
+    ("Warm-up", "An old CRT clicks on and warms to snow as the camera pushes toward the glass."),
+    ("The logo", "A white flash, then the MetaZoo logo rolls down into place through fading static."),
+    ("The flashes", "Five cards flash through the snow, each a little faster than the last."),
+    ("The hero", "Tracking drops, a beat of dead air, then the hero card slams in with its own sound."),
+    ("Switch-off", "The picture squeezes to a line, then a dot, and loops back to the start."),
+]
+mz_extra = f"""
+    <section class="section section--rule" aria-labelledby="vhs-title">
+      <div class="wrap">
+        <h2 class="section-title" id="vhs-title">The VHS reveal</h2>
+        <p class="section-intro">The signature format: an eighteen-second vertical film built to loop, shot on real tape-deck and television footage.</p>
+        <ol class="steps">
+{steps(VHS)}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section band--raised section--rule" aria-labelledby="films-title">
+      <div class="wrap split">
+        <div>
+          <h2 class="section-title" id="films-title">Recent films</h2>
+          <ul class="events">
+{chr(10).join(f'            <li><a href="{LINKS["yt"]}" rel="noopener">{f}</a></li>' for f in FILMS)}
+          </ul>
+        </div>
+        <div>
+          <h2 class="section-title">On assignment</h2>
+          <p class="section-intro">Event photography for MetaZoo TCG itself.</p>
+          <ul class="events">
+{events_list("../photography/")}
+          </ul>
+        </div>
+      </div>
+    </section>
+"""
 
 entry("metazoo", "metazoo", "Bailey MetaZoo",
       "Bailey MetaZoo is Dorian Bailey's YouTube and Instagram channel on MetaZoo, the cryptid trading card game, and the folklore behind it.",
       "Short films on MetaZoo, the cryptid trading card game, and the folklore behind its cards.",
       """          <p>MetaZoo is a trading card game built from cryptids, folklore and the paranormal. Bailey MetaZoo covers the game and the legends it draws on: the Squonk, the Loveland Frogman, Old Scratch, and which cryptid haunts your state.</p>
-          <p>Alongside the lore there are new set releases, pack openings, giveaways, and a signature format: the VHS reveal, where a tape goes into the deck, the old set flickers on, and the cards flash through static before the best one lands.</p>
-          <p>Off camera, I photograph events for MetaZoo TCG itself: the Legends tournament, the Mothman Festival and the Green Eyes Festival. The plates below are one from each, and the full sets are in <a href="../photography/">Photography</a>.</p>""",
+          <p>Alongside the lore there are new set releases, pack openings and giveaways. Off camera, I photograph events for MetaZoo TCG itself.</p>""",
       [("Platforms", f'<a href="{LINKS["yt"]}" rel="noopener">YouTube</a> and <a href="{LINKS["ig"]}" rel="noopener">Instagram</a>'),
        ("Handle", "@baileymetazoo"),
        ("Subject", "MetaZoo and cryptid folklore"),
        ("Format", "Short vertical video"),
        ("Role", "Creator, host and editor"),
        ("Also", '<a href="../photography/">Event photographer for MetaZoo TCG</a>')],
-      [P("legends", 2, "<em>The first-place prize, from Legends</em>"),
-       P("mothman", 3, "<em>A signed print, from Mothman Festival</em>"),
+      [P("mothman", 3, "<em>A signed print, from Mothman Festival</em>"),
+       P("legends", 25, "<em>The Loveland Frogman, from Legends</em>"),
        P("green-eyes", 14, "<em>A MetaZoo card, from Green Eyes</em>")],
-      [("Watch on YouTube", LINKS["yt"]), ("Follow on Instagram", LINKS["ig"])])
+      [("Watch on YouTube", LINKS["yt"]), ("Follow on Instagram", LINKS["ig"])],
+      head_print=HP("legends", 2),
+      extra=mz_extra)
 
 # ===================================================================== Photographs
 index_items, sections = [], []
@@ -419,11 +648,11 @@ page("photography/index.html", "photo", "Photography | Dorian Bailey",
     </header>
 
     <figure class="banner">
-      <img src="../assets/photos/{BANNER['file']}" alt="{html.escape(BANNER['alt'])}" width="{BANNER['w']}" height="{BANNER['h']}" fetchpriority="high" decoding="async">
+      <div class="banner__clip"><img src="../assets/photos/{BANNER['file']}" alt="{html.escape(BANNER['alt'])}" width="{BANNER['w']}" height="{BANNER['h']}" fetchpriority="high" decoding="async"></div>
       <figcaption class="wrap"><em>Letchworth State Park, New York, October 2026</em></figcaption>
     </figure>
 
-    <section class="section" aria-labelledby="commissions-title">
+    <section class="section band--dark" aria-labelledby="commissions-title">
       <div class="wrap">
         <h2 class="section-title" id="commissions-title">Commissions</h2>
         <dl class="ledger">
@@ -447,6 +676,25 @@ page("photography/index.html", "photo", "Photography | Dorian Bailey",
             </dd>
           </div>
         </dl>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="kit-title">
+      <div class="wrap split">
+        <div class="measure">
+          <h2 class="section-title" id="kit-title">Approach</h2>
+          <p class="lede">Most of this is event work: long days on a festival street or a tournament floor, close to the people and the cards.</p>
+          <p>The kit is small on purpose. Two fast primes for faces and details, a zoom for when the crowd closes in, and everything edited in Lightroom. The personal collections are where the slower pictures live: a gorge in October, a cat in window light, fungi on a fallen log.</p>
+        </div>
+        <aside class="particulars" aria-labelledby="kit-list-title">
+          <h2 id="kit-list-title">The kit</h2>
+          <dl>
+            <div><dt>Body</dt><dd>Canon EOS R50</dd></div>
+            <div><dt>Primes</dt><dd>RF 35mm f/1.8 Macro IS STM<br>RF 50mm f/1.8 STM</dd></div>
+            <div><dt>Zooms</dt><dd>EF 24&ndash;105mm f/4L IS USM<br>RF-S 55&ndash;210mm<br>RF-S 18&ndash;45mm</dd></div>
+            <div><dt>Editing</dt><dd>Adobe Lightroom and Photoshop</dd></div>
+          </dl>
+        </aside>
       </div>
     </section>
 

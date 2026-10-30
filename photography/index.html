@@ -15,7 +15,7 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#1e3a2b">
+  <meta name="theme-color" content="#1c1b19">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="preload" href="../assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/fonts/libre-caslon-text-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -60,11 +60,11 @@
     </header>
 
     <figure class="banner">
-      <img src="../assets/photos/letchworth/letchworth-02.jpg" alt="The gorge and a distant waterfall framed by autumn leaves" width="2000" height="1546" fetchpriority="high" decoding="async">
+      <div class="banner__clip"><img src="../assets/photos/letchworth/letchworth-02.jpg" alt="The gorge and a distant waterfall framed by autumn leaves" width="2000" height="1546" fetchpriority="high" decoding="async"></div>
       <figcaption class="wrap"><em>Letchworth State Park, New York, October 2026</em></figcaption>
     </figure>
 
-    <section class="section" aria-labelledby="commissions-title">
+    <section class="section band--dark" aria-labelledby="commissions-title">
       <div class="wrap">
         <h2 class="section-title" id="commissions-title">Commissions</h2>
         <dl class="ledger">
@@ -88,6 +88,25 @@
             </dd>
           </div>
         </dl>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="kit-title">
+      <div class="wrap split">
+        <div class="measure">
+          <h2 class="section-title" id="kit-title">Approach</h2>
+          <p class="lede">Most of this is event work: long days on a festival street or a tournament floor, close to the people and the cards.</p>
+          <p>The kit is small on purpose. Two fast primes for faces and details, a zoom for when the crowd closes in, and everything edited in Lightroom. The personal collections are where the slower pictures live: a gorge in October, a cat in window light, fungi on a fallen log.</p>
+        </div>
+        <aside class="particulars" aria-labelledby="kit-list-title">
+          <h2 id="kit-list-title">The kit</h2>
+          <dl>
+            <div><dt>Body</dt><dd>Canon EOS R50</dd></div>
+            <div><dt>Primes</dt><dd>RF 35mm f/1.8 Macro IS STM<br>RF 50mm f/1.8 STM</dd></div>
+            <div><dt>Zooms</dt><dd>EF 24&ndash;105mm f/4L IS USM<br>RF-S 55&ndash;210mm<br>RF-S 18&ndash;45mm</dd></div>
+            <div><dt>Editing</dt><dd>Adobe Lightroom and Photoshop</dd></div>
+          </dl>
+        </aside>
       </div>
     </section>
 
@@ -785,17 +804,12 @@
   <footer class="site-footer">
     <div class="wrap site-footer__inner">
       <div class="site-footer__mark">
-        <svg class="seal" width="56" height="56" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-          <defs><linearGradient id="foil-foot" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#8a6b32"/><stop offset=".28" stop-color="#e2cb8c"/>
-            <stop offset=".5" stop-color="#a8894b"/><stop offset=".72" stop-color="#ead7a2"/>
-            <stop offset="1" stop-color="#7d612c"/>
-          </linearGradient></defs>
-          <circle class="seal__ring" pathLength="1" cx="60" cy="60" r="57" fill="none" stroke="url(#foil-foot)" stroke-width="1.6"/>
-          <circle class="seal__ring seal__ring--inner" pathLength="1" cx="60" cy="60" r="50" fill="none" stroke="url(#foil-foot)" stroke-width=".8"/>
-          <g class="seal__dots" fill="url(#foil-foot)"><circle cx="60" cy="6.5" r="1.8"/><circle cx="60" cy="113.5" r="1.8"/>
+        <svg class="seal seal--deboss" width="56" height="56" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+          <circle class="seal__ring" pathLength="1" cx="60" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <circle class="seal__ring seal__ring--inner" pathLength="1" cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-width=".8"/>
+          <g class="seal__dots" fill="currentColor"><circle cx="60" cy="6.5" r="1.8"/><circle cx="60" cy="113.5" r="1.8"/>
           <circle cx="6.5" cy="60" r="1.8"/><circle cx="113.5" cy="60" r="1.8"/></g>
-          <text class="seal__mono" x="60" y="73" text-anchor="middle" font-family="'Libre Caslon Display', Georgia, serif" font-size="42" fill="url(#foil-foot)">DB</text>
+          <text class="seal__mono" x="60" y="73" text-anchor="middle" font-family="'Libre Caslon Display', Georgia, serif" font-size="42" fill="currentColor">DB</text>
         </svg>
         <p>The Collection of Dorian Bailey<br><em>North East, Pennsylvania</em></p>
       </div>

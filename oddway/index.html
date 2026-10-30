@@ -15,7 +15,7 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#1e3a2b">
+  <meta name="theme-color" content="#1c1b19">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="preload" href="../assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/fonts/libre-caslon-text-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -51,11 +51,16 @@
   </header>
 
   <main id="main">
-    <header class="entry-head">
+    <header class="entry-head entry-head--figure">
       <div class="wrap">
-        <p class="entry-head__num">No. II</p>
-        <h1>Take The OddWay</h1>
-        <p class="entry-head__standfirst">A road-trip guide to the strange: cryptids, folklore, haunted places and roadside oddities along your route.</p>
+        <div class="entry-head__text">
+          <p class="entry-head__num">No. II</p>
+          <h1>Take The OddWay</h1>
+          <p class="entry-head__standfirst">A road-trip guide to the strange: cryptids, folklore, haunted places and roadside oddities along your route.</p>
+        </div>
+        <figure class="entry-head__print">
+          <div class="frame"><img src="../assets/photos/green-eyes/green-eyes-07.jpg" alt="Mothman and Bigfoot side by side" width="1125" height="2000" fetchpriority="high" decoding="async"></div>
+        </figure>
       </div>
     </header>
 
@@ -63,7 +68,7 @@
       <div class="wrap entry">
         <div class="entry__prose">
           <p>Give OddWay a route and it finds the detours worth taking: Bigfoot sightings, local legends, haunted hotels, UFO landmarks, odd little museums and giant roadside statues.</p>
-          <p>I designed and built it end to end, from the brand and the research behind every stop to the web app itself, written in Next.js and TypeScript on Supabase. Stops are sorted into seven categories: cryptids, folklore, haunted, UFOs, weird history, museums and roadside oddities.</p>
+          <p>I designed and built it end to end, from the brand and the research behind every stop to the web app itself, written in Next.js and TypeScript on Supabase.</p>
           <div class="btn-row">
           <a class="btn" href="https://taketheoddway.com" rel="noopener">Visit taketheoddway.com</a>
           <a class="btn" href="https://shoptheoddway.com" rel="noopener">Shop the OddWay</a>
@@ -82,13 +87,55 @@
       </div>
     </section>
 
-    <section class="section section--rule" aria-label="Plates">
+    <section class="section section--rule" aria-labelledby="how-title">
+      <div class="wrap">
+        <h2 class="section-title" id="how-title">How it works</h2>
+        <ol class="steps">
+          <li>
+            <h3>Pick your route</h3>
+            <p>Give it a start and a finish. OddWay takes care of everything in between, including the two-lane roads you would never have chosen yourself.</p>
+          </li>
+          <li>
+            <h3>Find strange stops</h3>
+            <p>Filter by what you actually want to see, then check how far each stop pulls you off course before you commit to it.</p>
+          </li>
+          <li>
+            <h3>Take the OddWay</h3>
+            <p>Add the good ones to your trip, take the directions with you, and go stand in front of the thing.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section band--raised section--rule" aria-labelledby="cats-title">
+      <div class="wrap">
+        <h2 class="section-title" id="cats-title">Seven kinds of strange</h2>
+        <p class="section-intro">Every stop is filed under one of seven categories, so a trip can be all haunted hotels or all giant statues.</p>
+        <dl class="glossary">
+          <div><dt>Cryptids</dt><dd>Creatures people keep reporting and nobody has caught.</dd></div>
+          <div><dt>Folklore</dt><dd>Stories a place tells about itself, passed down and still repeated.</dd></div>
+          <div><dt>Haunted</dt><dd>Hotels, theatres, prisons and back roads with a reputation.</dd></div>
+          <div><dt>UFOs</dt><dd>Sighting sites, crash lore and the towns that kept the file open.</dd></div>
+          <div><dt>Weird history</dt><dd>Real events too strange to have made the textbook.</dd></div>
+          <div><dt>Museums</dt><dd>Small, specific collections run by people who care far too much.</dd></div>
+          <div><dt>Roadside oddities</dt><dd>Giant objects, odd monuments and things built for no clear reason.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section section--rule" aria-labelledby="next-title">
+      <div class="wrap split">
+        <h2 class="section-title" id="next-title">Next on the road</h2>
+        <div class="measure">
+          <p>An events listing: cryptid festivals, haunted houses and seasonal mazes, sortable by distance from wherever you are.</p>
+          <p>The hard part is the calendar. Most of these events follow a pattern, like the third weekend in September, rather than a fixed date, so each year&rsquo;s dates will be confirmed by hand. An event listed on the wrong weekend is worse than one not listed at all; nobody should drive four hours to an empty field.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section band--dark" aria-label="Plates">
       <div class="wrap">
         <div class="plate-row plate-row--3">
-          <figure class="plate">
-            <div class="frame"><a href="../photography/#green-eyes"><img src="../assets/photos/green-eyes/t-green-eyes-07.jpg" alt="Mothman and Bigfoot side by side" width="506" height="900" loading="lazy" decoding="async"></a></div>
-            <figcaption><em>Mothman and Bigfoot, from Green Eyes</em></figcaption>
-          </figure>
           <figure class="plate">
             <div class="frame"><a href="../photography/#green-eyes"><img src="../assets/photos/green-eyes/t-green-eyes-05.jpg" alt="Bigfoot mid-stride, in black and white" width="506" height="900" loading="lazy" decoding="async"></a></div>
             <figcaption><em>Bigfoot, from Green Eyes</em></figcaption>
@@ -96,6 +143,10 @@
           <figure class="plate">
             <div class="frame"><a href="../photography/#letchworth"><img src="../assets/photos/letchworth/t-letchworth-07.jpg" alt="Mist rising beneath the railroad bridge" width="900" height="695" loading="lazy" decoding="async"></a></div>
             <figcaption><em>The gorge, from Letchworth</em></figcaption>
+          </figure>
+          <figure class="plate">
+            <div class="frame"><a href="../photography/#north-east"><img src="../assets/photos/north-east/t-north-east-02.jpg" alt="Giant skeletons and a skeleton dog on a lawn" width="697" height="900" loading="lazy" decoding="async"></a></div>
+            <figcaption><em>Halloween, from North East</em></figcaption>
           </figure>
         </div>
       </div>
@@ -110,17 +161,12 @@
   <footer class="site-footer">
     <div class="wrap site-footer__inner">
       <div class="site-footer__mark">
-        <svg class="seal" width="56" height="56" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-          <defs><linearGradient id="foil-foot" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#8a6b32"/><stop offset=".28" stop-color="#e2cb8c"/>
-            <stop offset=".5" stop-color="#a8894b"/><stop offset=".72" stop-color="#ead7a2"/>
-            <stop offset="1" stop-color="#7d612c"/>
-          </linearGradient></defs>
-          <circle class="seal__ring" pathLength="1" cx="60" cy="60" r="57" fill="none" stroke="url(#foil-foot)" stroke-width="1.6"/>
-          <circle class="seal__ring seal__ring--inner" pathLength="1" cx="60" cy="60" r="50" fill="none" stroke="url(#foil-foot)" stroke-width=".8"/>
-          <g class="seal__dots" fill="url(#foil-foot)"><circle cx="60" cy="6.5" r="1.8"/><circle cx="60" cy="113.5" r="1.8"/>
+        <svg class="seal seal--deboss" width="56" height="56" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+          <circle class="seal__ring" pathLength="1" cx="60" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <circle class="seal__ring seal__ring--inner" pathLength="1" cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-width=".8"/>
+          <g class="seal__dots" fill="currentColor"><circle cx="60" cy="6.5" r="1.8"/><circle cx="60" cy="113.5" r="1.8"/>
           <circle cx="6.5" cy="60" r="1.8"/><circle cx="113.5" cy="60" r="1.8"/></g>
-          <text class="seal__mono" x="60" y="73" text-anchor="middle" font-family="'Libre Caslon Display', Georgia, serif" font-size="42" fill="url(#foil-foot)">DB</text>
+          <text class="seal__mono" x="60" y="73" text-anchor="middle" font-family="'Libre Caslon Display', Georgia, serif" font-size="42" fill="currentColor">DB</text>
         </svg>
         <p>The Collection of Dorian Bailey<br><em>North East, Pennsylvania</em></p>
       </div>
