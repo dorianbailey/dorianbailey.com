@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Photography — Dorian Bailey</title>
+  <meta name="description" content="Photography by Dorian Bailey.">
+  <link rel="canonical" href="https://dorianbailey.com/photography/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Photography — Dorian Bailey">
+  <meta property="og:description" content="Photography by Dorian Bailey.">
+  <meta property="og:url" content="https://dorianbailey.com/photography/">
+  <meta property="og:image" content="https://dorianbailey.com/assets/img/dorian-bailey.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-logo" href="../index.html">Dorian Bailey</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="../index.html#work">Work</a></li>
+          <li><a href="../resume/">Resume</a></li>
+          <li><a href="../metazoo/">Bailey MetaZoo</a></li>
+          <li><a href="../oddway/">Take The OddWay</a></li>
+          <li><a href="../better-selling/">Better Selling</a></li>
+          <li><a href="../photography/" aria-current="page">Photography</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Hobby &middot; Photography</p>
+        <h1>Photography</h1>
+        <p class="lede">A collection of my favorite shots.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="gallery-filters" id="gallery-filters" hidden></div>
+        <div class="gallery" id="gallery" data-manifest="../assets/photos/photos.json"></div>
+        <div class="gallery-empty" id="gallery-empty" hidden>Photos coming soon.</div>
+      </div>
+    </section>
+
+    <dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+      <button class="lightbox__close" type="button" aria-label="Close">&times;</button>
+      <img src="" alt="">
+      <p></p>
+    </dialog>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p>&copy; <span data-year>2026</span> Dorian Bailey &middot; North East, Pennsylvania</p>
+      <ul>
+        <li><a href="../metazoo/">Bailey MetaZoo</a></li>
+        <li><a href="../oddway/">Take The OddWay</a></li>
+        <li><a href="../better-selling/">Better Selling With Bailey</a></li>
+        <li><a href="../photography/">Photography</a></li>
+        <li><a href="https://github.com/dorianbailey" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/gallery.js" defer></script>
+</body>
+</html>
