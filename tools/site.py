@@ -238,16 +238,7 @@ page("index.html", "home",
       </div>
     </section>
 
-    <section class="section" aria-labelledby="contents-title">
-      <div class="wrap wrap--narrow">
-        <h2 class="section-title" id="contents-title">Contents</h2>
-        <ol class="contents">
-{contents}
-        </ol>
-      </div>
-    </section>
-
-    <section class="section section--rule" aria-labelledby="feature-title">
+    <section class="section" aria-labelledby="feature-title">
       <div class="wrap feature">
         <figure class="feature__media">
           <a class="frame" href="photography/#legends"><img src="assets/photos/{FEAT['file']}" alt="{html.escape(FEAT['alt'])}" width="{FEAT['w']}" height="{FEAT['h']}" loading="lazy" decoding="async"></a>
@@ -303,6 +294,15 @@ page("index.html", "home",
       </div>
     </section>
 
+    <section class="section" id="index" aria-labelledby="index-title">
+      <div class="wrap wrap--narrow">
+        <h2 class="section-title" id="index-title">Index</h2>
+        <ol class="contents">
+{contents}
+        </ol>
+      </div>
+    </section>
+
     <section class="correspondence band--raised" id="correspondence" aria-labelledby="corr-title">
       <div class="wrap wrap--narrow">
         <h2 class="section-title" id="corr-title">Correspondence</h2>
@@ -347,7 +347,7 @@ def entry(slug, key, title, desc, standfirst, prose, particulars, plates, links,
     if prev_:
         nav.append(f'<a class="entry-nav__prev" href="../{prev_[0]}/"><em>Previous</em> {prev_[1]}. {prev_[2]}</a>')
     else:
-        nav.append('<a class="entry-nav__prev" href="../index.html"><em>Back to</em> Contents</a>')
+        nav.append('<a class="entry-nav__prev" href="../index.html#index"><em>Back to</em> the index</a>')
     nav.append(f'<a class="entry-nav__next" href="../{next_[0]}/"><em>Next</em> {next_[1]}. {next_[2]}</a>')
 
     if head_print:
@@ -833,7 +833,7 @@ page("record/index.html", "record", "The Record | Dorian Bailey",
 
     <nav class="wrap entry-nav" aria-label="Collection">
       <a class="entry-nav__prev" href="../photography/"><em>Previous</em> IV. Photography</a>
-      <a class="entry-nav__next" href="../index.html"><em>Back to</em> Contents</a>
+      <a class="entry-nav__next" href="../index.html#index"><em>Back to</em> the index</a>
     </nav>""")
 
 # ===================================================================== 404
@@ -843,6 +843,6 @@ page("404.html", "", "Not found | Dorian Bailey", "This page is not in the colle
         <p class="entry-head__num">Not catalogued</p>
         <h1>This page isn&rsquo;t in the collection</h1>
         <p class="entry-head__standfirst">It may have moved, or the address may be mistyped.</p>
-        <div class="btn-row btn-row--center"><a class="btn" href="/">Return to the contents</a></div>
+        <div class="btn-row btn-row--center"><a class="btn" href="/">Return to the index</a></div>
       </div>
     </header>""")
