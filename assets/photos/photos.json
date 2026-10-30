@@ -1,12 +1,331 @@
 {
  "collections": [
   {
-   "id": "green-eyes",
+   "id": "legends",
    "numeral": "I",
+   "title": "Legends",
+   "place": "Two-day tournament",
+   "date": "August 2026",
+   "note": "Tournament play under convention-hall lights: the prize cards on their easels, players at the tables, the commentary desk, and the whole field together for one last photograph.",
+   "commission": "MetaZoo TCG",
+   "cover": "legends/t-legends-11.jpg",
+   "photos": [
+    {
+     "file": "legends/legends-01.jpg",
+     "thumb": "legends/t-legends-01.jpg",
+     "alt": "An inflatable winged cryptid on a MetaZoo base",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-02.jpg",
+     "thumb": "legends/t-legends-02.jpg",
+     "alt": "The first-place prize card on an easel",
+     "w": 1333,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-03.jpg",
+     "thumb": "legends/t-legends-03.jpg",
+     "alt": "The second-place prize card on an easel",
+     "w": 1333,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-04.jpg",
+     "thumb": "legends/t-legends-04.jpg",
+     "alt": "The third-place prize card on an easel",
+     "w": 1333,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-05.jpg",
+     "thumb": "legends/t-legends-05.jpg",
+     "alt": "The MetaZoo Trading Card Game booth",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-06.jpg",
+     "thumb": "legends/t-legends-06.jpg",
+     "alt": "A match underway",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-07.jpg",
+     "thumb": "legends/t-legends-07.jpg",
+     "alt": "Players studying their hands",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-08.jpg",
+     "thumb": "legends/t-legends-08.jpg",
+     "alt": "Concentration at the tournament tables",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-09.jpg",
+     "thumb": "legends/t-legends-09.jpg",
+     "alt": "A player fanning his cards",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-10.jpg",
+     "thumb": "legends/t-legends-10.jpg",
+     "alt": "Holding a hand of cards across the table",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-11.jpg",
+     "thumb": "legends/t-legends-11.jpg",
+     "alt": "The commentary desk in front of a MetaZoo backdrop",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-12.jpg",
+     "thumb": "legends/t-legends-12.jpg",
+     "alt": "Signing cards at the table",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-13.jpg",
+     "thumb": "legends/t-legends-13.jpg",
+     "alt": "A player weighing his next move",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-14.jpg",
+     "thumb": "legends/t-legends-14.jpg",
+     "alt": "A player in a MetaZoo cap mid-match",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-15.jpg",
+     "thumb": "legends/t-legends-15.jpg",
+     "alt": "A player beside the inflatable cryptid",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-16.jpg",
+     "thumb": "legends/t-legends-16.jpg",
+     "alt": "A match at the feature table",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-17.jpg",
+     "thumb": "legends/t-legends-17.jpg",
+     "alt": "A reaction across the table",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-18.jpg",
+     "thumb": "legends/t-legends-18.jpg",
+     "alt": "A player in glasses mid-game",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-19.jpg",
+     "thumb": "legends/t-legends-19.jpg",
+     "alt": "Players at the tables",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-20.jpg",
+     "thumb": "legends/t-legends-20.jpg",
+     "alt": "A match on the clock",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-21.jpg",
+     "thumb": "legends/t-legends-21.jpg",
+     "alt": "Two players deep in a match",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-22.jpg",
+     "thumb": "legends/t-legends-22.jpg",
+     "alt": "A match beneath the stream camera",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-23.jpg",
+     "thumb": "legends/t-legends-23.jpg",
+     "alt": "Rows of Old Green Eyes cards",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-24.jpg",
+     "thumb": "legends/t-legends-24.jpg",
+     "alt": "A Mothman Festival edition card in its sleeve",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-25.jpg",
+     "thumb": "legends/t-legends-25.jpg",
+     "alt": "A Loveland Frogman card",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "legends/legends-26.jpg",
+     "thumb": "legends/t-legends-26.jpg",
+     "alt": "The players together beneath the inflatable cryptid",
+     "w": 1600,
+     "h": 2000
+    }
+   ]
+  },
+  {
+   "id": "mothman",
+   "numeral": "II",
+   "title": "Mothman Festival",
+   "place": "Point Pleasant, West Virginia",
+   "date": "September 2026",
+   "note": "MetaZoo TCG’s booth on the festival street: players, pulls and playmats, and a few people dressed for the occasion.",
+   "commission": "MetaZoo TCG",
+   "cover": "mothman/t-mothman-16.jpg",
+   "photos": [
+    {
+     "file": "mothman/mothman-01.jpg",
+     "thumb": "mothman/t-mothman-01.jpg",
+     "alt": "A couple posing before an inflatable Mothman at the MetaZoo booth",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "mothman/mothman-02.jpg",
+     "thumb": "mothman/t-mothman-02.jpg",
+     "alt": "Crowds filling the festival street between brick storefronts",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "mothman/mothman-03.jpg",
+     "thumb": "mothman/t-mothman-03.jpg",
+     "alt": "A signed MetaZoo Mothman print on an easel",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "mothman/mothman-04.jpg",
+     "thumb": "mothman/t-mothman-04.jpg",
+     "alt": "A player checking his cards",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "mothman/mothman-05.jpg",
+     "thumb": "mothman/t-mothman-05.jpg",
+     "alt": "Players gathered at the booth table",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "mothman/mothman-06.jpg",
+     "thumb": "mothman/t-mothman-06.jpg",
+     "alt": "Festival-goers in feathered ears, and a dachshund in a sling",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "mothman/mothman-07.jpg",
+     "thumb": "mothman/t-mothman-07.jpg",
+     "alt": "Browsing cards under the booth tent",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "mothman/mothman-08.jpg",
+     "thumb": "mothman/t-mothman-08.jpg",
+     "alt": "Comparing pulls at the booth",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "mothman/mothman-09.jpg",
+     "thumb": "mothman/t-mothman-09.jpg",
+     "alt": "Trading across the booth table",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "mothman/mothman-10.jpg",
+     "thumb": "mothman/t-mothman-10.jpg",
+     "alt": "A festival-goer in red glasses and feathered ears",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "mothman/mothman-11.jpg",
+     "thumb": "mothman/t-mothman-11.jpg",
+     "alt": "A young fan pointing out cards at the booth",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "mothman/mothman-12.jpg",
+     "thumb": "mothman/t-mothman-12.jpg",
+     "alt": "A laughing player under the tent",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "mothman/mothman-13.jpg",
+     "thumb": "mothman/t-mothman-13.jpg",
+     "alt": "Players shopping the booth display",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "mothman/mothman-14.jpg",
+     "thumb": "mothman/t-mothman-14.jpg",
+     "alt": "Opening packs with a friend",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "mothman/mothman-15.jpg",
+     "thumb": "mothman/t-mothman-15.jpg",
+     "alt": "Hands sorting cards over a playmat",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "mothman/mothman-16.jpg",
+     "thumb": "mothman/t-mothman-16.jpg",
+     "alt": "Two fans holding up a MetaZoo playmat",
+     "w": 1600,
+     "h": 2000
+    }
+   ]
+  },
+  {
+   "id": "green-eyes",
+   "numeral": "III",
    "title": "Green Eyes",
    "place": "Green Eyes Festival, Chickamauga, Georgia",
    "date": "October 2026",
    "note": "A day of cryptids, costumes and card tables at a festival named for the battlefield legend of Ole’ Green Eyes.",
+   "commission": "MetaZoo TCG",
    "cover": "green-eyes/t-green-eyes-04.jpg",
    "photos": [
     {
@@ -114,12 +433,11 @@
      "w": 2000,
      "h": 1500
     }
-   ],
-   "commission": "MetaZoo TCG"
+   ]
   },
   {
    "id": "letchworth",
-   "numeral": "II",
+   "numeral": "IV",
    "title": "Letchworth",
    "place": "Letchworth State Park, New York",
    "date": "October 2026",
@@ -193,7 +511,7 @@
   },
   {
    "id": "north-east",
-   "numeral": "III",
+   "numeral": "V",
    "title": "North East",
    "place": "North East, Pennsylvania",
    "date": "September–October 2026",
@@ -288,7 +606,7 @@
   },
   {
    "id": "creatures",
-   "numeral": "IV",
+   "numeral": "VI",
    "title": "Creatures",
    "place": "Pennsylvania",
    "date": "September–October 2026",
@@ -397,7 +715,7 @@
   },
   {
    "id": "studies",
-   "numeral": "V",
+   "numeral": "VII",
    "title": "Studies",
    "place": "Penn State Behrend and elsewhere",
    "date": "September–October 2026",

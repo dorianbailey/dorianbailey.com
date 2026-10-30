@@ -355,16 +355,16 @@ entry("metazoo", "metazoo", "Bailey MetaZoo",
       "Short films on MetaZoo, the cryptid trading card game, and the folklore behind its cards.",
       """          <p>MetaZoo is a trading card game built from cryptids, folklore and the paranormal. Bailey MetaZoo covers the game and the legends it draws on: the Squonk, the Loveland Frogman, Old Scratch, and which cryptid haunts your state.</p>
           <p>Alongside the lore there are new set releases, pack openings, giveaways, and a signature format: the VHS reveal, where a tape goes into the deck, the old set flickers on, and the cards flash through static before the best one lands.</p>
-          <p>Off camera, I photograph events for MetaZoo TCG itself, including the Green Eyes Festival, the Mothman Festival and Legends. The plates below are from <a href="../photography/#green-eyes">Green Eyes</a>.</p>""",
+          <p>Off camera, I photograph events for MetaZoo TCG itself: the Legends tournament, the Mothman Festival and the Green Eyes Festival. The plates below are one from each, and the full sets are in <a href="../photography/">Photography</a>.</p>""",
       [("Platforms", f'<a href="{LINKS["yt"]}" rel="noopener">YouTube</a> and <a href="{LINKS["ig"]}" rel="noopener">Instagram</a>'),
        ("Handle", "@baileymetazoo"),
        ("Subject", "MetaZoo and cryptid folklore"),
        ("Format", "Short vertical video"),
        ("Role", "Creator, host and editor"),
        ("Also", '<a href="../photography/">Event photographer for MetaZoo TCG</a>')],
-      [P("green-eyes", 14, "<em>A MetaZoo card, from Green Eyes</em>"),
-       P("green-eyes", 13, "<em>A MetaZoo cap, from Green Eyes</em>"),
-       P("green-eyes", 3, "<em>The binder, from Green Eyes</em>")],
+      [P("legends", 2, "<em>The first-place prize, from Legends</em>"),
+       P("mothman", 3, "<em>A signed print, from Mothman Festival</em>"),
+       P("green-eyes", 14, "<em>A MetaZoo card, from Green Eyes</em>")],
       [("Watch on YouTube", LINKS["yt"]), ("Follow on Instagram", LINKS["ig"])])
 
 # ===================================================================== Photographs
@@ -374,14 +374,14 @@ for c in M["collections"]:
     cov = next(p for p in c["photos"] if p["thumb"] == c["cover"])
     w, h = thumb_dims(cov)
     n = len(c["photos"])
-    index_items.append(f"""          <li>
+    index_items.append((bool(c.get("commission")), f"""          <li>
             <a href="#{c['id']}">
               <span class="frame"><img src="../assets/photos/{c['cover']}" alt="" width="{w}" height="{h}" loading="lazy" decoding="async"></span>
               <span class="coll-index__num">{c['numeral']}</span>
               <span class="coll-index__title">{c['title']}</span>
-              <span class="coll-index__meta">{('Commissioned by ' + c['commission'] + '<br>') if c.get('commission') else ''}{c['place']}<br>{n} plates</span>
+              <span class="coll-index__meta">{c['place']}<br>{c['date']}, {n} plates</span>
             </a>
-          </li>""")
+          </li>"""))
     figs = []
     for i, ph in enumerate(c["photos"], 1):
         tw, th = thumb_dims(ph)
@@ -431,11 +431,11 @@ page("photography/index.html", "photo", "Photography | Dorian Bailey",
             <dt>Event photographer</dt>
             <dd>
               <h3>MetaZoo TCG</h3>
-              <p>Professional coverage of MetaZoo TCG at cryptid festivals: players at the tables, the cards they pull, costumed cryptids, and the crowds that come to see them.</p>
+              <p>Professional coverage of MetaZoo TCG at tournaments and cryptid festivals: players at the tables, the cards they pull, costumed cryptids, and the crowds that come to see them.</p>
               <ul class="events">
+                <li><a href="#legends">Legends</a> <em>MetaZoo TCG tournament, August 2026</em></li>
+                <li><a href="#mothman">Mothman Festival</a> <em>Point Pleasant, West Virginia, September 2026</em></li>
                 <li><a href="#green-eyes">Green Eyes Festival</a> <em>Chickamauga, Georgia, October 2026</em></li>
-                <li>Mothman Festival <em>Point Pleasant, West Virginia, September 2026</em></li>
-                <li>Legends</li>
               </ul>
             </dd>
           </div>
@@ -456,8 +456,13 @@ page("photography/index.html", "photo", "Photography | Dorian Bailey",
           <h2 class="section-title" id="collections-title">Collections</h2>
           <p class="section-head__note">{TOTAL} plates in {NUMWORD.lower()} collections</p>
         </div>
+        <h3 class="coll-group">Commissioned by MetaZoo TCG</h3>
         <ol class="coll-index">
-{chr(10).join(index_items)}
+{chr(10).join(item for comm, item in index_items if comm)}
+        </ol>
+        <h3 class="coll-group">Personal</h3>
+        <ol class="coll-index" start="{sum(1 for comm, _ in index_items if comm) + 1}">
+{chr(10).join(item for comm, item in index_items if not comm)}
         </ol>
       </div>
     </section>
@@ -516,7 +521,7 @@ page("record/index.html", "record", "The Record | Dorian Bailey",
               <h3><a href="{LINKS['vanta']}" rel="noopener">Vanta House</a></h3>
               <p><em>Marketing assistant, June 2026 to present.</em> A video-first content studio in North East. Content strategy and social campaigns across client accounts, SEO and digital campaigns, campaign analysis, and support on shoots and video production.</p>
               <h3><a href="../photography/">MetaZoo TCG</a></h3>
-              <p><em>Event photographer.</em> Commissioned coverage at the Green Eyes Festival, the Mothman Festival and Legends.</p>
+              <p><em>Event photographer.</em> Commissioned coverage at the Legends tournament, the Mothman Festival and the Green Eyes Festival.</p>
             </dd>
           </div>
           <div class="ledger__row">
