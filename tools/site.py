@@ -34,6 +34,14 @@ LINKS = {
 }
 
 
+import hashlib
+
+
+def v(rel):
+    """Content fingerprint for cache-busting: base.css?v=abc123 changes whenever the file does."""
+    return hashlib.md5((ROOT / rel).read_bytes()).hexdigest()[:8]
+
+
 def seal(size, cls="seal", foil=None):
     """The DB monogram seal. foil='<id>' paints it with a gold-foil gradient."""
     paint = f"url(#{foil})" if foil else "currentColor"
@@ -86,7 +94,7 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
   <link rel="icon" href="{p}favicon.svg" type="image/svg+xml">
   <link rel="preload" href="{p}assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{p}assets/fonts/libre-caslon-text-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{p}css/base.css">
+  <link rel="stylesheet" href="{p}css/base.css?v={v('css/base.css')}">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -128,7 +136,7 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
     </div>
   </footer>
 
-  <script src="{p}js/main.js" defer></script>
+  <script src="{p}js/main.js?v={v('js/main.js')}" defer></script>
 {extra_js}</body>
 </html>
 """
@@ -387,7 +395,7 @@ def entry(slug, key, title, desc, standfirst, prose, particulars, plates, links,
     </section>
 """
 
-    page(f"{slug}/index.html", key, f"{title} | Dorian Bailey", desc, extra_js=(f'  <script src="../js/{js}" defer></script>\n' if js else ""), body=f"""{head}
+    page(f"{slug}/index.html", key, f"{title} | Dorian Bailey", desc, extra_js=(f'  <script src="../js/{js}?v={v("js/" + js)}" defer></script>\n' if js else ""), body=f"""{head}
 
     <section class="section">
       <div class="wrap entry">
@@ -854,7 +862,7 @@ page("photography/index.html", "photo", "Photography | Dorian Bailey",
       <button class="lightbox__btn lightbox__prev" type="button" aria-label="Previous photograph">&lsaquo;</button>
       <button class="lightbox__btn lightbox__next" type="button" aria-label="Next photograph">&rsaquo;</button>
     </dialog>""",
-     extra_js='  <script src="../js/gallery.js" defer></script>\n')
+     extra_js=f'  <script src="../js/gallery.js?v={v("js/gallery.js")}" defer></script>\n')
 
 # ===================================================================== Record
 page("record/index.html", "record", "The Record | Dorian Bailey",
