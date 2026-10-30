@@ -16,7 +16,10 @@
   var H = 360, W = 960;
   var ROAD_TOP = 268, BASE = 322, ROAD_BOTTOM = 352;   // BASE: where wheels and obstacles sit
   var CAR_X = 120, CAR_W = 124;
-  var GRAV = 1900, JUMP_V = -660;
+  var GRAV = 1900, JUMP_V = -720;
+  var TOP_SPEED = 680;
+  var JUMP_BUFFER = 0.14;      // a press this close to landing still jumps, the moment the wheels touch
+  var RESTART_LOCK = 800;      // ms after a crash before a tap or Space can start a new drive
   var OSD = '"VT323", ui-monospace, monospace';
   var BEST_KEY = 'cryptid-highway-best';
   var best = 0;
@@ -48,7 +51,7 @@
       mode: mode, t: 0, speed: 300, dist: 0, sightings: 0, film: 24,
       car: { y: 0, vy: 0, air: false }, obs: [], cry: [],
       nextObs: 700, nextCry: 4 + Math.random() * 4, flash: 0, shake: 0, toasts: [],
-      far: 0, mid: 0, near: 0, road: 0, beat: 0, score: 0
+      far: 0, mid: 0, near: 0, road: 0, beat: 0, score: 0, buffer: 0, overAt: 0
     };
   }
   reset('idle');
@@ -69,10 +72,12 @@
 
   // ---------- Controls ----------
   function jump() {
-    if (S.mode === 'idle' || S.mode === 'over') { start(); return; }
-    if (S.mode === 'paused') { S.mode = 'run'; loop(); return; }
-    if (!S.car.air) { S.car.vy = JUMP_V; S.car.air = true; }
+    if (S.mode === 'idle') { start(); return; }
+    if (S.mode === 'over') { if (performance.now() - S.overAt > RESTART_LOCK) start(); return; }
+    if (S.mode === 'paused') { resume(); return; }
+    if (!S.car.air) launch(); else S.buffer = JUMP_BUFFER;
   }
+  function launch() { S.car.vy = JUMP_V; S.car.air = true; S.buffer = 0; }
   function snap() {
     if (S.mode !== 'run') return;
     if (S.film <= 0) { toast('OUT OF FILM'); return; }
@@ -95,20 +100,33 @@
   var inView = false;
   window.addEventListener('keydown', function (e) {
     if (!inView) return;
-    if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+    // Form fields type normally; focused buttons and links keep their own Space/Enter
+    if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable], button, a')) return;
     var k = e.key;
+    var isJump = k === ' ' || k === 'ArrowUp' || k === 'w' || k === 'W';
     if (S.mode === 'run' || S.mode === 'paused') {
-      if (k === ' ' || k === 'ArrowUp' || k === 'w' || k === 'W') { e.preventDefault(); jump(); }
+      if (isJump) { e.preventDefault(); jump(); }
       else if (k === 's' || k === 'S' || k === 'x' || k === 'X') { e.preventDefault(); snap(); }
-      else if (k === 'p' || k === 'P' || k === 'Escape') { pause(); }
+      else if (k === 'p' || k === 'P') { if (S.mode === 'paused') resume(); else pause(); }
+      else if (k === 'Escape') { pause(); }
+    } else if ((isJump || k === 'Enter') && root.contains(document.activeElement)) {
+      // Before the first drive or after a crash: Space or Enter starts, once the game has focus
+      e.preventDefault(); jump();
     }
   });
   canvas.addEventListener('pointerdown', function (e) { e.preventDefault(); jump(); });
-  btnJump.addEventListener('click', function () { jump(); canvas.focus({ preventScroll: true }); });
-  btnSnap.addEventListener('click', function () { snap(); });
+  // On-screen buttons act on press (no wait for release) and never keep focus,
+  // so a later Space can't also "click" them. Keyboard activation still works.
+  function press(btn, fn) {
+    btn.addEventListener('pointerdown', function (e) { e.preventDefault(); fn(); });
+    btn.addEventListener('click', function (e) { if (e.detail === 0) fn(); });
+  }
+  press(btnJump, jump);
+  press(btnSnap, snap);
   btnStart.forEach(function (b) { b.addEventListener('click', start); });
 
   function start() {
+    if (S.mode === 'run') return;
     reset('run');
     panelStart.hidden = true;
     panelOver.hidden = true;
@@ -119,14 +137,17 @@
   function pause() {
     if (S.mode === 'run') { S.mode = 'paused'; draw(); }
   }
+  function resume() {
+    if (S.mode === 'paused') { S.mode = 'run'; loop(); }
+  }
 
   // ---------- Spawning ----------
   function spawnObstacle() {
     var r = Math.random();
-    var deerChance = Math.min(0.32, 0.14 + S.t / 300);
+    var deerChance = S.t < 6 ? 0 : Math.min(0.3, 0.14 + S.t / 300);   // no deer in the first few seconds
     var o;
-    if (r < deerChance) o = { kind: 'deer', w: 64, h: 58 };
-    else if (r < deerChance + 0.33) o = { kind: 'cone', w: 20, h: 28 };
+    if (r < deerChance) o = { kind: 'deer', w: 50, h: 36 };
+    else if (r < deerChance + 0.33) o = { kind: 'cone', w: 20, h: 26 };
     else o = { kind: 'pothole', w: 54, h: 7 };
     o.x = W + 40;
     S.obs.push(o);
@@ -146,28 +167,35 @@
 
   // ---------- Update ----------
   function update(dt) {
+    if (S.flash > 0) S.flash -= dt;
+    if (S.shake > 0) S.shake -= dt;
+    S.toasts.forEach(function (t) { t.life -= dt; });
+    S.toasts = S.toasts.filter(function (t) { return t.life > 0; });
+    // After a crash (or while paused) the whole scene holds still: no road, no scenery, no flapping
+    if (S.mode === 'over' || S.mode === 'paused') return;
+
+    var running = S.mode === 'run';
     S.t += dt;
     S.beat += dt;
-    var move = S.mode === 'run' ? 1 : 0.4;
-    var speed = S.mode === 'run' ? Math.min(760, 300 + S.t * 9) : 120;
+    var speed = running ? Math.min(TOP_SPEED, 300 + S.t * 7) : 120;   // idle: a slow drive behind the start card
     S.speed = speed;
     var scroll = speed * dt;
     S.far = (S.far + scroll * 0.08) % HILL_TILE;
     S.mid = (S.mid + scroll * 0.25) % TREE_TILE;
     S.near = (S.near + scroll * 0.6) % POLE_GAP;
     S.road = (S.road + scroll) % 80;
-    if (S.flash > 0) S.flash -= dt;
-    if (S.shake > 0) S.shake -= dt;
-    S.toasts.forEach(function (t) { t.life -= dt; });
-    S.toasts = S.toasts.filter(function (t) { return t.life > 0; });
-    if (S.mode !== 'run') return move;
+    if (!running) return;
 
     S.dist += scroll;
     var car = S.car;
+    if (S.buffer > 0) S.buffer -= dt;
     if (car.air) {
       car.vy += GRAV * dt;
       car.y += car.vy * dt;
-      if (car.y >= 0) { car.y = 0; car.vy = 0; car.air = false; }
+      if (car.y >= 0) {
+        car.y = 0; car.vy = 0; car.air = false;
+        if (S.buffer > 0) launch();   // pressed just before touching down
+      }
     }
     S.nextObs -= scroll;
     if (S.nextObs <= 0) spawnObstacle();
@@ -178,8 +206,8 @@
     S.cry.forEach(function (c) { c.x -= scroll * c.p; });
     S.cry = S.cry.filter(function (c) { return c.x > -140; });
 
-    // Collision: the car's body against each obstacle
-    var left = CAR_X + 14, right = CAR_X + CAR_W - 10, bottom = BASE + car.y;
+    // Collision: the car's body against each obstacle (a little forgiving at the bumpers)
+    var left = CAR_X + 18, right = CAR_X + CAR_W - 14, bottom = BASE + car.y;
     for (var i = 0; i < S.obs.length; i++) {
       var o = S.obs[i];
       var ol = o.x + 6, or = o.x + o.w - 6;
@@ -188,18 +216,21 @@
       if (o.kind === 'pothole' ? car.y > -4 : bottom > top + 4) { crash(o); break; }
     }
     S.score = Math.round(S.dist / 50) + S.sightings * 150;
-    return move;
   }
 
   function crash(o) {
+    var run = S;
     S.mode = 'over';
     S.shake = 0.35;
+    S.overAt = performance.now();
+    S.buffer = 0;
     root.classList.remove('is-running');
     var miles = (S.dist / 5000).toFixed(1);
     var isBest = S.score > best;
     if (isBest) { best = S.score; try { localStorage.setItem(BEST_KEY, String(best)); } catch (e) { /* private mode */ } }
     var cause = o.kind === 'deer' ? 'A deer stepped into your headlights.' : o.kind === 'cone' ? 'You clipped a traffic cone.' : 'You hit a pothole.';
     setTimeout(function () {
+      if (S !== run) return;   // a new drive already started
       panelOver.querySelector('[data-o="cause"]').textContent = cause;
       panelOver.querySelector('[data-o="score"]').textContent = String(S.score);
       panelOver.querySelector('[data-o="detail"]').textContent =
@@ -373,18 +404,20 @@
       ctx.fillStyle = C.bone; ctx.fillRect(x + 5, BASE - 15, o.w - 10, 4);
       ctx.fillStyle = '#8c4a2c'; ctx.fillRect(x - 4, BASE - 2, o.w + 8, 3);
     } else {
-      // a deer, standing broadside, eyes catching the headlights
+      // a young deer, standing broadside, eyes catching the headlights.
+      // Drawn to match its hitbox: the body top sits right where the car has to clear.
       ctx.fillStyle = '#4a3a2e'; ctx.strokeStyle = '#4a3a2e'; ctx.lineCap = 'round';
-      ctx.beginPath(); ctx.ellipse(x + 34, BASE - 34, 24, 11, 0, 0, Math.PI * 2); ctx.fill();   // body
-      ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.ellipse(x + 27, BASE - 22, 18, 7, 0, 0, Math.PI * 2); ctx.fill();   // body
+      ctx.beginPath(); ctx.ellipse(x + 45, BASE - 25, 3, 2, 0.6, 0, Math.PI * 2); ctx.fill();   // tail
+      ctx.lineWidth = 3.5;
       ctx.beginPath();
-      [16, 24, 44, 52].forEach(function (lx) { ctx.moveTo(x + lx, BASE - 28); ctx.lineTo(x + lx, BASE); });
-      ctx.moveTo(x + 14, BASE - 38); ctx.lineTo(x + 6, BASE - 52);                                  // neck
+      [15, 21, 33, 39].forEach(function (lx) { ctx.moveTo(x + lx, BASE - 18); ctx.lineTo(x + lx, BASE); });
+      ctx.moveTo(x + 12, BASE - 25); ctx.lineTo(x + 8, BASE - 33);                               // neck
       ctx.stroke();
-      ctx.beginPath(); ctx.ellipse(x + 4, BASE - 54, 7, 5, -0.4, 0, Math.PI * 2); ctx.fill();         // head
-      ctx.lineWidth = 2; ctx.strokeStyle = '#6b5a48';
-      ctx.beginPath(); ctx.moveTo(x + 6, BASE - 58); ctx.lineTo(x + 10, BASE - 70); ctx.moveTo(x + 8, BASE - 64); ctx.lineTo(x + 14, BASE - 66); ctx.stroke();
-      eyes(x + 1, BASE - 55, 0.01, 1.8, '#f2ecd8');
+      ctx.beginPath(); ctx.ellipse(x + 6, BASE - 35, 6, 4, -0.4, 0, Math.PI * 2); ctx.fill();       // head
+      ctx.lineWidth = 1.5; ctx.strokeStyle = '#6b5a48';
+      ctx.beginPath(); ctx.moveTo(x + 8, BASE - 38); ctx.lineTo(x + 10, BASE - 45); ctx.moveTo(x + 9, BASE - 42); ctx.lineTo(x + 13, BASE - 43); ctx.stroke();
+      eyes(x + 3, BASE - 36, 0.01, 1.6, '#f2ecd8');
     }
   }
 
