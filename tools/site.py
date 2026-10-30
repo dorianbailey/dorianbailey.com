@@ -429,7 +429,7 @@ page("photography/index.html", "photo", "Photography | Dorian Bailey",
             <dt>Event photographer</dt>
             <dd>
               <h3>MetaZoo TCG</h3>
-              <p>Professional coverage at several MetaZoo TCG events: players at the tables, the cards they pull, costumed cryptids, and the crowds that come to see them. Delivered as edited sets for the brand&rsquo;s own use.</p>
+              <p>Professional coverage at several MetaZoo TCG events: players at the tables, the cards they pull, costumed cryptids, and the crowds that come to see them.</p>
             </dd>
           </div>
           <div class="ledger__row">
