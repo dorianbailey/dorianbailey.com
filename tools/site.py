@@ -66,6 +66,38 @@ def thumb_dims(p):
     return round(w * s), round(h * s)
 
 
+# Cryptid Highway lives behind the Mothman eyes in the footer. The markup waits in an inert
+# <template>; js/main.js clones it into a dialog and loads js/game.js on the first sighting clicked.
+GAME_TEMPLATE = """    <template id="cryptid-highway">
+      <div class="game-dialog__head">
+        <p class="game-dialog__title" id="game-dialog-title">Cryptid Highway</p>
+        <button class="game-dialog__close" type="button" data-game-close>Close</button>
+      </div>
+      <div class="game" data-game>
+        <div class="game__screen">
+          <canvas tabindex="0" role="img" aria-label="Cryptid Highway, a night drive past cryptids"></canvas>
+          <div class="game__panel" data-game-start>
+            <p class="game__kicker">You saw something</p>
+            <h3>Cryptid Highway</h3>
+            <p>Take the two-lane road out after it. Jump the potholes, cones and deer in your headlights, and photograph Mothman, Bigfoot and the Frogman before they slip back into the dark. You have twenty-four shots of film.</p>
+            <button class="btn" type="button" data-game-go autofocus>Start the drive</button>
+          </div>
+          <div class="game__panel" data-game-over hidden>
+            <p class="game__kicker" data-o="cause">Trip over.</p>
+            <h3><span data-o="score">0</span> points</h3>
+            <p data-o="detail"></p>
+            <p class="game__stop" data-o="stop" hidden>Up the road, you&rsquo;d have passed <a href="https://taketheoddway.com" rel="noopener">a real stop</a>, <span data-o="place"></span>.</p>
+            <button class="btn" type="button" data-game-go>Drive again</button>
+          </div>
+        </div>
+        <div class="game__controls">
+          <button type="button" class="game__btn" data-game-jump>Jump <span>Space</span></button>
+          <button type="button" class="game__btn" data-game-snap>Photograph <span>S</span></button>
+        </div>
+      </div>
+    </template>"""
+
+
 def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card.jpg"):
     depth = path.count("/")
     p = "/" if path == "404.html" else "../" * depth
@@ -119,7 +151,8 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
   </main>
 
   <footer class="site-footer">
-    <span class="mothman" aria-hidden="true"><i></i><i></i></span>
+    <button class="mothman" type="button" tabindex="-1" aria-hidden="true" data-game-src="{p}js/game.js?v={v('js/game.js')}"><i></i><i></i></button>
+{GAME_TEMPLATE}
     <div class="wrap site-footer__inner">
       <div class="site-footer__mark">
         {seal(56, "seal seal--deboss")}
@@ -264,37 +297,6 @@ page("index.html", "home",
       </div>
     </section>
 
-    <section class="section band--dark" id="cryptid-highway" aria-labelledby="game-title">
-      <div class="wrap">
-        <div class="section-head">
-          <h2 class="section-title" id="game-title">Cryptid Highway</h2>
-          <p class="section-head__note">Jump with Space or a tap. Photograph with S or the camera button.</p>
-        </div>
-        <div class="game" data-game>
-          <div class="game__screen">
-            <canvas tabindex="0" role="img" aria-label="Cryptid Highway, a night drive past cryptids"></canvas>
-            <div class="game__panel" data-game-start>
-              <p class="game__kicker">A small game</p>
-              <h3>Cryptid Highway</h3>
-              <p>Drive a two-lane road at dusk. Jump the potholes, cones and deer in your headlights, and photograph Mothman, Bigfoot and the Frogman before they slip back into the dark. You have twenty-four shots of film.</p>
-              <button class="btn" type="button" data-game-go>Start the drive</button>
-            </div>
-            <div class="game__panel" data-game-over hidden>
-              <p class="game__kicker" data-o="cause">Trip over.</p>
-              <h3><span data-o="score">0</span> points</h3>
-              <p data-o="detail"></p>
-              <p class="game__stop" data-o="stop" hidden>Up the road, you&rsquo;d have passed <a href="https://taketheoddway.com" rel="noopener">a real stop</a>, <span data-o="place"></span>.</p>
-              <button class="btn" type="button" data-game-go>Drive again</button>
-            </div>
-          </div>
-          <div class="game__controls">
-            <button type="button" class="game__btn" data-game-jump>Jump <span>Space</span></button>
-            <button type="button" class="game__btn" data-game-snap>Photograph <span>S</span></button>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="section band--raised section--rule" aria-labelledby="foreword-title">
       <div class="wrap foreword">
         <figure class="plate foreword__portrait">
@@ -366,7 +368,7 @@ page("index.html", "home",
       "worksFor": {{"@type": "Organization", "name": "Vanta House", "url": "{LINKS['vanta']}"}},
       "sameAs": ["{LINKS['linkedin']}", "{LINKS['github']}", "{LINKS['bswb']}", "{LINKS['oddway']}", "{LINKS['yt']}", "{LINKS['ig']}"]
     }}
-    </script>""", extra_js=f'  <script src="js/game.js?v={v("js/game.js")}" defer></script>\n')
+    </script>""")
 
 
 # ===================================================================== Entries (venture pages)

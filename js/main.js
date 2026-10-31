@@ -29,28 +29,81 @@
     }).observe(hero);
   }
 
-  // Easter egg: now and then, a pair of red eyes blinks in the dark footer.
+  // Easter egg: a pair of red eyes blinks in the dark footer now and then.
+  // Catch them (click or tap) and Cryptid Highway opens.
   var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var eyes = document.querySelector('.mothman');
-  if (eyes && !calm) {
+  var footer = document.querySelector('.site-footer');
+  if (eyes && footer) {
+    var timer = 0, watching = false;
     var sighting = function () {
+      timer = 0;
+      if (!watching || document.hidden || root.classList.contains('game-open')) { if (watching) next(); return; }
       eyes.style.left = (6 + Math.random() * 84) + '%';
       eyes.style.top = (16 + Math.random() * 52) + '%';
-      eyes.classList.remove('is-seen');
+      eyes.classList.remove('is-seen', 'is-caught');
       void eyes.offsetWidth;
       eyes.classList.add('is-seen');
-      setTimeout(sighting, 22000 + Math.random() * 26000);
+      next();
     };
-    setTimeout(sighting, 5000 + Math.random() * 7000);
+    var next = function (soon) {
+      clearTimeout(timer);
+      timer = setTimeout(sighting, soon ? 2500 + Math.random() * 3000 : 14000 + Math.random() * 16000);
+    };
+    // Only watch while the footer is on screen, and show up soon after it arrives
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (e) {
+        watching = e[0].isIntersecting;
+        if (watching && !timer) next(true);
+        if (!watching) { clearTimeout(timer); timer = 0; }
+      }, { threshold: 0.3 }).observe(footer);
+    } else { watching = true; next(true); }
+    // Gone when it finishes blinking: no longer catchable
+    eyes.addEventListener('animationend', function () { eyes.classList.remove('is-seen'); });
+    eyes.addEventListener('click', function () {
+      if (!eyes.classList.contains('is-seen')) return;
+      eyes.classList.add('is-caught');
+      setTimeout(function () { eyes.classList.remove('is-seen', 'is-caught'); openGame(); }, calm ? 0 : 420);
+    });
   }
 
-  // Easter egg: type "oddway" anywhere and the page loses tracking for a moment.
+  // Cryptid Highway in a dialog, built from the footer's <template> the first time it's needed.
+  var dialog = null;
+  function openGame() {
+    var tpl = document.getElementById('cryptid-highway');
+    if (!tpl || !window.HTMLDialogElement) return;
+    if (!dialog) {
+      dialog = document.createElement('dialog');
+      dialog.className = 'game-dialog band--dark';
+      dialog.setAttribute('aria-labelledby', 'game-dialog-title');
+      dialog.appendChild(tpl.content.cloneNode(true));
+      document.body.appendChild(dialog);
+      dialog.querySelector('[data-game-close]').addEventListener('click', function () { dialog.close(); });
+      // A click on the dimmed page outside the dialog closes it
+      dialog.addEventListener('click', function (e) {
+        if (e.target !== dialog) return;
+        var r = dialog.getBoundingClientRect();
+        if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dialog.close();
+      });
+      dialog.addEventListener('close', function () { root.classList.remove('game-open'); });
+      var s = document.createElement('script');
+      s.src = eyes ? eyes.getAttribute('data-game-src') : 'js/game.js';
+      document.body.appendChild(s);
+    }
+    if (dialog.open) return;
+    root.classList.add('game-open');
+    dialog.showModal();
+  }
+
+  // Easter eggs for the keyboard: type "oddway" and the page loses tracking for a moment;
+  // type "mothman" and you go looking for it.
   var typed = '';
   document.addEventListener('keydown', function (e) {
     if (e.metaKey || e.ctrlKey || e.altKey || e.key.length !== 1) return;
-    if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
-    typed = (typed + e.key.toLowerCase()).slice(-6);
-    if (typed === 'oddway') { typed = ''; sweep(); }
+    if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable], dialog')) return;
+    typed = (typed + e.key.toLowerCase()).slice(-7);
+    if (typed.slice(-6) === 'oddway') { typed = ''; sweep(); }
+    else if (typed === 'mothman') { typed = ''; openGame(); }
   });
   function sweep() {
     if (document.querySelector('.vhs-sweep')) return;

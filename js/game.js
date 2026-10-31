@@ -1,4 +1,5 @@
-// Cryptid Highway: a small game on the home page.
+// Cryptid Highway: a small hidden game. It opens in a dialog when someone catches the
+// Mothman eyes in the footer (or types "mothman"); js/main.js builds the dialog and loads this file.
 // Drive a two-lane road at dusk. Jump potholes, cones and deer; photograph
 // Mothman, Bigfoot and the Frogman before they slip back into the dark.
 // When the trip ends, OddWay deals a real cryptid stop you'd have passed.

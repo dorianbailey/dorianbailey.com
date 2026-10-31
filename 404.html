@@ -19,7 +19,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/libre-caslon-text-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/base.css?v=3da4ec50">
+  <link rel="stylesheet" href="/css/base.css?v=7ee0f9b5">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -62,7 +62,35 @@
   </main>
 
   <footer class="site-footer">
-    <span class="mothman" aria-hidden="true"><i></i><i></i></span>
+    <button class="mothman" type="button" tabindex="-1" aria-hidden="true" data-game-src="/js/game.js?v=28cd9838"><i></i><i></i></button>
+    <template id="cryptid-highway">
+      <div class="game-dialog__head">
+        <p class="game-dialog__title" id="game-dialog-title">Cryptid Highway</p>
+        <button class="game-dialog__close" type="button" data-game-close>Close</button>
+      </div>
+      <div class="game" data-game>
+        <div class="game__screen">
+          <canvas tabindex="0" role="img" aria-label="Cryptid Highway, a night drive past cryptids"></canvas>
+          <div class="game__panel" data-game-start>
+            <p class="game__kicker">You saw something</p>
+            <h3>Cryptid Highway</h3>
+            <p>Take the two-lane road out after it. Jump the potholes, cones and deer in your headlights, and photograph Mothman, Bigfoot and the Frogman before they slip back into the dark. You have twenty-four shots of film.</p>
+            <button class="btn" type="button" data-game-go autofocus>Start the drive</button>
+          </div>
+          <div class="game__panel" data-game-over hidden>
+            <p class="game__kicker" data-o="cause">Trip over.</p>
+            <h3><span data-o="score">0</span> points</h3>
+            <p data-o="detail"></p>
+            <p class="game__stop" data-o="stop" hidden>Up the road, you&rsquo;d have passed <a href="https://taketheoddway.com" rel="noopener">a real stop</a>, <span data-o="place"></span>.</p>
+            <button class="btn" type="button" data-game-go>Drive again</button>
+          </div>
+        </div>
+        <div class="game__controls">
+          <button type="button" class="game__btn" data-game-jump>Jump <span>Space</span></button>
+          <button type="button" class="game__btn" data-game-snap>Photograph <span>S</span></button>
+        </div>
+      </div>
+    </template>
     <div class="wrap site-footer__inner">
       <div class="site-footer__mark">
         <svg class="seal seal--deboss" width="56" height="56" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
@@ -85,6 +113,6 @@
     </div>
   </footer>
 
-  <script src="/js/main.js?v=4ccfb161" defer></script>
+  <script src="/js/main.js?v=af33b2c9" defer></script>
 </body>
 </html>
