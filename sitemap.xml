@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://dorianbailey.com/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <image:image><image:loc>https://dorianbailey.com/assets/img/dorian-bailey.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-26.jpg</image:loc></image:image>
   </url>
   <url>
     <loc>https://dorianbailey.com/better-selling/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <image:image><image:loc>https://dorianbailey.com/assets/img/dorian-bailey.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-garage-collectibles.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-tables.jpg</image:loc></image:image>
@@ -19,17 +19,17 @@
   </url>
   <url>
     <loc>https://dorianbailey.com/oddway/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/green-eyes/green-eyes-07.jpg</image:loc></image:image>
   </url>
   <url>
     <loc>https://dorianbailey.com/metazoo/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-02.jpg</image:loc></image:image>
   </url>
   <url>
     <loc>https://dorianbailey.com/photography/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-01.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-02.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-03.jpg</image:loc></image:image>
@@ -134,11 +134,52 @@
   </url>
   <url>
     <loc>https://dorianbailey.com/record/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <image:image><image:loc>https://dorianbailey.com/assets/img/dorian-bailey.jpg</image:loc></image:image>
   </url>
   <url>
     <loc>https://dorianbailey.com/privacy/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+  <url>
+    <loc>https://dorianbailey.com/journal/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-26.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/north-east/north-east-08.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-canopy.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-crowd.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://dorianbailey.com/journal/legends-expo-metazoo-tournament/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-26.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-02.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-05.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-13.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-17.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-11.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-22.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-24.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://dorianbailey.com/journal/senior-pictures-erie-county/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/north-east/north-east-08.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/north-east/north-east-07.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://dorianbailey.com/journal/how-estate-sales-work-erie-county/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-canopy.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://dorianbailey.com/journal/star-wars-collectors-sale-north-east/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-crowd.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-garage-collectibles.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-tables.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-garage.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-canopy.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-news.jpg</image:loc></image:image>
   </url>
 </urlset>

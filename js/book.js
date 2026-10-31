@@ -38,7 +38,7 @@
   dialog.className = 'book';
   dialog.setAttribute('aria-labelledby', 'book-title');
   document.body.appendChild(dialog);
-  var service, view, picked;
+  var service, view, picked, preset;
 
   function shell(inner) {
     dialog.innerHTML = '<div class="book__head"><p class="book__kicker">Bookings available now</p>' +
@@ -93,7 +93,7 @@
   function form() {
     var s = SERVICES[service], x = s.extra;
     var extra = x.options
-      ? '<label class="book__field"><span>' + esc(x.key) + '</span><select name="extra">' + x.options.map(function (o) { return '<option>' + esc(o) + '</option>'; }).join('') + '</select></label>'
+      ? '<label class="book__field"><span>' + esc(x.key) + '</span><select name="extra">' + x.options.map(function (o) { return '<option' + (o === preset ? ' selected' : '') + '>' + esc(o) + '</option>'; }).join('') + '</select></label>'
       : '<label class="book__field"><span>' + esc(x.key) + ' <em>optional</em></span><input name="extra" type="text" autocomplete="off" placeholder="' + esc(x.placeholder || '') + '"></label>';
     shell('<p class="book__date"><span>' + esc(s.name) + '</span> ' + esc(longDate(picked)) + ' <button type="button" class="book__change">Change date</button></p>' +
       '<form class="book__form" novalidate>' +
@@ -154,8 +154,9 @@
     dialog.querySelector('[data-close]').focus();
   }
 
-  function open(kind) {
+  function open(kind, type) {
     service = SERVICES[kind] ? kind : 'photo';
+    preset = type || '';
     picked = null;
     // Open on this month, or on next month when less than a week of this one is left
     var monthEnd = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
@@ -171,5 +172,5 @@
     var r = dialog.getBoundingClientRect();
     if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dialog.close();
   });
-  buttons.forEach(function (b) { b.addEventListener('click', function () { open(b.getAttribute('data-book')); }); });
+  buttons.forEach(function (b) { b.addEventListener('click', function () { open(b.getAttribute('data-book'), b.getAttribute('data-book-type')); }); });
 })();
