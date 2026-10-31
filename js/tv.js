@@ -51,6 +51,19 @@
     titleEl.textContent = tape.getAttribute('data-title');
   }
 
+  // Picking another tape ejects the one playing: back to static, STOP, and the
+  // "Insert tape" button, so every tape goes in the same way.
+  var pending = 0;
+  function eject() {
+    clearTimeout(pending);
+    player.innerHTML = '';
+    playing = false;
+    tv.classList.remove('is-playing', 'is-loading');
+    state.textContent = 'STOP ■';
+    insert.hidden = false;
+    startSnow();
+  }
+
   function play() {
     var id = current.getAttribute('data-id');
     tv.classList.add('is-loading');
@@ -69,11 +82,18 @@
       tv.classList.remove('is-loading');
       tv.classList.add('is-playing');
     };
-    if (reduce) go(); else setTimeout(go, 650);
+    if (reduce) go(); else pending = setTimeout(go, 650);
   }
 
   insert.addEventListener('click', play);
   tapes.forEach(function (t) {
-    t.addEventListener('click', function () { select(t); play(); });
+    t.addEventListener('click', function () {
+      eject();
+      select(t);
+      // On a phone the list sits below the set: bring the TV (and its button) back into view
+      var r = tv.getBoundingClientRect();
+      if (r.top < 0 || r.bottom > window.innerHeight) tv.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      insert.focus({ preventScroll: true });
+    });
   });
 })();
