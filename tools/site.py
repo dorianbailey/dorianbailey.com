@@ -1055,22 +1055,13 @@ page("photography/index.html", "photo", "Dorian Bailey Photography | Photographe
       </div>
     </section>
 
-    <section class="section" aria-labelledby="kit-title">
-      <div class="wrap split">
+    <section class="section" aria-labelledby="approach-title">
+      <div class="wrap">
         <div class="measure">
-          <h2 class="section-title" id="kit-title">Approach</h2>
+          <h2 class="section-title" id="approach-title">Approach</h2>
           <p class="lede">Most of this is event work: long days on a festival street or a tournament floor, close to the people and the cards.</p>
-          <p>The kit stays light on purpose: two fast primes for faces and details, a few zooms for when the crowd closes in, and everything edited in Lightroom. The personal collections are where the slower pictures live: a gorge in October, a cat in window light, fungi on a fallen log.</p>
+          <p>The personal collections are where the slower pictures live: a gorge in October, a cat in window light, fungi on a fallen log.</p>
         </div>
-        <aside class="particulars" aria-labelledby="kit-list-title">
-          <h2 id="kit-list-title">The kit</h2>
-          <dl>
-            <div><dt>Body</dt><dd>Canon EOS R50</dd></div>
-            <div><dt>Primes</dt><dd>RF 35mm f/1.8 Macro IS STM<br>RF 50mm f/1.8 STM</dd></div>
-            <div><dt>Zooms</dt><dd>EF 24&ndash;105mm f/4L IS USM<br>RF-S 55&ndash;210mm<br>RF-S 18&ndash;45mm</dd></div>
-            <div><dt>Editing</dt><dd>Adobe Lightroom and Photoshop</dd></div>
-          </dl>
-        </aside>
       </div>
     </section>
 
