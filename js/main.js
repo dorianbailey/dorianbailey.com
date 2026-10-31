@@ -21,6 +21,23 @@
   }
 
 
+  // The signature on the home page is written on through an animated mask. Once the pen has
+  // finished (or a few seconds after the page is first seen, in case a browser doesn't animate
+  // masks), drop the mask so the finished signature always shows.
+  var masked = document.querySelector('.sig--hero [mask]');
+  if (masked) {
+    var unmask = function () { masked.removeAttribute('mask'); };
+    var lastStroke = document.querySelector('.sig__ink--underline');
+    if (lastStroke) lastStroke.addEventListener('animationend', unmask);
+    var arm = function () { setTimeout(unmask, 3600); };
+    if (document.visibilityState === 'visible') arm();
+    else document.addEventListener('visibilitychange', function seen() {
+      if (document.visibilityState !== 'visible') return;
+      document.removeEventListener('visibilitychange', seen);
+      arm();
+    });
+  }
+
   // Pause the home collage while it is scrolled out of view
   var hero = document.querySelector('.frontispiece');
   if (hero && document.querySelector('.collage') && 'IntersectionObserver' in window) {
