@@ -165,7 +165,7 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
         <li><a href="{LINKS['yt']}" rel="noopener">YouTube</a></li>
         <li><a href="{LINKS['github']}" rel="noopener">GitHub</a></li>
       </ul>
-      <p class="site-footer__fine">&copy; <span data-year>2026</span> Dorian Bailey. Photographs are the author&rsquo;s own.</p>
+      <p class="site-footer__fine">&copy; <span data-year>2026</span> Dorian Bailey. Photographs are the author&rsquo;s own. <a href="{p}privacy/">Privacy</a></p>
     </div>
   </footer>
 
@@ -708,6 +708,7 @@ mz_extra = f"""
               <div class="tv__panel" aria-hidden="true"><span class="tv__knob"></span><span class="tv__knob tv__knob--small"></span><span class="tv__grille"></span></div>
             </div>
             <p class="tv__now"><em>On the tape</em> <span data-tv-title>{html.escape(latest['title'])}</span></p>
+            <p class="tv__note">Plays from YouTube, which may set cookies once a tape is playing. <a href="../privacy/">Privacy</a></p>
           </div>
           <div class="tv-guide">
             <p class="tv-guide__head">Tapes, newest first</p>
@@ -973,6 +974,67 @@ page("record/index.html", "record", "The Record | Dorian Bailey",
 
     <nav class="wrap entry-nav" aria-label="Collection">
       <a class="entry-nav__prev" href="../photography/"><em>Previous</em> IV. Photography</a>
+      <a class="entry-nav__next" href="../index.html#index"><em>Back to</em> the index</a>
+    </nav>""")
+
+# ===================================================================== Privacy
+PRIVACY_DATE = "October 30, 2026"
+page("privacy/index.html", "privacy", "Privacy | Dorian Bailey",
+     "What dorianbailey.com collects, which is almost nothing: no cookies, no tracking, no analytics.",
+     f"""    <header class="entry-head">
+      <div class="wrap">
+        <p class="entry-head__num">Privacy</p>
+        <h1>What this site keeps</h1>
+        <p class="entry-head__standfirst">Very little. No cookies, no tracking, no analytics and no advertising, and nothing on the site asks for your personal information.</p>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="wrap">
+        <dl class="ledger">
+          <div class="ledger__row">
+            <dt>Cookies</dt>
+            <dd><p>This site doesn&rsquo;t set any. There are no analytics, advertising or social-media tracking scripts, and every font is served from this site rather than from Google Fonts or another font service.</p></dd>
+          </div>
+          <div class="ledger__row">
+            <dt>In your browser</dt>
+            <dd><p>If you play Cryptid Highway, your best score is saved in your browser&rsquo;s local storage so it&rsquo;s there next time. It never leaves your device, and clearing this site&rsquo;s data in your browser removes it.</p></dd>
+          </div>
+          <div class="ledger__row">
+            <dt>Hosting</dt>
+            <dd><p>The site is hosted by GitHub Pages. Like any web host, GitHub logs visitors&rsquo; IP addresses for security purposes, under the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub General Privacy Statement</a>.</p></dd>
+          </div>
+          <div class="ledger__row">
+            <dt>Outside services<em>Only when you use them</em></dt>
+            <dd>
+              <h3>YouTube</h3>
+              <p>The television on the <a href="../metazoo/">Bailey MetaZoo</a> page uses YouTube&rsquo;s privacy-enhanced player, and nothing loads from YouTube until you insert a tape. Once a video plays, YouTube may set cookies and store data in your browser under <a href="https://policies.google.com/privacy" rel="noopener">Google&rsquo;s Privacy Policy</a>.</p>
+              <h3>Take The OddWay</h3>
+              <p>&ldquo;Roll a detour&rdquo; on the <a href="../oddway/">Take The OddWay</a> page, and the end of a Cryptid Highway drive, fetch a real stop from Take The OddWay&rsquo;s database. Nothing about you is sent with the request, though like any web request it reaches the server with your IP address.</p>
+            </dd>
+          </div>
+          <div class="ledger__row">
+            <dt>Correspondence</dt>
+            <dd><p>If you email me, I&rsquo;ll use your address and what you write only to reply. I don&rsquo;t share or sell it, or add it to any list.</p></dd>
+          </div>
+          <div class="ledger__row">
+            <dt>Other sites</dt>
+            <dd><p>Links to Instagram, YouTube, LinkedIn, Facebook, GitHub and my other ventures lead to sites with their own privacy policies.</p></dd>
+          </div>
+          <div class="ledger__row">
+            <dt>Changes</dt>
+            <dd><p>If this site ever adds analytics, a form or anything else that collects information, this page will say so first, with a new date.</p></dd>
+          </div>
+          <div class="ledger__row">
+            <dt>Questions<em>Effective {PRIVACY_DATE}</em></dt>
+            <dd><p>Write to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p></dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <nav class="wrap entry-nav" aria-label="Collection">
+      <a class="entry-nav__prev" href="../record/"><em>See also</em> The Record</a>
       <a class="entry-nav__next" href="../index.html#index"><em>Back to</em> the index</a>
     </nav>""")
 

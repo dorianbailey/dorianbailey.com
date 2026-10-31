@@ -427,6 +427,7 @@ em { font-style: italic; }
 .site-footer__links { list-style: none; margin: 0; padding: 0; text-align: right; font-size: var(--s-16); line-height: 2; }
 .site-footer a { text-decoration: none; }
 .site-footer a:hover { color: var(--brass); }
+.site-footer__fine a { color: inherit; margin-left: 0.35rem; text-decoration: underline; text-decoration-color: var(--on-field-rule); text-underline-offset: 0.2em; }
 .site-footer__fine { grid-column: 1 / -1; margin: 0; padding-top: 1.5rem; border-top: 1px solid var(--on-field-rule); font-size: var(--s-14); font-style: italic; color: var(--on-field-soft); }
 @media (max-width: 640px) {
   .site-footer__inner { grid-template-columns: 1fr; }
@@ -611,6 +612,8 @@ em { font-style: italic; }
 .tv__grille { width: 70%; flex: 1; min-height: 3rem; background: repeating-linear-gradient(0deg, #1a1917 0 3px, #2f2d29 3px 6px); border-radius: 4px; }
 .tv__now { margin: 1rem 0 0; font-size: var(--s-16); color: var(--ink-soft); }
 .tv__now em { margin-right: 0.4rem; }
+.tv__note { margin: 0.35rem 0 0; font-size: var(--s-14); font-style: italic; color: var(--ink-soft); }
+.tv__note a { color: inherit; text-decoration-color: var(--brass); }
 .tv-guide__head { font-style: italic; color: var(--ink-soft); margin: 0 0 0.75rem; }
 .tapes { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
 .tape {
