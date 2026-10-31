@@ -548,7 +548,9 @@ html.book-open { overflow: hidden; }
 /* ---------- Frontispiece entrance: the one orchestrated moment ---------- */
 @media (prefers-reduced-motion: no-preference) {
   /* The signature is written on: the main stroke, then the hook, then the underline */
-  .sig__ink { stroke-dasharray: 1; stroke-dashoffset: 1; animation: sig-write 1.75s cubic-bezier(.45, .05, .4, 1) 0.2s forwards; }
+  /* Each stroke waits fully in its gap (dash 1, gap 2, offset just past 1) so no zero-length dash is left at
+     its tip: Safari draws one as a round dot before the stroke has started. */
+  .sig__ink { stroke-dasharray: 1 2; stroke-dashoffset: 1.01; animation: sig-write 1.75s cubic-bezier(.45, .05, .4, 1) 0.2s forwards; }
   .sig__ink--hook { animation-duration: 0.3s; animation-delay: 2.05s; animation-timing-function: ease-out; }
   .sig__ink--underline { animation-duration: 0.5s; animation-delay: 2.4s; animation-timing-function: cubic-bezier(.3, 0, .2, 1); }
   .frontispiece__pre { opacity: 0; animation: fade-in 0.9s ease 1.45s forwards; }
