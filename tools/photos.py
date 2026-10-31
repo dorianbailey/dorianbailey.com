@@ -177,6 +177,7 @@ for c in C:
         name = f"{c['id']}-{i:02d}.jpg"
         w, h = save(im, os.path.join(d, name), 2000, 82)
         save(im, os.path.join(d, "t-" + name), 900, 76)
+        save(im, os.path.join(d, "s-" + name), 520, 80)   # small size for grids and phones (srcset)
         im.close() if hasattr(im, "close") else None
         e = {"file": f"{c['id']}/{name}", "thumb": f"{c['id']}/t-{name}", "alt": alt, "w": w, "h": h}
         if os.path.basename(src) == c["cover"]: c["coverFile"] = e["thumb"]

@@ -12,12 +12,13 @@ TOTAL = sum(len(c["photos"]) for c in M["collections"])
 NUMWORD = ["Zero","One","Two","Three","Four","Five","Six","Seven","Eight"][len(M["collections"])]
 
 NAV = [
+    ("#services", "Services", "services"),
+    ("photography/", "Photography", "photo"),
     ("better-selling/", "Better Selling", "selling"),
     ("oddway/", "OddWay", "oddway"),
     ("metazoo/", "MetaZoo", "metazoo"),
-    ("photography/", "Photography", "photo"),
     ("record/", "Record", "record"),
-    ("index.html#correspondence", "Contact", "contact"),
+    ("#correspondence", "Contact", "contact"),
 ]
 
 LINKS = {
@@ -35,6 +36,60 @@ LINKS = {
 
 
 import hashlib
+from urllib.parse import quote
+
+# ---------------------------------------------------------------- Services and structured data
+PHOTO_TYPES = [
+    ("Events and festivals", "Conventions, tournaments, festivals and parties, covered from the doors opening to the last photo."),
+    ("Portraits and headshots", "Headshots for work and profiles, and portraits for everything else."),
+    ("Seniors and graduates", "Senior pictures and graduation portraits, on location around Erie County."),
+    ("Couples and families", "Engagements, anniversaries and family sessions."),
+    ("Sports and competitions", "Games, matches and card tournaments: the action and the people around it."),
+    ("Products and small businesses", "Product photos, storefronts and social content for local businesses."),
+    ("Real estate and interiors", "Listings, rentals and estate sale previews, bright and true to the room."),
+    ("Landscapes and nature", "Scenic and nature photography, from the lakeshore to the gorge."),
+]
+MAILTO_PHOTO = ("mailto:" + EMAIL + "?subject=" + quote("Photography inquiry") + "&body=" +
+                quote("Hi Dorian,\n\nType of photography:\nDate:\nLocation:\n\n"))
+PERSON_ID = SITE + "/#dorian-bailey"
+PERSON = {
+    "@type": "Person", "@id": PERSON_ID, "name": "Dorian Bailey", "url": SITE + "/",
+    "image": SITE + "/assets/img/dorian-bailey.jpg", "email": "mailto:" + EMAIL,
+    "description": "Dorian Bailey is a photographer, marketer and founder from North East, Pennsylvania: Dorian Bailey Photography, "
+                   "Better Selling With Bailey estate sales, Take The OddWay and Bailey MetaZoo.",
+    "jobTitle": ["Photographer", "Marketing Assistant", "Founder"],
+    "address": {"@type": "PostalAddress", "addressLocality": "North East", "addressRegion": "PA", "addressCountry": "US"},
+    "homeLocation": {"@type": "Place", "name": "North East, Pennsylvania"},
+    "alumniOf": {"@type": "CollegeOrUniversity", "name": "Penn State Behrend", "url": "https://behrend.psu.edu"},
+    "worksFor": {"@type": "Organization", "name": "Vanta House", "url": LINKS["vanta"]},
+    "knowsAbout": ["Photography", "Event photography", "Portrait photography", "Estate sales", "Digital marketing",
+                   "Search engine optimization", "Social media marketing", "Web development", "MetaZoo"],
+    "sameAs": [LINKS["linkedin"], LINKS["github"], LINKS["yt"], LINKS["ig"], LINKS["bswb"], LINKS["bswb_fb"], LINKS["oddway"]],
+}
+WEBSITE = {"@type": "WebSite", "@id": SITE + "/#website", "url": SITE + "/", "name": "Dorian Bailey",
+           "alternateName": "The Collection of Dorian Bailey", "inLanguage": "en-US", "publisher": {"@id": PERSON_ID}}
+AREA = [{"@type": "AdministrativeArea", "name": "Erie County, Pennsylvania"}, {"@type": "City", "name": "North East, Pennsylvania"},
+        {"@type": "City", "name": "Erie, Pennsylvania"}]
+PHOTO_SERVICE = {
+    "@type": "ProfessionalService", "@id": SITE + "/photography/#service", "name": "Dorian Bailey Photography",
+    "url": SITE + "/photography/", "image": SITE + "/assets/img/og-photography.jpg", "email": EMAIL,
+    "description": "All types of photography offered by Dorian Bailey in North East and Erie, Pennsylvania: events, portraits, "
+                   "seniors, families, sports, products and real estate. Inquire for rates.",
+    "founder": {"@id": PERSON_ID}, "areaServed": AREA,
+    "address": {"@type": "PostalAddress", "addressLocality": "North East", "addressRegion": "PA", "addressCountry": "US"},
+    "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Photography by Dorian Bailey", "itemListElement": [
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": t, "description": d}} for t, d in PHOTO_TYPES]},
+}
+ESTATE_SERVICE = {
+    "@type": "Service", "@id": SITE + "/better-selling/#service", "name": "Estate sales by Better Selling With Bailey",
+    "serviceType": "Estate sale management", "areaServed": AREA,
+    "description": "Dorian Bailey prices, stages, promotes and runs estate sales in the client's home across Erie County, Pennsylvania, "
+                   "and removes whatever is left at no charge.",
+    "provider": {"@type": "LocalBusiness", "name": "Better Selling With Bailey", "url": LINKS["bswb"], "sameAs": [LINKS["bswb_fb"]],
+                 "founder": {"@id": PERSON_ID}, "areaServed": AREA,
+                 "address": {"@type": "PostalAddress", "addressLocality": "North East", "addressRegion": "PA", "addressCountry": "US"}},
+    "offers": {"@type": "Offer", "description": "$995 flat fee plus 20% commission on total sales; leftover removal free"},
+}
 
 
 def v(rel):
@@ -108,12 +163,22 @@ GAME_TEMPLATE = """    <template id="cryptid-highway">
     </template>"""
 
 
-def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card.jpg"):
+def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card.jpg", ld=None, crumb=None, noindex=False):
     depth = path.count("/")
     p = "/" if path == "404.html" else "../" * depth
     canonical = SITE + "/" + path.replace("index.html", "")
+    # Structured data: whatever the page passes, plus a breadcrumb trail for inner pages
+    graph = list(ld or [])
+    if crumb:
+        graph.append({"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Dorian Bailey", "item": SITE + "/"},
+            {"@type": "ListItem", "position": 2, "name": crumb, "item": canonical}]})
+    ld_html = ("\n  <script type=\"application/ld+json\">" + json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False)
+               .replace("</", "<\\/") + "</script>") if graph else ""
+    seo = ('  <meta name="robots" content="noindex">' if noindex else f'  <link rel="canonical" href="{canonical}">')
+    home = p or "./"
     nav = "\n".join(
-        f'          <li><a href="{p}{href}"{" aria-current=\"page\"" if k == key else ""}>{label}</a></li>'
+        f'          <li><a href="{home if href.startswith("#") else p}{href}"{" aria-current=\"page\"" if k == key else ""}>{label}</a></li>'
         for href, label, k in NAV)
     out = f"""<!doctype html>
 <html lang="en">
@@ -122,8 +187,10 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{title}</title>
   <meta name="description" content="{desc}">
+  <meta name="author" content="Dorian Bailey">
   <meta name="color-scheme" content="light dark">
-  <link rel="canonical" href="{canonical}">
+{seo}
+  <meta property="og:site_name" content="Dorian Bailey">
   <meta property="og:type" content="website">
   <meta property="og:title" content="{title}">
   <meta property="og:description" content="{desc}">
@@ -137,7 +204,7 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
   <link rel="apple-touch-icon" href="{p}apple-touch-icon.png">
   <link rel="preload" href="{p}assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{p}assets/fonts/libre-caslon-text-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{p}css/base.css?v={v('css/base.css')}">
+  <link rel="stylesheet" href="{p}css/base.css?v={v('css/base.css')}">{ld_html}
 </head>
 <body>
   {SIG_SPRITE}
@@ -145,7 +212,7 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
 
   <header class="site-header">
     <div class="wrap site-header__inner">
-      <a class="site-mark" href="{p}index.html">
+      <a class="site-mark" href="{home}">
         {sig(28)}
         <span>Dorian Bailey</span>
       </a>
@@ -173,8 +240,8 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
       <ul class="site-footer__links">
         <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
         <li><a href="{LINKS['linkedin']}" rel="noopener">LinkedIn</a></li>
-        <li><a href="{LINKS['ig']}" rel="noopener">Instagram</a></li>
-        <li><a href="{LINKS['yt']}" rel="noopener">YouTube</a></li>
+        <li><a href="{LINKS['ig']}" rel="noopener">Instagram <em>@baileymetazoo</em></a></li>
+        <li><a href="{LINKS['yt']}" rel="noopener">YouTube <em>@baileymetazoo</em></a></li>
         <li><a href="{LINKS['github']}" rel="noopener">GitHub</a></li>
       </ul>
       <p class="site-footer__fine">&copy; <span data-year>2026</span> Dorian Bailey. Photographs are the author&rsquo;s own. <a href="{p}privacy/">Privacy</a></p>
@@ -191,8 +258,25 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
     print("wrote", path)
 
 
-def plate(src_thumb, alt, w, h, caption, href=None, prefix=""):
-    img = f'<img src="{prefix}{src_thumb}" alt="{html.escape(alt)}" width="{w}" height="{h}" loading="lazy" decoding="async">'
+def srcset(ph, prefix="", full=False):
+    """The sizes of a photo, smallest first: small (520px long side), thumbnail (900px), optionally full.
+    With a sizes attribute, the browser downloads only the smallest one that will look sharp."""
+    def wide(long):
+        return round(ph["w"] * min(1, long / max(ph["w"], ph["h"])))
+    base = prefix + "assets/photos/"
+    out = [f'{base}{ph["thumb"].replace("/t-", "/s-")} {wide(520)}w', f'{base}{ph["thumb"]} {wide(900)}w']
+    if full:
+        out.append(f'{base}{ph["file"]} {ph["w"]}w')
+    return ", ".join(out)
+
+
+PORTRAIT_SET = "{p}assets/img/s-dorian-bailey.jpg 390w, {p}assets/img/dorian-bailey.jpg 900w"
+SIZES_PLATE = "(max-width: 640px) 46vw, 330px"
+
+
+def plate(src_thumb, alt, w, h, caption, href=None, prefix="", ph=None, sizes=SIZES_PLATE):
+    ss = f' srcset="{srcset(ph, prefix)}" sizes="{sizes}"' if ph else ""
+    img = f'<img src="{prefix}{src_thumb}"{ss} alt="{html.escape(alt)}" width="{w}" height="{h}" loading="lazy" decoding="async">'
     inner = f'<a href="{href}">{img}</a>' if href else img
     return f"""<figure class="plate">
             <div class="frame">{inner}</div>
@@ -248,7 +332,7 @@ for cid, n, cap in [("letchworth", 7, "Letchworth"), ("creatures", 4, "Creatures
                     ("north-east", 5, "North East"), ("studies", 6, "Studies")]:
     ph, w, h = photo(cid, n)
     selected.append(plate("assets/photos/" + ph["thumb"], ph["alt"], w, h,
-                          f"<em>{cap}</em>", href=f"photography/#{cid}"))
+                          f"<em>{cap}</em>", href=f"photography/#{cid}", ph=ph, sizes="(max-width: 640px) 46vw, 250px"))
 selected = "\n          ".join(selected)
 
 FEAT = COLL["legends"]["photos"][25]
@@ -275,9 +359,44 @@ now_rows = "\n".join(f"""          <div class="ledger__row">
             <dd><p>{v}</p></dd>
           </div>""" for k, v in NOW)
 
+SERVICES = f"""
+    <section class="section services" id="services" aria-labelledby="services-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 class="section-title" id="services-title">Services</h2>
+          <p class="section-head__note">Book Dorian Bailey in North East, Erie and across Erie County, Pennsylvania</p>
+        </div>
+        <div class="services__grid">
+          <article class="service">
+            <p class="service__kicker">Photography</p>
+            <h3>Dorian Bailey Photography</h3>
+            <p>All types of photography offered, from events and festivals to portraits, seniors, families, products and real estate. Inquire for rates.</p>
+            <ul class="service__list">
+{chr(10).join(f"              <li>{t}</li>" for t, _ in PHOTO_TYPES)}
+            </ul>
+            <div class="btn-row"><a class="btn" href="{html.escape(MAILTO_PHOTO)}">Inquire for rates</a><a class="btn" href="photography/">See the photographs</a></div>
+          </article>
+          <article class="service">
+            <p class="service__kicker">Estate sales</p>
+            <h3>Better Selling With Bailey</h3>
+            <p>Estate sales across Erie County, priced, staged, promoted and run by Dorian Bailey in your own home, with whatever is left removed free. A $995 flat fee plus 20% of sales.</p>
+            <ul class="service__list">
+              <li>Walkthrough and pricing</li>
+              <li>Staging</li>
+              <li>Promotion</li>
+              <li>Running the sale days</li>
+              <li>Cleanup and removal</li>
+            </ul>
+            <div class="btn-row"><a class="btn" href="{LINKS['bswb']}" rel="noopener">Book a walkthrough</a><a class="btn" href="better-selling/">How a sale works</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+"""
+
 page("index.html", "home",
-     "Dorian Bailey",
-     "The collection of Dorian Bailey: Better Selling With Bailey, Take The OddWay, Bailey MetaZoo and photography for MetaZoo TCG, from North East, Pennsylvania.",
+     "Dorian Bailey | Photography and Estate Sales in Erie, PA",
+     "Dorian Bailey offers all types of photography and runs estate sales across Erie County, PA, and builds Take The OddWay and Bailey MetaZoo. Inquire for rates.",
      f"""    <section class="frontispiece">
       <div class="collage" aria-hidden="true">
         <div class="collage__wall">
@@ -288,19 +407,19 @@ page("index.html", "home",
         {sig_signing()}
         <p class="frontispiece__pre">The Collection of</p>
         <h1>Dorian Bailey</h1>
-        <p class="frontispiece__sub">Ventures, pursuits and photographs<br>from North East, Pennsylvania</p>
+        <p class="frontispiece__sub">Photography, estate sales and ventures<br>from North East, Pennsylvania</p>
       </div>
     </section>
-
+{SERVICES}
     <section class="section" aria-labelledby="feature-title">
       <div class="wrap feature">
         <figure class="feature__media">
-          <a class="frame" href="photography/#legends"><img src="assets/photos/{FEAT['file']}" alt="{html.escape(FEAT['alt'])}" width="{FEAT['w']}" height="{FEAT['h']}" loading="lazy" decoding="async"></a>
+          <a class="frame" href="photography/#legends"><img src="assets/photos/{FEAT['file']}" srcset="{srcset(FEAT, full=True)}" sizes="(max-width: 900px) 92vw, 620px" alt="{html.escape(FEAT['alt'])}" width="{FEAT['w']}" height="{FEAT['h']}" decoding="async"></a>
         </figure>
         <div class="feature__card">
           <p class="feature__kicker">Featured commission</p>
           <h2 id="feature-title">MetaZoo TCG, 2026</h2>
-          <p>Three events in three months for MetaZoo TCG: a two-day tournament, the Mothman Festival and the Green Eyes Festival. Players at the tables, prize cards on their easels, costumed cryptids, and the crowds that came to see them.</p>
+          <p>Dorian Bailey photographed three events in three months for MetaZoo TCG: a two-day tournament, the Mothman Festival and the Green Eyes Festival. Players at the tables, prize cards on their easels, costumed cryptids, and the crowds that came to see them.</p>
           <ul class="events">
 {events_list("photography/")}
           </ul>
@@ -312,13 +431,14 @@ page("index.html", "home",
     <section class="section band--raised section--rule" aria-labelledby="foreword-title">
       <div class="wrap foreword">
         <figure class="plate foreword__portrait">
-          <div class="frame"><img src="assets/img/dorian-bailey.jpg" alt="Portrait of Dorian Bailey" width="900" height="1200" loading="lazy"></div>
+          <div class="frame"><img src="assets/img/dorian-bailey.jpg" srcset="{PORTRAIT_SET.format(p='')}" sizes="(max-width: 900px) 92vw, 340px" alt="Portrait of Dorian Bailey" width="900" height="1200" loading="lazy" decoding="async"></div>
         </figure>
         <div class="foreword__text">
           <h2 class="section-title" id="foreword-title">Foreword</h2>
           <p class="lede">Born and raised in North East, Pennsylvania, I study Marketing and Management Information Systems at Penn State Behrend.</p>
           <p>Long before I started a business, I spent years buying, selling, researching and pricing things of every kind. That became Better Selling With Bailey. A taste for the strange side of the map became Take The OddWay, and a love of cryptid lore and collecting became Bailey MetaZoo. Somewhere along the way I picked up a camera, and now photograph events for MetaZoo TCG.</p>
           <p>By day I&rsquo;m a marketing assistant at <a href="{LINKS['vanta']}" rel="noopener">Vanta House</a>, a video-first content studio here in North East. This site gathers the rest: the work I&rsquo;m paid for and the work I&rsquo;d do anyway.</p>
+          <p class="foreword__sign">{sig(40)}<span>Dorian Bailey</span></p>
           <p><a class="text-link" href="record/">Read the record</a></p>
         </div>
       </div>
@@ -360,27 +480,12 @@ page("index.html", "home",
     <section class="correspondence band--raised" id="correspondence" aria-labelledby="corr-title">
       <div class="wrap wrap--narrow">
         <h2 class="section-title" id="corr-title">Correspondence</h2>
-        <p>For work, commissions, collaborations or an estate sale, write to me directly.</p>
+        <p>For photography, an estate sale, work or a collaboration, write to me directly.</p>
         <p class="correspondence__email"><a href="mailto:{EMAIL}">{EMAIL}</a></p>
+        <div class="btn-row"><a class="btn" href="{html.escape(MAILTO_PHOTO)}">Photography inquiry</a><a class="btn" href="{LINKS['bswb']}" rel="noopener">Book an estate sale walkthrough</a></div>
         <p class="correspondence__more">Also on <a href="{LINKS['linkedin']}" rel="noopener">LinkedIn</a>. Estate sale bookings are handled at <a href="{LINKS['bswb']}" rel="noopener">bettersellingwithbailey.com</a>.</p>
       </div>
-    </section>
-
-    <script type="application/ld+json">
-    {{
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Dorian Bailey",
-      "url": "https://dorianbailey.com",
-      "email": "mailto:{EMAIL}",
-      "image": "https://dorianbailey.com/assets/img/dorian-bailey.jpg",
-      "homeLocation": "North East, Pennsylvania",
-      "alumniOf": "Penn State Behrend",
-      "jobTitle": "Marketing Assistant",
-      "worksFor": {{"@type": "Organization", "name": "Vanta House", "url": "{LINKS['vanta']}"}},
-      "sameAs": ["{LINKS['linkedin']}", "{LINKS['github']}", "{LINKS['bswb']}", "{LINKS['oddway']}", "{LINKS['yt']}", "{LINKS['ig']}"]
-    }}
-    </script>""")
+    </section>""", ld=[WEBSITE, PERSON, PHOTO_SERVICE])
 
 
 # ===================================================================== Entries (venture pages)
@@ -390,7 +495,8 @@ ORDER = [("better-selling", "I", "Better Selling With Bailey"),
          ("photography", "IV", "Photography")]
 
 
-def entry(slug, key, title, desc, standfirst, prose, particulars, plates, links, head_print=None, extra="", js=None):
+def entry(slug, key, title, desc, standfirst, prose, particulars, plates, links, head_print=None, extra="", js=None,
+          seo_title=None, ld=None):
     idx = [o[0] for o in ORDER].index(slug)
     num = ORDER[idx][1]
     prev_ = ORDER[idx - 1] if idx > 0 else None
@@ -401,11 +507,11 @@ def entry(slug, key, title, desc, standfirst, prose, particulars, plates, links,
     if prev_:
         nav.append(f'<a class="entry-nav__prev" href="../{prev_[0]}/"><em>Previous</em> {prev_[1]}. {prev_[2]}</a>')
     else:
-        nav.append('<a class="entry-nav__prev" href="../index.html#index"><em>Back to</em> the index</a>')
+        nav.append('<a class="entry-nav__prev" href="../#index"><em>Back to</em> the index</a>')
     nav.append(f'<a class="entry-nav__next" href="../{next_[0]}/"><em>Next</em> {next_[1]}. {next_[2]}</a>')
 
     if head_print:
-        src, alt, w, h = head_print
+        src, alt, w, h, ss = head_print
         head = f"""    <header class="entry-head entry-head--figure">
       <div class="wrap">
         <div class="entry-head__text">
@@ -414,7 +520,7 @@ def entry(slug, key, title, desc, standfirst, prose, particulars, plates, links,
           <p class="entry-head__standfirst">{standfirst}</p>
         </div>
         <figure class="entry-head__print">
-          <div class="frame"><img src="{src}" alt="{html.escape(alt)}" width="{w}" height="{h}" fetchpriority="high" decoding="async"></div>
+          <div class="frame"><img src="{src}" srcset="{ss}" sizes="(max-width: 900px) 320px, 420px" alt="{html.escape(alt)}" width="{w}" height="{h}" fetchpriority="high" decoding="async"></div>
         </figure>
       </div>
     </header>"""
@@ -440,7 +546,8 @@ def entry(slug, key, title, desc, standfirst, prose, particulars, plates, links,
     </section>
 """
 
-    page(f"{slug}/index.html", key, f"{title} | Dorian Bailey", desc, extra_js=(f'  <script src="../js/{js}?v={v("js/" + js)}" defer></script>\n' if js else ""), body=f"""{head}
+    page(f"{slug}/index.html", key, seo_title or f"{title} | Dorian Bailey", desc, ld=[PERSON] + (ld or []), crumb=title,
+         og_image=f"assets/img/og-{slug}.jpg", extra_js=(f'  <script src="../js/{js}?v={v("js/" + js)}" defer></script>\n' if js else ""), body=f"""{head}
 
     <section class="section">
       <div class="wrap entry">
@@ -468,12 +575,12 @@ def entry(slug, key, title, desc, standfirst, prose, particulars, plates, links,
 def P(cid, n, cap, link=True):
     ph, w, h = photo(cid, n)
     return plate("assets/photos/" + ph["thumb"], ph["alt"], w, h, cap,
-                 href=f"../photography/#{cid}" if link else None, prefix="../")
+                 href=f"../photography/#{cid}" if link else None, prefix="../", ph=ph)
 
 
 def HP(cid, n):
     ph = COLL[cid]["photos"][n - 1]
-    return ("../assets/photos/" + ph["file"], ph["alt"], ph["w"], ph["h"])
+    return ("../assets/photos/" + ph["file"], ph["alt"], ph["w"], ph["h"], srcset(ph, "../", full=True))
 
 
 def steps(items):
@@ -565,8 +672,8 @@ bswb_extra = f"""
 """
 
 entry("better-selling", "selling", "Better Selling With Bailey",
-      "Better Selling With Bailey is Dorian Bailey's estate sale company in Erie County, Pennsylvania.",
-      "Estate sales in Erie County, run start to finish by one person, so the people selling keep the proceeds.",
+      "Better Selling With Bailey is Dorian Bailey's estate sale company in Erie County, PA: pricing, staging, promotion and the sale itself, for a $995 flat fee plus 20%.",
+      "Estate sales in Erie County, run start to finish by Dorian Bailey, so the people selling keep the proceeds.",
       """          <p>Better Selling With Bailey prices, stages, promotes and runs estate sales in the client&rsquo;s own home, then clears whatever is left at no charge. Many clients treat it as a cleanout of a garage, basement or collection that happens to pay.</p>
           <p>Every client works with me directly, from the first walkthrough to the last sale of the day. Some like to be involved in every pricing decision; others would rather hand the whole thing over. Either works.</p>""",
       [("Established", "May 2026, North East, Pennsylvania"),
@@ -577,9 +684,10 @@ entry("better-selling", "selling", "Better Selling With Bailey",
        ("Terms", "$995 flat fee plus 20% commission; leftover removal free"),
        ("Press", f'<a href="{LINKS["erie"]}" rel="noopener">YourErie.com, May 2026</a>')],
       [],
-      [("Visit bettersellingwithbailey.com", LINKS["bswb"]), ("Facebook", LINKS["bswb_fb"])],
-      head_print=("../assets/img/dorian-bailey.jpg", "Dorian Bailey in a Better Selling With Bailey polo", 900, 1200),
-      extra=bswb_extra, js="calc.js")
+      [("Book a walkthrough", LINKS["bswb"]), ("Facebook", LINKS["bswb_fb"])],
+      head_print=("../assets/img/dorian-bailey.jpg", "Dorian Bailey in a Better Selling With Bailey polo", 900, 1200, PORTRAIT_SET.format(p="../")),
+      extra=bswb_extra, js="calc.js",
+      seo_title="Erie Estate Sales by Dorian Bailey | Better Selling With Bailey", ld=[ESTATE_SERVICE])
 
 # ---------------------------------------------------------------- II. Take The OddWay
 ODD_STEPS = [
@@ -669,7 +777,11 @@ entry("oddway", "oddway", "Take The OddWay",
        P("north-east", 2, "<em>Halloween, from North East</em>")],
       [("Visit taketheoddway.com", LINKS["oddway"]), ("Shop the OddWay", LINKS["shop"])],
       head_print=HP("green-eyes", 7),
-      extra=odd_extra, js="detour.js")
+      extra=odd_extra, js="detour.js",
+      seo_title="Take The OddWay | A Road-Trip App by Dorian Bailey",
+      ld=[{"@type": "WebApplication", "name": "Take The OddWay", "url": LINKS["oddway"], "applicationCategory": "TravelApplication",
+           "operatingSystem": "Web", "description": "A road-trip guide to cryptids, folklore, haunted places and roadside oddities along your route.",
+           "creator": {"@id": PERSON_ID}, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}])
 
 # ---------------------------------------------------------------- III. Bailey MetaZoo
 VHS = [
@@ -771,7 +883,10 @@ entry("metazoo", "metazoo", "Bailey MetaZoo",
        P("green-eyes", 14, "<em>A MetaZoo card, from Green Eyes</em>")],
       [("Watch on YouTube", LINKS["yt"]), ("Follow on Instagram", LINKS["ig"])],
       head_print=HP("legends", 2),
-      extra=mz_extra, js="tv.js")
+      extra=mz_extra, js="tv.js",
+      seo_title="Bailey MetaZoo | MetaZoo TCG Videos by Dorian Bailey",
+      ld=[{"@type": "CreativeWorkSeries", "name": "Bailey MetaZoo", "url": LINKS["yt"], "sameAs": [LINKS["yt"], LINKS["ig"]],
+           "about": "MetaZoo, the cryptid trading card game, and the folklore behind its cards", "creator": {"@id": PERSON_ID}}])
 
 # ===================================================================== Photographs
 index_items, sections = [], []
@@ -782,7 +897,7 @@ for c in M["collections"]:
     n = len(c["photos"])
     index_items.append((bool(c.get("commission")), f"""          <li>
             <a href="#{c['id']}">
-              <span class="frame"><img src="../assets/photos/{c['cover']}" alt="" width="{w}" height="{h}" loading="lazy" decoding="async"></span>
+              <span class="frame"><img src="../assets/photos/{c['cover']}" srcset="{srcset(cov, '../')}" sizes="(max-width: 640px) 44vw, 240px" alt="" width="{w}" height="{h}" loading="lazy" decoding="async"></span>
               <span class="coll-index__num">{c['numeral']}</span>
               <span class="coll-index__title">{c['title']}</span>
               <span class="coll-index__meta">{c['place']}<br>{c['date']}, {n} plates</span>
@@ -793,7 +908,7 @@ for c in M["collections"]:
         tw, th = thumb_dims(ph)
         figs.append(f"""          <figure class="plate">
             <button class="frame" type="button" data-full="../assets/photos/{ph['file']}" data-caption="{c['title']}, plate {i} of {n}">
-              <img src="../assets/photos/{ph['thumb']}" alt="{html.escape(ph['alt'])}" width="{tw}" height="{th}" loading="lazy" decoding="async">
+              <img src="../assets/photos/{ph['thumb']}" srcset="{srcset(ph, '../')}" sizes="(max-width: 640px) 92vw, (max-width: 1100px) 30vw, 340px" alt="{html.escape(ph['alt'])}" width="{tw}" height="{th}" loading="lazy" decoding="async">
             </button>
           </figure>""")
     sections.append(f"""    <section class="collection section--rule" id="{c['id']}" aria-labelledby="{c['id']}-title">
@@ -804,6 +919,7 @@ for c in M["collections"]:
             <h2 id="{c['id']}-title">{c['title']}</h2>
             <p class="collection__meta">{('Commissioned by ' + c['commission'] + '. ') if c.get('commission') else ''}{c['place']}, {c['date']}. {n} plates.</p>
             <p class="collection__note">{c['note']}</p>
+            <p class="collection__up"><a href="#collections-title">All collections</a></p>
           </div>
         </header>
         <div class="gallery" data-collection>
@@ -814,20 +930,35 @@ for c in M["collections"]:
 
 BANNER = COLL["letchworth"]["photos"][1]
 
-page("photography/index.html", "photo", "Photography | Dorian Bailey",
-     f"Photography by Dorian Bailey: event coverage for MetaZoo TCG, work with Vanta House, and {NUMWORD.lower()} collections of portrait, event, landscape and close-up photographs.",
+page("photography/index.html", "photo", "Dorian Bailey Photography | Photographer in Erie, PA",
+     "Dorian Bailey Photography: all types of photography in Erie County, PA, from events and portraits to seniors, families, products and real estate. Inquire for rates.",
      f"""    <header class="entry-head">
       <div class="wrap">
         <p class="entry-head__num">No. IV</p>
-        <h1>Photography</h1>
-        <p class="entry-head__standfirst">Event, portrait and landscape photography, from commissioned coverage for MetaZoo TCG to quiet studies close to home. Made on a Canon EOS R50.</p>
+        <h1>Dorian Bailey Photography</h1>
+        <p class="entry-head__standfirst">All types of photography offered, from events and festivals to portraits, families, products and real estate. Based in North East, Pennsylvania. Inquire for rates.</p>
+        <div class="btn-row"><a class="btn" href="{html.escape(MAILTO_PHOTO)}">Inquire for rates</a><a class="btn" href="#types">What I photograph</a></div>
       </div>
     </header>
 
     <figure class="banner">
-      <div class="banner__clip"><img src="../assets/photos/{BANNER['file']}" alt="{html.escape(BANNER['alt'])}" width="{BANNER['w']}" height="{BANNER['h']}" fetchpriority="high" decoding="async"></div>
-      <figcaption class="wrap"><em>Letchworth State Park, New York, October 2026</em></figcaption>
+      <div class="banner__clip"><img src="../assets/photos/{BANNER['file']}" srcset="{srcset(BANNER, '../', full=True)}" sizes="100vw" alt="{html.escape(BANNER['alt'])}" width="{BANNER['w']}" height="{BANNER['h']}" fetchpriority="high" decoding="async"></div>
+      <figcaption class="wrap"><em>Letchworth State Park, New York, October 2026. Photograph by Dorian Bailey.</em></figcaption>
     </figure>
+
+    <section class="section" id="types" aria-labelledby="types-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 class="section-title" id="types-title">All types of photography</h2>
+          <p class="section-head__note">Inquire for rates</p>
+        </div>
+        <dl class="glossary">
+{chr(10).join(f"          <div><dt>{t}</dt><dd>{d}</dd></div>" for t, d in PHOTO_TYPES)}
+        </dl>
+        <div class="btn-row"><a class="btn" href="{html.escape(MAILTO_PHOTO)}">Inquire for rates</a><a class="btn" href="mailto:{EMAIL}">{EMAIL}</a></div>
+        <p class="services__note">Dorian Bailey is based in North East, Pennsylvania, photographs across Erie County, and travels for events.</p>
+      </div>
+    </section>
 
     <section class="section band--dark" aria-labelledby="commissions-title">
       <div class="wrap">
@@ -861,7 +992,7 @@ page("photography/index.html", "photo", "Photography | Dorian Bailey",
         <div class="measure">
           <h2 class="section-title" id="kit-title">Approach</h2>
           <p class="lede">Most of this is event work: long days on a festival street or a tournament floor, close to the people and the cards.</p>
-          <p>The kit is small on purpose. Two fast primes for faces and details, a zoom for when the crowd closes in, and everything edited in Lightroom. The personal collections are where the slower pictures live: a gorge in October, a cat in window light, fungi on a fallen log.</p>
+          <p>The kit stays light on purpose: two fast primes for faces and details, a few zooms for when the crowd closes in, and everything edited in Lightroom. The personal collections are where the slower pictures live: a gorge in October, a cat in window light, fungi on a fallen log.</p>
         </div>
         <aside class="particulars" aria-labelledby="kit-list-title">
           <h2 id="kit-list-title">The kit</h2>
@@ -879,7 +1010,7 @@ page("photography/index.html", "photo", "Photography | Dorian Bailey",
       <div class="wrap">
         <div class="section-head">
           <h2 class="section-title" id="collections-title">Collections</h2>
-          <p class="section-head__note">{TOTAL} plates in {NUMWORD.lower()} collections</p>
+          <p class="section-head__note">{TOTAL} photographs by Dorian Bailey in {NUMWORD.lower()} collections</p>
         </div>
         <h3 class="coll-group">Commissioned by MetaZoo TCG</h3>
         <ol class="coll-index">
@@ -893,6 +1024,15 @@ page("photography/index.html", "photo", "Photography | Dorian Bailey",
     </section>
 
 {chr(10).join(sections)}
+
+    <section class="correspondence band--raised" aria-labelledby="hire-title">
+      <div class="wrap wrap--narrow">
+        <h2 class="section-title" id="hire-title">Hire Dorian Bailey</h2>
+        <p>Events, portraits, seniors, families, sports, products, real estate or something else entirely: all types of photography offered. Tell me the date, the place and what you need, and I&rsquo;ll reply with rates.</p>
+        <div class="btn-row"><a class="btn" href="{html.escape(MAILTO_PHOTO)}">Inquire for rates</a></div>
+        <p class="correspondence__more">Based in North East, Pennsylvania. Photographing across Erie County and travelling for events.</p>
+      </div>
+    </section>
 
     <nav class="wrap entry-nav" aria-label="Collection">
       <a class="entry-nav__prev" href="../metazoo/"><em>Previous</em> III. Bailey MetaZoo</a>
@@ -908,17 +1048,18 @@ page("photography/index.html", "photo", "Photography | Dorian Bailey",
       <button class="lightbox__btn lightbox__prev" type="button" aria-label="Previous photograph">&lsaquo;</button>
       <button class="lightbox__btn lightbox__next" type="button" aria-label="Next photograph">&rsaquo;</button>
     </dialog>""",
-     extra_js=f'  <script src="../js/gallery.js?v={v("js/gallery.js")}" defer></script>\n')
+     extra_js=f'  <script src="../js/gallery.js?v={v("js/gallery.js")}" defer></script>\n',
+     og_image="assets/img/og-photography.jpg", crumb="Dorian Bailey Photography", ld=[PERSON, PHOTO_SERVICE])
 
 # ===================================================================== Record
-page("record/index.html", "record", "The Record | Dorian Bailey",
-     "The record of Dorian Bailey: Penn State Behrend, Better Selling With Bailey, Take The OddWay, Bailey MetaZoo and photography.",
+page("record/index.html", "record", "The Record of Dorian Bailey | Resume",
+     "The resume of Dorian Bailey: Marketing and MIS at Penn State Behrend, Vanta House, Better Selling With Bailey, Take The OddWay, Bailey MetaZoo and photography.",
      f"""    <header class="entry-head">
       <div class="wrap">
         <p class="entry-head__num">No. V</p>
         <h1>The Record</h1>
-        <p class="entry-head__standfirst">Education, positions, ventures and proficiencies, for anyone who would like it all on one page.</p>
-        <div class="btn-row"><a class="btn" href="../assets/dorian-bailey-record.pdf" download>Download the record (PDF)</a></div>
+        <p class="entry-head__standfirst">Dorian Bailey&rsquo;s education, positions, ventures and proficiencies, for anyone who would like it all on one page.</p>
+        <div class="btn-row"><a class="btn" href="../assets/dorian-bailey-record.pdf" download="Dorian-Bailey-Resume.pdf">Download the résumé (PDF)</a></div>
       </div>
     </header>
 
@@ -928,9 +1069,10 @@ page("record/index.html", "record", "The Record | Dorian Bailey",
           {sig(40, "sig print-head__sig")}
           <div>
             <p class="print-head__name">Dorian Bailey</p>
-            <p class="print-head__meta">North East, Pennsylvania &nbsp;&middot;&nbsp; {EMAIL} &nbsp;&middot;&nbsp; dorianbailey.com &nbsp;&middot;&nbsp; linkedin.com/in/dorian-bailey</p>
+            <p class="print-head__meta">North East, Pennsylvania &nbsp;&middot;&nbsp; <a href="mailto:{EMAIL}">{EMAIL}</a> &nbsp;&middot;&nbsp; <a href="{SITE}/">dorianbailey.com</a> &nbsp;&middot;&nbsp; <a href="{LINKS['linkedin']}">linkedin.com/in/dorian-bailey</a></p>
           </div>
         </div>
+        <h2 class="sr-only">The record of Dorian Bailey</h2>
         <dl class="ledger">
           <div class="ledger__row">
             <dt>Education</dt>
@@ -959,7 +1101,7 @@ page("record/index.html", "record", "The Record | Dorian Bailey",
               <h3><a href="../metazoo/">Bailey MetaZoo</a></h3>
               <p><em>Creator.</em> Short-form video on MetaZoo and cryptid folklore for YouTube and Instagram, including the VHS card-reveal series.</p>
               <h3><a href="../photography/">Photography</a></h3>
-              <p><em>Photographer.</em> Event, portrait, landscape and close-up work, collected in {NUMWORD.lower()} series of {TOTAL} plates.</p>
+              <p><em>Photographer.</em> Event, portrait, landscape and close-up work, {TOTAL} photographs in {NUMWORD.lower()} collections.</p>
             </dd>
           </div>
           <div class="ledger__row">
@@ -986,8 +1128,9 @@ page("record/index.html", "record", "The Record | Dorian Bailey",
 
     <nav class="wrap entry-nav" aria-label="Collection">
       <a class="entry-nav__prev" href="../photography/"><em>Previous</em> IV. Photography</a>
-      <a class="entry-nav__next" href="../index.html#index"><em>Back to</em> the index</a>
-    </nav>""")
+      <a class="entry-nav__next" href="../#index"><em>Back to</em> the index</a>
+    </nav>""", crumb="The Record", og_image="assets/img/og-record.jpg",
+     ld=[PERSON, {"@type": "ProfilePage", "url": SITE + "/record/", "name": "The Record of Dorian Bailey", "mainEntity": {"@id": PERSON_ID}}])
 
 # ===================================================================== Privacy
 PRIVACY_DATE = "October 30, 2026"
@@ -1003,6 +1146,7 @@ page("privacy/index.html", "privacy", "Privacy | Dorian Bailey",
 
     <section class="section">
       <div class="wrap">
+        <h2 class="sr-only">What dorianbailey.com collects</h2>
         <dl class="ledger">
           <div class="ledger__row">
             <dt>Cookies</dt>
@@ -1047,8 +1191,8 @@ page("privacy/index.html", "privacy", "Privacy | Dorian Bailey",
 
     <nav class="wrap entry-nav" aria-label="Collection">
       <a class="entry-nav__prev" href="../record/"><em>See also</em> The Record</a>
-      <a class="entry-nav__next" href="../index.html#index"><em>Back to</em> the index</a>
-    </nav>""")
+      <a class="entry-nav__next" href="../#index"><em>Back to</em> the index</a>
+    </nav>""", crumb="Privacy")
 
 # ===================================================================== 404
 page("404.html", "", "Not found | Dorian Bailey", "This page is not in the collection.",
@@ -1059,4 +1203,27 @@ page("404.html", "", "Not found | Dorian Bailey", "This page is not in the colle
         <p class="entry-head__standfirst">It may have moved, or the address may be mistyped.</p>
         <div class="btn-row btn-row--center"><a class="btn" href="/">Return to the index</a></div>
       </div>
-    </header>""")
+    </header>""", noindex=True)
+
+# ===================================================================== Sitemap
+# Every public page with today's date, and the photographs on each page, so search engines
+# can find them for image search. (The 404 page is left out on purpose.)
+import datetime
+TODAY = datetime.date.today().isoformat()
+PAGE_IMAGES = {
+    "": ["assets/img/dorian-bailey.jpg", "assets/photos/" + FEAT["file"]],
+    "better-selling/": ["assets/img/dorian-bailey.jpg"],
+    "oddway/": ["assets/photos/" + COLL["green-eyes"]["photos"][6]["file"]],
+    "metazoo/": ["assets/photos/" + COLL["legends"]["photos"][1]["file"]],
+    "photography/": ["assets/photos/" + ph["file"] for c in M["collections"] for ph in c["photos"]],
+    "record/": ["assets/img/dorian-bailey.jpg"],
+    "privacy/": [],
+}
+urls = []
+for path, imgs in PAGE_IMAGES.items():
+    im = "".join(f"\n    <image:image><image:loc>{SITE}/{i}</image:loc></image:image>" for i in imgs)
+    urls.append(f"  <url>\n    <loc>{SITE}/{path}</loc>\n    <lastmod>{TODAY}</lastmod>{im}\n  </url>")
+(ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
+                                  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+                                  'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n' + "\n".join(urls) + "\n</urlset>\n")
+print("wrote sitemap.xml")
