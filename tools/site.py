@@ -42,22 +42,32 @@ def v(rel):
     return hashlib.md5((ROOT / rel).read_bytes()).hexdigest()[:8]
 
 
-def seal(size, cls="seal", foil=None):
-    """The DB monogram seal. foil='<id>' paints it with a gold-foil gradient."""
-    paint = f"url(#{foil})" if foil else "currentColor"
-    defs = f"""
-          <defs><linearGradient id="{foil}" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#8a6b32"/><stop offset=".28" stop-color="#e2cb8c"/>
-            <stop offset=".5" stop-color="#a8894b"/><stop offset=".72" stop-color="#ead7a2"/>
-            <stop offset="1" stop-color="#7d612c"/>
-          </linearGradient></defs>""" if foil else ""
-    return f"""<svg class="{cls}" width="{size}" height="{size}" viewBox="0 0 120 120" aria-hidden="true" focusable="false">{defs}
-          <circle class="seal__ring" pathLength="1" cx="60" cy="60" r="57" fill="none" stroke="{paint}" stroke-width="1.6"/>
-          <circle class="seal__ring seal__ring--inner" pathLength="1" cx="60" cy="60" r="50" fill="none" stroke="{paint}" stroke-width=".8"/>
-          <g class="seal__dots" fill="{paint}"><circle cx="60" cy="6.5" r="1.8"/><circle cx="60" cy="113.5" r="1.8"/>
-          <circle cx="6.5" cy="60" r="1.8"/><circle cx="113.5" cy="60" r="1.8"/></g>
-          <text class="seal__mono" x="60" y="73" text-anchor="middle" font-family="'Libre Caslon Display', Georgia, serif" font-size="42" fill="{paint}">DB</text>
-        </svg>"""
+# The mark: Dorian's signature, re-inked as a pointed-pen stroke. tools/signature.json holds the
+# path data (built from the original drawing): 'refined_text' for small sizes, 'refined_display'
+# for the frontispiece, 'refined_icon' for the favicon, and 'centre' lines for the signing animation.
+SIG = json.load(open(ROOT / "tools/signature.json"))
+SIG_VB = SIG["viewBox"]
+_vb = [float(n) for n in SIG_VB.split()]
+SIG_RATIO = _vb[2] / _vb[3]
+# One copy of the small-size path per page; every mark on the page <use>s it.
+SIG_SPRITE = (f'<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">'
+              f'<symbol id="sig" viewBox="{SIG_VB}"><path fill-rule="evenodd" d="{SIG["refined_text"]}"/></symbol></svg>')
+
+
+def sig(height, cls="sig"):
+    """The signature at a given height (width follows its proportions)."""
+    return (f'<svg class="{cls}" width="{round(height * SIG_RATIO)}" height="{height}" aria-hidden="true" focusable="false">'
+            f'<use href="#sig" width="100%" height="100%"/></svg>')
+
+
+def sig_signing(cls="sig sig--hero"):
+    """The large signature for the frontispiece. A mask of the pen's centre lines draws it on, stroke by stroke."""
+    c = SIG["centre"]
+    ink = lambda k, d: f'<path class="sig__ink sig__ink--{k}" d="{d}" pathLength="1" fill="none" stroke="#fff" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>'
+    return (f'<svg class="{cls}" width="{round(120 * SIG_RATIO)}" height="120" viewBox="{SIG_VB}" role="img" aria-label="Dorian Bailey&rsquo;s signature">'
+            f'<mask id="sig-pen" maskUnits="userSpaceOnUse" x="{_vb[0]}" y="{_vb[1]}" width="{_vb[2]}" height="{_vb[3]}">'
+            f'{ink("main", c["main"])}{ink("hook", c["hook"])}{ink("underline", c["underline"])}</mask>'
+            f'<path fill-rule="evenodd" mask="url(#sig-pen)" d="{SIG["refined_display"]}"/></svg>')
 
 
 def thumb_dims(p):
@@ -124,17 +134,19 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#1c1b19">
   <link rel="icon" href="{p}favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{p}apple-touch-icon.png">
   <link rel="preload" href="{p}assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{p}assets/fonts/libre-caslon-text-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{p}css/base.css?v={v('css/base.css')}">
 </head>
 <body>
+  {SIG_SPRITE}
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <div class="wrap site-header__inner">
       <a class="site-mark" href="{p}index.html">
-        {seal(34)}
+        {sig(28)}
         <span>Dorian Bailey</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
@@ -155,7 +167,7 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
 {GAME_TEMPLATE}
     <div class="wrap site-footer__inner">
       <div class="site-footer__mark">
-        {seal(56, "seal seal--deboss")}
+        {sig(44, "sig sig--deboss")}
         <p>The Collection of Dorian Bailey<br><em>North East, Pennsylvania</em></p>
       </div>
       <ul class="site-footer__links">
@@ -273,7 +285,7 @@ page("index.html", "home",
         </div>
       </div>
       <div class="wrap frontispiece__inner">
-        {seal(112, "seal seal--large seal--deboss")}
+        {sig_signing()}
         <p class="frontispiece__pre">The Collection of</p>
         <h1>Dorian Bailey</h1>
         <p class="frontispiece__sub">Ventures, pursuits and photographs<br>from North East, Pennsylvania</p>
@@ -913,7 +925,7 @@ page("record/index.html", "record", "The Record | Dorian Bailey",
     <section class="section">
       <div class="wrap">
         <div class="print-head" aria-hidden="true">
-          {seal(64, "seal print-head__seal")}
+          {sig(40, "sig print-head__sig")}
           <div>
             <p class="print-head__name">Dorian Bailey</p>
             <p class="print-head__meta">North East, Pennsylvania &nbsp;&middot;&nbsp; {EMAIL} &nbsp;&middot;&nbsp; dorianbailey.com &nbsp;&middot;&nbsp; linkedin.com/in/dorian-bailey</p>

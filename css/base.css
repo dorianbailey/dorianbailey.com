@@ -133,16 +133,16 @@ em { font-style: italic; }
 .measure { max-width: 36em; }
 
 /* ---------- Seal ---------- */
-.seal { display: block; flex: none; color: var(--brass); }
-.seal text { font-family: var(--font-display); }
+/* ---------- The mark: Dorian's signature ---------- */
+.sig { display: block; flex: none; fill: currentColor; color: var(--brass); overflow: visible; }
 /* Blind-debossed into black: a hairline highlight below, shadow above */
-.seal--deboss { filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.07)) drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.65)); }
+.sig--deboss { filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.07)) drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.65)); }
 
 /* ---------- Header ---------- */
 .site-header { position: sticky; top: 0; z-index: 50; background: var(--paper) var(--grain); border-bottom: 1px solid var(--rule); }
 .site-header__inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 68px; }
 .site-mark { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; font-family: var(--font-display); font-size: var(--s-24); white-space: nowrap; }
-.site-mark .seal { color: var(--ink); }
+.site-mark .sig { color: var(--ink); margin-top: -2px; }
 .site-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.6rem; }
 .site-nav a { text-decoration: none; font-size: var(--s-16); color: var(--ink-soft); padding: 0.25rem 0; }
 .site-nav a:hover { color: var(--ink); }
@@ -167,7 +167,7 @@ em { font-style: italic; }
   .site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--brass); border-bottom-color: var(--on-field-rule); }
   .nav-open .site-mark, .nav-open .nav-toggle { color: var(--on-field); position: relative; z-index: 2; }
   .nav-open .nav-toggle { border-color: rgba(230, 226, 216, 0.45); }
-  .nav-open .site-mark .seal { color: var(--brass); }
+  .nav-open .site-mark .sig { color: var(--brass); }
   .nav-open .site-header { border-bottom-color: transparent; }
   .nav-open, .nav-open body { overflow: hidden; }
 }
@@ -176,7 +176,7 @@ em { font-style: italic; }
 /* ---------- Frontispiece (home hero) ---------- */
 .frontispiece { background: var(--field) var(--grain); color: var(--on-field); }
 .frontispiece__inner { text-align: center; padding-top: clamp(4.5rem, 12vw, 8rem); padding-bottom: clamp(4.5rem, 12vw, 8rem); display: flex; flex-direction: column; align-items: center; }
-.seal--large { color: var(--brass); margin-bottom: 2.25rem; width: clamp(88px, 14vw, 124px); height: auto; }
+.sig--hero { color: var(--brass); margin-bottom: 2rem; width: clamp(200px, 30vw, 330px); height: auto; filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.6)); }
 .frontispiece__pre { font-style: italic; font-size: var(--s-21); color: var(--on-field-soft); margin: 0 0 0.6rem; }
 .frontispiece h1 { font-size: var(--s-72); line-height: 1; letter-spacing: 0.01em; }
 .frontispiece__sub {
@@ -440,14 +440,15 @@ em { font-style: italic; }
 
 /* ---------- Frontispiece entrance: the one orchestrated moment ---------- */
 @media (prefers-reduced-motion: no-preference) {
-  .frontispiece .seal__ring { stroke-dasharray: 1; stroke-dashoffset: 1; animation: seal-draw 1.5s cubic-bezier(.6, 0, .2, 1) 0.15s forwards; }
-  .frontispiece .seal__ring--inner { animation-delay: 0.45s; }
-  .frontispiece .seal__dots, .frontispiece .seal__mono { opacity: 0; animation: fade-in 0.9s ease 1.25s forwards; }
+  /* The signature is written on: the main stroke, then the hook, then the underline */
+  .sig__ink { stroke-dasharray: 1; stroke-dashoffset: 1; animation: sig-write 1.75s cubic-bezier(.45, .05, .4, 1) 0.2s forwards; }
+  .sig__ink--hook { animation-duration: 0.3s; animation-delay: 2.05s; animation-timing-function: ease-out; }
+  .sig__ink--underline { animation-duration: 0.5s; animation-delay: 2.4s; animation-timing-function: cubic-bezier(.3, 0, .2, 1); }
   .frontispiece__pre { opacity: 0; animation: fade-in 0.9s ease 1.45s forwards; }
   .frontispiece h1 { opacity: 0; letter-spacing: 0.09em; animation: settle 1.6s cubic-bezier(.2, .7, .2, 1) 1.55s forwards; }
   .frontispiece__sub { opacity: 0; animation: fade-in 1s ease 2.35s forwards; }
 }
-@keyframes seal-draw { to { stroke-dashoffset: 0; } }
+@keyframes sig-write { to { stroke-dashoffset: 0; } }
 @keyframes fade-in { to { opacity: 1; } }
 @keyframes settle { to { opacity: 1; letter-spacing: 0.01em; } }
 
@@ -460,8 +461,8 @@ em { font-style: italic; }
   .site-header, .site-footer, .entry-nav, .entry-head, .skip-link, .btn-row, .ledger__row--screen { display: none !important; }
   .section { padding: 0 !important; }
   .wrap { max-width: none; padding: 0; }
-  .print-head { display: flex; align-items: center; gap: 14pt; padding-bottom: 12pt; margin-bottom: 4pt; border-bottom: 1.5pt solid var(--ink); }
-  .print-head .seal { width: 44pt; height: 44pt; color: var(--ink); }
+  .print-head { display: flex; align-items: center; gap: 12pt; padding-bottom: 12pt; margin-bottom: 4pt; border-bottom: 1.5pt solid var(--ink); }
+  .print-head .sig { width: auto; height: 27pt; color: var(--ink); }
   .print-head__name { font-family: var(--font-display); font-size: 26pt; line-height: 1; margin: 0 0 4pt; }
   .print-head__meta { font-style: italic; font-size: 8.5pt; color: var(--ink-soft); margin: 0; }
   .ledger { border-top: 0; max-width: none; }
