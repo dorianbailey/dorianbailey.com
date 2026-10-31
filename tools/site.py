@@ -372,7 +372,7 @@ SERVICES = f"""
       <div class="wrap">
         <div class="section-head">
           <h2 class="section-title" id="services-title">Services</h2>
-          <p class="section-head__note">Bookings available now: choose a date and Dorian Bailey will confirm by email</p>
+          <p class="section-head__note">Choose a date and Dorian Bailey will confirm by email</p>
         </div>
         <div class="services__grid">
           <article class="service">
@@ -514,7 +514,7 @@ page("index.html", "home",
         <p>For photography, an estate sale, advertising on OddWay or a collaboration, write to me directly, or book a date.</p>
         <p class="correspondence__email"><a href="mailto:{EMAIL}">{EMAIL}</a></p>
         <div class="btn-row"><button class="btn" type="button" data-book="photo">Book a photo shoot</button><button class="btn" type="button" data-book="estate">Request an estate sale</button><button class="btn" type="button" data-book="ads">Advertise on OddWay</button></div>
-        <p class="correspondence__more">Also on <a href="{LINKS['linkedin']}" rel="noopener">LinkedIn</a>. Estate sale bookings are handled at <a href="{LINKS['bswb']}" rel="noopener">bettersellingwithbailey.com</a>.</p>
+        <p class="correspondence__more">Also on <a href="{LINKS['linkedin']}" rel="noopener">LinkedIn</a>. More on the estate sales at <a href="{LINKS['bswb']}" rel="noopener">bettersellingwithbailey.com</a>.</p>
       </div>
     </section>""", ld=[WEBSITE, PERSON, PHOTO_SERVICE])
 
@@ -672,7 +672,7 @@ bswb_extra = f"""
           <label class="calc__label" for="calc-total">Estimated total sales</label>
           <div class="calc__input">
             <span aria-hidden="true">$</span>
-            <input id="calc-total" type="number" inputmode="numeric" min="0" max="250000" step="250" value="10000">
+            <input id="calc-total" type="text" inputmode="numeric" autocomplete="off" value="10,000">
           </div>
           <input class="calc__range" type="range" min="2000" max="40000" step="250" value="10000" aria-label="Estimated total sales" data-calc-range>
           <div class="calc__presets">
@@ -885,6 +885,35 @@ def long_date(d):
     y, m, dd = d.split("-")
     return f"{int(dd)} {MONTHS[int(m) - 1]} {y}"
 
+
+_SMALL = {"a", "an", "and", "as", "at", "but", "by", "for", "in", "nor", "of", "on", "or", "the", "to", "vs"}
+_BRANDS = {"METAZOO": "MetaZoo", "TCG": "TCG", "UFO": "UFO", "UFOS": "UFOs", "VHS": "VHS"}
+
+
+def tidy_title(t):
+    """YouTube titles shout; the catalogue doesn't. All-caps titles become title case and all-caps
+    words (SADDEST, GIVEAWAY) become capitalised, keeping brands and acronyms as they should be."""
+    letters = [c for c in t if c.isalpha()]
+    shouting = bool(letters) and sum(c.isupper() for c in letters) / len(letters) > 0.6
+    out = []
+    for i, w in enumerate(t.split(" ")):
+        core = "".join(c for c in w if c.isalpha())
+        if core.isupper() and core in _BRANDS:
+            out.append(w.replace(core, _BRANDS[core]))
+        elif core.isupper() and (shouting or len(core) >= 4):
+            low = w.lower()
+            if shouting and i > 0 and core.lower() in _SMALL:
+                out.append(low)
+            else:
+                k = next(j for j, c in enumerate(low) if c.isalpha())
+                out.append(low[:k] + low[k].upper() + low[k + 1:])
+        else:
+            out.append(w)
+    return " ".join(out)
+
+
+for _v in YT:
+    _v["title"] = tidy_title(_v["title"])
 
 tapes = "\n".join(f"""            <li><button type="button" class="tape" data-id="{v['id']}" data-title="{html.escape(v['title'])}" data-date="{osd_date(v['published'])}" aria-pressed="{'true' if i == 0 else 'false'}">
               <span class="tape__title">{html.escape(v['title'])}</span>

@@ -12,9 +12,12 @@
   var breakEven = Math.ceil(fee / (1 - rate));
   var defaultNote = out('note').textContent;
 
+  var digits = function (v) { return Number(String(v).replace(/[^0-9]/g, '')) || 0; };
+  var grouped = function (n) { return n.toLocaleString('en-US'); };
+
   function render(total, from) {
-    total = Math.max(0, Math.round(Number(total) || 0));
-    if (from !== 'num') num.value = total;
+    total = Math.max(0, Math.round(digits(total)));
+    if (from !== 'num') num.value = grouped(total);
     if (from !== 'range') range.value = Math.min(Math.max(total, Number(range.min)), Number(range.max));
     var commission = total * rate;
     var keep = total - commission - fee;
@@ -27,6 +30,7 @@
   }
 
   num.addEventListener('input', function () { render(num.value, 'num'); });
+  num.addEventListener('blur', function () { num.value = grouped(digits(num.value)); });
   range.addEventListener('input', function () { render(range.value, 'range'); });
   root.querySelectorAll('[data-calc-preset]').forEach(function (b) {
     b.addEventListener('click', function () { render(b.getAttribute('data-calc-preset')); });

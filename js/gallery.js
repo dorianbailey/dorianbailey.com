@@ -66,3 +66,23 @@
     x0 = y0 = null;
   }, { passive: true });
 })();
+
+// On a long page of photographs, a small "All collections" button leads back to the list.
+(function () {
+  var title = document.getElementById('collections-title');
+  var footer = document.querySelector('.site-footer');
+  if (!title || !footer) return;
+  var list = title.closest('section');
+  var jump = document.createElement('a');
+  jump.className = 'coll-jump'; jump.href = '#collections-title'; jump.textContent = 'All collections';
+  document.body.appendChild(jump);
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var past = list.getBoundingClientRect().bottom < 0;
+    var nearEnd = footer.getBoundingClientRect().top < window.innerHeight * 0.9;
+    jump.classList.toggle('is-on', past && !nearEnd);
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
+})();
