@@ -7,6 +7,7 @@
   if (!buttons.length || !window.HTMLDialogElement) return;
   var me = document.currentScript || document.querySelector('script[src*="book.js"]');
   var TO = me.getAttribute('data-to');
+  var TO_ESTATE = me.getAttribute('data-to-estate') || TO;     // estate sales have their own inbox
   var PHOTO_TYPES = (me.getAttribute('data-photo-types') || '').split('|').filter(Boolean);
 
   var SERVICES = {
@@ -114,6 +115,7 @@
   }
 
   // ---------- Step 3: send, or hand over to the visitor's email app
+  function inbox() { return service === 'estate' ? TO_ESTATE : TO; }
   function send(f) {
     var s = SERVICES[service], err = f.querySelector('.book__error');
     var v = function (n) { var el = f.elements[n]; return el ? el.value.trim() : ''; };
@@ -130,7 +132,7 @@
     payload.Request = v('message');
     var btn = f.querySelector('button[type="submit"]');
     btn.disabled = true; btn.textContent = 'Sending…';
-    fetch('https://formsubmit.co/ajax/' + TO, {
+    fetch('https://formsubmit.co/ajax/' + inbox(), {
       method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload)
     }).then(function (r) { return r.json(); }).then(function (data) {
       if (data && (data.success === true || data.success === 'true')) done(v('email'), true);
@@ -141,14 +143,14 @@
     var body = Object.keys(p).filter(function (k) { return k.charAt(0) !== '_'; }).map(function (k) {
       return k === 'Request' ? '\n' + p[k] : (k === 'email' ? 'Email' : k) + ': ' + p[k];
     }).join('\n');
-    window.location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    window.location.href = 'mailto:' + inbox() + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     done(p.email, false);
   }
   function done(email, sent) {
     shell(sent
       ? '<div class="book__done"><p class="book__big">Request sent.</p><p>Dorian Bailey will reply to <strong>' + esc(email) + '</strong> to confirm ' + esc(longDate(picked)) + '.</p>' +
         '<div class="btn-row"><button class="btn" type="button" data-close>Done</button></div></div>'
-      : '<div class="book__done"><p class="book__big">Almost there.</p><p>Your email app should open with the request written out; press send to finish. If it doesn&rsquo;t, write to <a href="mailto:' + esc(TO) + '">' + esc(TO) + '</a>.</p>' +
+      : '<div class="book__done"><p class="book__big">Almost there.</p><p>Your email app should open with the request written out; press send to finish. If it doesn&rsquo;t, write to <a href="mailto:' + esc(inbox()) + '">' + esc(inbox()) + '</a>.</p>' +
         '<div class="btn-row"><button class="btn" type="button" data-close>Done</button></div></div>');
     dialog.querySelector('[data-close]').addEventListener('click', function () { dialog.close(); });
     dialog.querySelector('[data-close]').focus();

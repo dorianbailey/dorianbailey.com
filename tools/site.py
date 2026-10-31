@@ -34,8 +34,7 @@ LINKS = {
     "vanta": "https://vantahouse.studio",
     "oddway_ads": "https://taketheoddway.com/advertise",
 }
-PHONE = "(814) 323-8239"            # Better Selling With Bailey, as published on bettersellingwithbailey.com
-TEL = "tel:+18143238239"
+BSWB_EMAIL = "bettersellingwithbailey@gmail.com"     # estate sale inquiries and bookings go here
 
 
 import hashlib
@@ -54,6 +53,7 @@ PHOTO_TYPES = [
 ]
 MAILTO_PHOTO = ("mailto:" + EMAIL + "?subject=" + quote("Photography inquiry") + "&body=" +
                 quote("Hi Dorian,\n\nType of photography:\nDate:\nLocation:\n\n"))
+MAILTO_BSWB = ("mailto:" + BSWB_EMAIL + "?subject=" + quote("Estate sale inquiry"))
 PERSON_ID = SITE + "/#dorian-bailey"
 PERSON = {
     "@type": "Person", "@id": PERSON_ID, "name": "Dorian Bailey", "url": SITE + "/",
@@ -88,7 +88,7 @@ ESTATE_SERVICE = {
     "serviceType": "Estate sale management", "areaServed": AREA,
     "description": "Dorian Bailey prices, stages, promotes and runs estate sales in the client's home across Erie County, Pennsylvania, "
                    "and removes whatever is left at no charge.",
-    "provider": {"@type": "LocalBusiness", "name": "Better Selling With Bailey", "url": LINKS["bswb"], "sameAs": [LINKS["bswb_fb"]], "telephone": PHONE,
+    "provider": {"@type": "LocalBusiness", "name": "Better Selling With Bailey", "url": LINKS["bswb"], "sameAs": [LINKS["bswb_fb"]], "email": BSWB_EMAIL,
                  "founder": {"@id": PERSON_ID}, "areaServed": AREA,
                  "address": {"@type": "PostalAddress", "addressLocality": "North East", "addressRegion": "PA", "addressCountry": "US"}},
     "offers": {"@type": "Offer", "description": "$995 flat fee plus 20% commission on total sales; leftover removal free"},
@@ -262,7 +262,7 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
   </footer>
 
   <script src="{p}js/main.js?v={v('js/main.js')}" defer></script>
-  <script src="{p}js/book.js?v={v('js/book.js')}" data-to="{EMAIL}" data-privacy="{p}privacy/" data-photo-types="{html.escape('|'.join(t for t, _ in PHOTO_TYPES))}" defer></script>
+  <script src="{p}js/book.js?v={v('js/book.js')}" data-to="{EMAIL}" data-to-estate="{BSWB_EMAIL}" data-privacy="{p}privacy/" data-photo-types="{html.escape('|'.join(t for t, _ in PHOTO_TYPES))}" defer></script>
 {extra_js}</body>
 </html>
 """
@@ -410,7 +410,7 @@ SERVICES = f"""
                 <li>Cleanup and removal</li>
               </ul>
             </details>
-            <div class="btn-row"><button class="btn" type="button" data-book="estate">Book now</button><a class="btn" href="{TEL}">Call {PHONE}</a></div>
+            <div class="btn-row"><button class="btn" type="button" data-book="estate">Book now</button><a class="btn" href="{html.escape(MAILTO_BSWB)}">Email me</a></div>
           </article>
           <article class="service">
             <p class="service__kicker">Advertising</p>
@@ -749,11 +749,11 @@ entry("better-selling", "selling", "Better Selling With Bailey",
        ("Client sales", "More than $35,000"),
        ("Top events", "More than $16,000 and $8,000, each in a single weekend"),
        ("Terms", "$995 flat fee plus 20% commission; leftover removal free"),
-       ("Phone", f'<a href="{TEL}">{PHONE}</a>'),
+       ("Email", f'<a href="mailto:{BSWB_EMAIL}">{BSWB_EMAIL}</a>'),
        ("Bookings", "Available now"),
        ("Press", f'<a href="{LINKS["erie"]}" rel="noopener">YourErie.com, May 2026</a>')],
       [],
-      [("Book now", "book:estate"), (f"Call {PHONE}", TEL), ("Facebook", LINKS["bswb_fb"])],
+      [("Book now", "book:estate"), ("Email me", MAILTO_BSWB), ("Facebook", LINKS["bswb_fb"])],
       head_print=("../assets/img/dorian-bailey.jpg", "Dorian Bailey in a Better Selling With Bailey polo", 900, 1200, PORTRAIT_SET.format(p="../")),
       extra=bswb_extra, js="calc.js",
       seo_title="Erie Estate Sales by Dorian Bailey | Better Selling With Bailey", ld=[ESTATE_SERVICE])
@@ -1241,7 +1241,7 @@ page("record/index.html", "record", "The Record of Dorian Bailey | Resume",
      ld=[PERSON, {"@type": "ProfilePage", "url": SITE + "/record/", "name": "The Record of Dorian Bailey", "mainEntity": {"@id": PERSON_ID}}])
 
 # ===================================================================== Privacy
-PRIVACY_DATE = "October 30, 2026"
+PRIVACY_DATE = "October 31, 2026"
 page("privacy/index.html", "privacy", "Privacy | Dorian Bailey",
      "What dorianbailey.com collects, which is almost nothing: no cookies, no tracking, no analytics.",
      f"""    <header class="entry-head">
@@ -1279,7 +1279,7 @@ page("privacy/index.html", "privacy", "Privacy | Dorian Bailey",
           </div>
           <div class="ledger__row">
             <dt>Booking requests</dt>
-            <dd><p>When you book a date, your name, email, phone (if you give it), the date and your message are sent to Dorian Bailey&rsquo;s inbox through <a href="https://formsubmit.co" rel="noopener">FormSubmit</a>, a form-to-email service, and used only to reply to you. If that service can&rsquo;t be reached, your own email app opens with the request written out instead.</p></dd>
+            <dd><p>When you book a date, your name, email, phone (if you give it), the date and your message are emailed to Dorian Bailey (estate sale requests to the Better Selling With Bailey inbox) through <a href="https://formsubmit.co" rel="noopener">FormSubmit</a>, a form-to-email service, and used only to reply to you. If that service can&rsquo;t be reached, your own email app opens with the request written out instead.</p></dd>
           </div>
           <div class="ledger__row">
             <dt>Correspondence</dt>
@@ -1356,7 +1356,7 @@ BOOK_PHOTO = '<button class="btn" type="button" data-book="photo">Book now</butt
 BOOK_SENIOR = '<button class="btn" type="button" data-book="photo" data-book-type="Seniors and graduates">Book now</button>'
 BOOK_ESTATE = '<button class="btn" type="button" data-book="estate">Book now</button>'
 RATES = f'<a class="btn" href="{html.escape(MAILTO_PHOTO)}">Inquire for rates</a>'
-CALL = f'<a class="btn" href="{TEL}">Call {PHONE}</a>'
+EMAIL_BSWB = f'<a class="btn" href="{html.escape(MAILTO_BSWB)}">Email me</a>'
 
 JOURNAL = []
 
@@ -1505,10 +1505,10 @@ JOURNAL.append(dict(
 
           <h2>Where</h2>
           <p>Better Selling With Bailey is based in North East and runs sales in clients&rsquo; homes across Erie County, including Erie.</p>
-{cta("Book an estate sale", "Pick a date and I&rsquo;ll reply to set up a walkthrough.", [BOOK_ESTATE, CALL])}""",
+{cta("Book an estate sale", "Pick a date and I&rsquo;ll reply to set up a walkthrough.", [BOOK_ESTATE, EMAIL_BSWB])}""",
     particulars=[("Company", f'<a href="{J}better-selling/">Better Selling With Bailey</a>'), ("Region", "Erie County, Pennsylvania"),
                  ("Terms", "$995 flat fee plus 20% commission; leftover removal free"),
-                 ("Phone", f'<a href="{TEL}">{PHONE}</a>'), ("Photograph", "Ben and Andy Nagle")],
+                 ("Email", f'<a href="mailto:{BSWB_EMAIL}">{BSWB_EMAIL}</a>'), ("Photograph", "Ben and Andy Nagle")],
     images=[jph(5)],
 ))
 
@@ -1549,7 +1549,7 @@ JOURNAL.append(dict(
           <h2>Why it worked</h2>
           <p>A collection sells when it&rsquo;s laid out so buyers can take it in at a glance, and promoted to the people who collect it. Staging, promotion and running the floor are the whole job; <a href="../how-estate-sales-work-erie-county/">here is how a sale works</a>, step by step.</p>
           <p class="article__credit">Photographs of the sale by clients Ben and Andy Nagle, from their Google reviews.</p>
-{cta("Book an estate sale", "Have a collection, a garage or a whole house to sell? Pick a date and I&rsquo;ll reply to set up a walkthrough.", [BOOK_ESTATE, CALL])}""",
+{cta("Book an estate sale", "Have a collection, a garage or a whole house to sell? Pick a date and I&rsquo;ll reply to set up a walkthrough.", [BOOK_ESTATE, EMAIL_BSWB])}""",
     particulars=[("Where", "North East, Pennsylvania"), ("When", "May 2026"),
                  ("Collection", "Star Wars action figures, books and sealed LEGO sets"),
                  ("Press", f'<a href="{LINKS["erie"]}" rel="noopener">YourErie.com, May 2026</a>'),
