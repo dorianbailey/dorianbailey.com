@@ -8,6 +8,9 @@
   var me = document.currentScript || document.querySelector('script[src*="book.js"]');
   var TO = me.getAttribute('data-to');
   var TO_ESTATE = me.getAttribute('data-to-estate') || TO;     // estate sales have their own inbox
+  // FormSubmit's private form IDs stand in for the addresses, so the inboxes aren't exposed to form spam
+  var FORM = me.getAttribute('data-form') || TO;
+  var FORM_ESTATE = me.getAttribute('data-form-estate') || TO_ESTATE;
   var PHOTO_TYPES = (me.getAttribute('data-photo-types') || '').split('|').filter(Boolean);
 
   var SERVICES = {
@@ -116,6 +119,7 @@
 
   // ---------- Step 3: send, or hand over to the visitor's email app
   function inbox() { return service === 'estate' ? TO_ESTATE : TO; }
+  function formId() { return service === 'estate' ? FORM_ESTATE : FORM; }
   function send(f) {
     var s = SERVICES[service], err = f.querySelector('.book__error');
     var v = function (n) { var el = f.elements[n]; return el ? el.value.trim() : ''; };
@@ -132,7 +136,7 @@
     payload.Request = v('message');
     var btn = f.querySelector('button[type="submit"]');
     btn.disabled = true; btn.textContent = 'Sending…';
-    fetch('https://formsubmit.co/ajax/' + inbox(), {
+    fetch('https://formsubmit.co/ajax/' + formId(), {
       method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload)
     }).then(function (r) { return r.json(); }).then(function (data) {
       if (data && (data.success === true || data.success === 'true')) done(v('email'), true);

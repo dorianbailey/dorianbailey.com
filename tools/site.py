@@ -35,6 +35,9 @@ LINKS = {
     "oddway_ads": "https://taketheoddway.com/advertise",
 }
 BSWB_EMAIL = "bettersellingwithbailey@gmail.com"     # estate sale inquiries and bookings go here
+# FormSubmit form IDs for the booking requests (issued when each inbox activated its form)
+FORM_ID = "511032ddbe1c69af5fe8d840dfea7b33"          # dorianbailey814@gmail.com
+FORM_ID_ESTATE = "52c841a84d745bd972229883ba98b50b"   # bettersellingwithbailey@gmail.com
 
 
 import hashlib
@@ -263,7 +266,7 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
   </footer>
 
   <script src="{p}js/main.js?v={v('js/main.js')}" defer></script>
-  <script src="{p}js/book.js?v={v('js/book.js')}" data-to="{EMAIL}" data-to-estate="{BSWB_EMAIL}" data-privacy="{p}privacy/" data-photo-types="{html.escape('|'.join(t for t, _ in PHOTO_TYPES))}" defer></script>
+  <script src="{p}js/book.js?v={v('js/book.js')}" data-to="{EMAIL}" data-to-estate="{BSWB_EMAIL}" data-form="{FORM_ID}" data-form-estate="{FORM_ID_ESTATE}" data-privacy="{p}privacy/" data-photo-types="{html.escape('|'.join(t for t, _ in PHOTO_TYPES))}" defer></script>
 {extra_js}</body>
 </html>
 """
