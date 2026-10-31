@@ -47,6 +47,7 @@ GitHub Pages from `main` (root) with the custom domain `dorianbailey.com`. DNS l
 
 ## Features
 
+- **Bookings** (`js/book.js`, on every page): any `data-book="photo|estate|ads"` button opens a calendar; the chosen date fills in a short request, which is emailed to Dorian through FormSubmit (`https://formsubmit.co/ajax/<email>`). The first request ever sent triggers a one-time "Activate Form" email from FormSubmit; until it's clicked (or if FormSubmit can't be reached) the visitor's own email app opens with the request written out instead. Services live in `SERVICES` in `site.py`; the photo types come from `PHOTO_TYPES`.
 - **What would I keep?** (`/better-selling/`, `js/calc.js`): payout = total sales - 20% - $995, the published standard terms.
 - **Roll a detour** (`/oddway/`, `js/detour.js`): deals one random public stop live from OddWay's Supabase index, read-only with the project's publishable key. Category counts in the script are only used to pick a random offset.
 - **The television** (`/metazoo/`, `js/tv.js`): plays the latest Bailey MetaZoo shorts from YouTube's privacy-enhanced player. `tools/youtube.py` refreshes `assets/data/youtube.json` from the channel's public feed; `.github/workflows/youtube.yml` runs it every six hours, rebuilds the pages and publishes.

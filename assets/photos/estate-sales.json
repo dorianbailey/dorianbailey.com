@@ -1,0 +1,47 @@
+{
+ "credit": "Ben and Andy Nagle",
+ "photos": [
+  {
+   "file": "estate-sales/estate-sale-garage-collectibles.jpg",
+   "thumb": "estate-sales/t-estate-sale-garage-collectibles.jpg",
+   "alt": "A garage staged wall to wall with boxed action figures, LEGO sets and collectibles",
+   "w": 1200,
+   "h": 676
+  },
+  {
+   "file": "estate-sales/estate-sale-tables.jpg",
+   "thumb": "estate-sales/t-estate-sale-tables.jpg",
+   "alt": "Long tables of merchandise lined up beneath a canopy beside the house",
+   "w": 1200,
+   "h": 676
+  },
+  {
+   "file": "estate-sales/estate-sale-crowd.jpg",
+   "thumb": "estate-sales/t-estate-sale-crowd.jpg",
+   "alt": "Buyers waiting in line on a rainy sale morning",
+   "w": 900,
+   "h": 1200
+  },
+  {
+   "file": "estate-sales/estate-sale-news.jpg",
+   "thumb": "estate-sales/t-estate-sale-news.jpg",
+   "alt": "A television news crew filming the sale",
+   "w": 900,
+   "h": 1200
+  },
+  {
+   "file": "estate-sales/estate-sale-garage.jpg",
+   "thumb": "estate-sales/t-estate-sale-garage.jpg",
+   "alt": "The open garage, with racks of boxed figures and tables of collectibles",
+   "w": 1200,
+   "h": 676
+  },
+  {
+   "file": "estate-sales/estate-sale-canopy.jpg",
+   "thumb": "estate-sales/t-estate-sale-canopy.jpg",
+   "alt": "Shoppers browsing tables under a canopy on a wet sale day",
+   "w": 900,
+   "h": 1200
+  }
+ ]
+}

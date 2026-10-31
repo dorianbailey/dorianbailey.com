@@ -32,7 +32,10 @@ LINKS = {
     "shop": "https://shoptheoddway.com",
     "linkedin": "https://www.linkedin.com/in/dorian-bailey/",
     "vanta": "https://vantahouse.studio",
+    "oddway_ads": "https://taketheoddway.com/advertise",
 }
+PHONE = "(814) 323-8239"            # Better Selling With Bailey, as published on bettersellingwithbailey.com
+TEL = "tel:+18143238239"
 
 
 import hashlib
@@ -85,7 +88,7 @@ ESTATE_SERVICE = {
     "serviceType": "Estate sale management", "areaServed": AREA,
     "description": "Dorian Bailey prices, stages, promotes and runs estate sales in the client's home across Erie County, Pennsylvania, "
                    "and removes whatever is left at no charge.",
-    "provider": {"@type": "LocalBusiness", "name": "Better Selling With Bailey", "url": LINKS["bswb"], "sameAs": [LINKS["bswb_fb"]],
+    "provider": {"@type": "LocalBusiness", "name": "Better Selling With Bailey", "url": LINKS["bswb"], "sameAs": [LINKS["bswb_fb"]], "telephone": PHONE,
                  "founder": {"@id": PERSON_ID}, "areaServed": AREA,
                  "address": {"@type": "PostalAddress", "addressLocality": "North East", "addressRegion": "PA", "addressCountry": "US"}},
     "offers": {"@type": "Offer", "description": "$995 flat fee plus 20% commission on total sales; leftover removal free"},
@@ -249,6 +252,7 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
   </footer>
 
   <script src="{p}js/main.js?v={v('js/main.js')}" defer></script>
+  <script src="{p}js/book.js?v={v('js/book.js')}" data-to="{EMAIL}" data-privacy="{p}privacy/" data-photo-types="{html.escape('|'.join(t for t, _ in PHOTO_TYPES))}" defer></script>
 {extra_js}</body>
 </html>
 """
@@ -337,7 +341,7 @@ selected = "\n          ".join(selected)
 
 FEAT = COLL["legends"]["photos"][25]
 
-EVENTS = [("legends", "Legends", "Two-day tournament, August 2026"),
+EVENTS = [("legends", "Legends Expo", "MetaZoo $10,000 cash tournament, Monroeville, Pennsylvania, August 2026"),
           ("mothman", "Mothman Festival", "Point Pleasant, West Virginia, September 2026"),
           ("green-eyes", "Green Eyes Festival", "Chickamauga, Georgia, October 2026")]
 
@@ -364,21 +368,23 @@ SERVICES = f"""
       <div class="wrap">
         <div class="section-head">
           <h2 class="section-title" id="services-title">Services</h2>
-          <p class="section-head__note">Book Dorian Bailey in North East, Erie and across Erie County, Pennsylvania</p>
+          <p class="section-head__note">Bookings available now: choose a date and Dorian Bailey will confirm by email</p>
         </div>
         <div class="services__grid">
           <article class="service">
             <p class="service__kicker">Photography</p>
-            <h3>Dorian Bailey Photography</h3>
+            <h3><a href="photography/">Dorian Bailey Photography</a></h3>
+            <p class="service__status">Bookings available now</p>
             <p>All types of photography offered, from events and festivals to portraits, seniors, families, products and real estate. Inquire for rates.</p>
             <ul class="service__list">
 {chr(10).join(f"              <li>{t}</li>" for t, _ in PHOTO_TYPES)}
             </ul>
-            <div class="btn-row"><a class="btn" href="{html.escape(MAILTO_PHOTO)}">Inquire for rates</a><a class="btn" href="photography/">See the photographs</a></div>
+            <div class="btn-row"><button class="btn" type="button" data-book="photo">Book now</button><a class="btn" href="{html.escape(MAILTO_PHOTO)}">Inquire for rates</a></div>
           </article>
           <article class="service">
             <p class="service__kicker">Estate sales</p>
-            <h3>Better Selling With Bailey</h3>
+            <h3><a href="better-selling/">Better Selling With Bailey</a></h3>
+            <p class="service__status">Bookings available now</p>
             <p>Estate sales across Erie County, priced, staged, promoted and run by Dorian Bailey in your own home, with whatever is left removed free. A $995 flat fee plus 20% of sales.</p>
             <ul class="service__list">
               <li>Walkthrough and pricing</li>
@@ -387,7 +393,20 @@ SERVICES = f"""
               <li>Running the sale days</li>
               <li>Cleanup and removal</li>
             </ul>
-            <div class="btn-row"><a class="btn" href="{LINKS['bswb']}" rel="noopener">Book a walkthrough</a><a class="btn" href="better-selling/">How a sale works</a></div>
+            <div class="btn-row"><button class="btn" type="button" data-book="estate">Book now</button><a class="btn" href="{TEL}">Call {PHONE}</a></div>
+          </article>
+          <article class="service">
+            <p class="service__kicker">Advertising</p>
+            <h3><a href="oddway/#advertise">Advertise on Take The OddWay</a></h3>
+            <p class="service__status">Bookings available now</p>
+            <p>Banner and featured map placements on OddWay for brands that fit the road it maps: roadside attractions, small museums, diners and motels, festivals and haunted tours, and makers of strange things.</p>
+            <ul class="service__list">
+              <li>Banner on the home and stop pages</li>
+              <li>Featured marker on the map</li>
+              <li>Seen by people planning a detour</li>
+              <li>Listings are never for sale</li>
+            </ul>
+            <div class="btn-row"><button class="btn" type="button" data-book="ads">Book a call</button><a class="btn" href="{LINKS['oddway_ads']}" rel="noopener">Advertising options</a></div>
           </article>
         </div>
       </div>
@@ -419,7 +438,7 @@ page("index.html", "home",
         <div class="feature__card">
           <p class="feature__kicker">Featured commission</p>
           <h2 id="feature-title">MetaZoo TCG, 2026</h2>
-          <p>Dorian Bailey photographed three events in three months for MetaZoo TCG: a two-day tournament, the Mothman Festival and the Green Eyes Festival. Players at the tables, prize cards on their easels, costumed cryptids, and the crowds that came to see them.</p>
+          <p>Dorian Bailey photographed three events in three months for MetaZoo TCG: the $10,000 cash tournament at the Legends Expo Card Show in Monroeville, the Mothman Festival and the Green Eyes Festival. Players at the tables, prize cards on their easels, costumed cryptids, and the crowds that came to see them.</p>
           <ul class="events">
 {events_list("photography/")}
           </ul>
@@ -480,9 +499,9 @@ page("index.html", "home",
     <section class="correspondence band--raised" id="correspondence" aria-labelledby="corr-title">
       <div class="wrap wrap--narrow">
         <h2 class="section-title" id="corr-title">Correspondence</h2>
-        <p>For photography, an estate sale, work or a collaboration, write to me directly.</p>
+        <p>For photography, an estate sale, advertising on OddWay or a collaboration, write to me directly, or book a date.</p>
         <p class="correspondence__email"><a href="mailto:{EMAIL}">{EMAIL}</a></p>
-        <div class="btn-row"><a class="btn" href="{html.escape(MAILTO_PHOTO)}">Photography inquiry</a><a class="btn" href="{LINKS['bswb']}" rel="noopener">Book an estate sale walkthrough</a></div>
+        <div class="btn-row"><button class="btn" type="button" data-book="photo">Book a photo shoot</button><button class="btn" type="button" data-book="estate">Request an estate sale</button><button class="btn" type="button" data-book="ads">Advertise on OddWay</button></div>
         <p class="correspondence__more">Also on <a href="{LINKS['linkedin']}" rel="noopener">LinkedIn</a>. Estate sale bookings are handled at <a href="{LINKS['bswb']}" rel="noopener">bettersellingwithbailey.com</a>.</p>
       </div>
     </section>""", ld=[WEBSITE, PERSON, PHOTO_SERVICE])
@@ -502,7 +521,8 @@ def entry(slug, key, title, desc, standfirst, prose, particulars, plates, links,
     prev_ = ORDER[idx - 1] if idx > 0 else None
     next_ = ORDER[idx + 1]
     parts = "\n".join(f"            <div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in particulars)
-    lk = "\n".join(f'          <a class="btn" href="{h}" rel="noopener">{t}</a>' for t, h in links)
+    lk = "\n".join(f'          <button class="btn" type="button" data-book="{h[5:]}">{t}</button>' if h.startswith("book:")
+                   else f'          <a class="btn" href="{h}" rel="noopener">{t}</a>' for t, h in links)
     nav = []
     if prev_:
         nav.append(f'<a class="entry-nav__prev" href="../{prev_[0]}/"><em>Previous</em> {prev_[1]}. {prev_[2]}</a>')
@@ -602,7 +622,26 @@ BSWB_STEPS = [
 SELLS = ["Clothing collections", "Toys and LEGO", "Video games and electronics", "Antiques and vintage",
          "Sports cards and collectibles", "Trading card collections", "Household goods", "Tools and equipment"]
 
+ES = json.load(open(ROOT / "assets/photos/estate-sales.json"))
+ES_CAPS = ["A collector&rsquo;s garage, staged", "Tables down the side of the house", "The line before opening, in the rain",
+           "The local news, filming the sale", "Boxed figures by the hundred", "A wet day, and still a crowd"]
+es_plates = "\n          ".join(plate("assets/photos/" + ph["thumb"], ph["alt"], *thumb_dims(ph), f"<em>{cap}</em>", prefix="../", ph=ph,
+                                     sizes="(max-width: 640px) 46vw, 360px")
+                               for ph, cap in zip(ES["photos"], ES_CAPS))
+
 bswb_extra = f"""
+    <section class="section band--dark" aria-labelledby="sales-photos-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 class="section-title" id="sales-photos-title">From the sales</h2>
+          <p class="section-head__note">A Better Selling With Bailey collector&rsquo;s sale in North East. Photographs by clients Ben and Andy Nagle, from their Google reviews.</p>
+        </div>
+        <div class="plate-row plate-row--3 plate-row--sales">
+          {es_plates}
+        </div>
+      </div>
+    </section>
+
     <section class="section section--rule" aria-labelledby="process-title">
       <div class="wrap">
         <h2 class="section-title" id="process-title">How a sale works</h2>
@@ -638,7 +677,7 @@ bswb_extra = f"""
             <div><dt>Flat fee</dt><dd>&minus;$995</dd></div>
           </dl>
           <p class="calc__note" data-calc-out="note">An estimate, not a quote. Removal of whatever is left is free either way.</p>
-          <div class="btn-row"><a class="btn" href="{LINKS['bswb']}" rel="noopener">Book a walkthrough</a></div>
+          <div class="btn-row"><button class="btn" type="button" data-book="estate">Book now</button></div>
         </div>
       </div>
     </section>
@@ -649,14 +688,23 @@ bswb_extra = f"""
           <h2 class="section-title" id="clients-title">From clients</h2>
           <div class="quotes quotes--stack">
             <blockquote class="quote">
-              <p>Everything was done for me. Great turnout for the sale. Was better than I hoped for.</p>
-              <cite>Google review</cite>
+              <p>Everything was done for me. Great turnout for the sale. Was better than I hoped for. The local TV station even came out and did a story on the sale.</p>
+              <cite>Andy N., Google review</cite>
             </blockquote>
             <blockquote class="quote">
-              <p>Great advertising and phenomenal work setting things up and execution of the sale.</p>
-              <cite>Google review</cite>
+              <p>Ran a giant garage sale for me and it went off without a hitch. Great advertising and phenomenal work setting things up and execution of the sale.</p>
+              <cite>Ben N., Google review</cite>
+            </blockquote>
+            <blockquote class="quote">
+              <p>Hands down the best! The weekend sale was such a success. Will be using them again for my future sale events.</p>
+              <cite>Juan G., Google review</cite>
+            </blockquote>
+            <blockquote class="quote">
+              <p>Dorian&rsquo;s great. He&rsquo;s very understanding and knowledgeable about whatever he is selling.</p>
+              <cite>Zane S., Google review</cite>
             </blockquote>
           </div>
+          <p class="quotes__more"><a href="https://www.google.com/search?q=Better%20Selling%20With%20Bailey%20reviews" rel="noopener">Rated 5.0 from six reviews on Google</a></p>
         </div>
         <div>
           <h2 class="section-title">What sells</h2>
@@ -673,7 +721,7 @@ bswb_extra = f"""
 
 entry("better-selling", "selling", "Better Selling With Bailey",
       "Better Selling With Bailey is Dorian Bailey's estate sale company in Erie County, PA: pricing, staging, promotion and the sale itself, for a $995 flat fee plus 20%.",
-      "Estate sales in Erie County, run start to finish by Dorian Bailey, so the people selling keep the proceeds.",
+      "Estate sales in Erie County, run start to finish by Dorian Bailey, so the people selling keep the proceeds. Bookings available now.",
       """          <p>Better Selling With Bailey prices, stages, promotes and runs estate sales in the client&rsquo;s own home, then clears whatever is left at no charge. Many clients treat it as a cleanout of a garage, basement or collection that happens to pay.</p>
           <p>Every client works with me directly, from the first walkthrough to the last sale of the day. Some like to be involved in every pricing decision; others would rather hand the whole thing over. Either works.</p>""",
       [("Established", "May 2026, North East, Pennsylvania"),
@@ -682,9 +730,11 @@ entry("better-selling", "selling", "Better Selling With Bailey",
        ("Client sales", "More than $35,000"),
        ("Top events", "More than $16,000 and $8,000, each in a single weekend"),
        ("Terms", "$995 flat fee plus 20% commission; leftover removal free"),
+       ("Phone", f'<a href="{TEL}">{PHONE}</a>'),
+       ("Bookings", "Available now"),
        ("Press", f'<a href="{LINKS["erie"]}" rel="noopener">YourErie.com, May 2026</a>')],
       [],
-      [("Book a walkthrough", LINKS["bswb"]), ("Facebook", LINKS["bswb_fb"])],
+      [("Book now", "book:estate"), (f"Call {PHONE}", TEL), ("Facebook", LINKS["bswb_fb"])],
       head_print=("../assets/img/dorian-bailey.jpg", "Dorian Bailey in a Better Selling With Bailey polo", 900, 1200, PORTRAIT_SET.format(p="../")),
       extra=bswb_extra, js="calc.js",
       seo_title="Erie Estate Sales by Dorian Bailey | Better Selling With Bailey", ld=[ESTATE_SERVICE])
@@ -751,6 +801,22 @@ odd_extra = f"""
       </div>
     </section>
 
+    <section class="section band--raised section--rule" id="advertise" aria-labelledby="ads-title">
+      <div class="wrap split">
+        <div>
+          <h2 class="section-title" id="ads-title">Advertise on OddWay</h2>
+          <p class="section-intro">OddWay offers advertising for brands that fit the road it maps: roadside attractions, small museums, diners and motels, festivals and haunted tours, and makers of strange things. The people who see it are planning a detour and deciding which stops are worth the trip.</p>
+          <p class="service__status">Bookings available now</p>
+          <div class="btn-row"><button class="btn" type="button" data-book="ads">Book a call</button><a class="btn" href="{LINKS['oddway_ads']}" rel="noopener">See advertising options</a></div>
+        </div>
+        <dl class="glossary glossary--single">
+          <div><dt>Banner placement</dt><dd>A banner on the home page and stop pages, with a link to your site and a line of text.</dd></div>
+          <div><dt>Featured map placement</dt><dd>A marker on the OddWay map with your name, logo and description.</dd></div>
+          <div><dt>Listings are never for sale</dt><dd>Advertising buys a placement, not a place in the index. Ads that don&rsquo;t fit the road are turned down.</dd></div>
+        </dl>
+      </div>
+    </section>
+
     <section class="section section--rule" aria-labelledby="next-title">
       <div class="wrap split">
         <h2 class="section-title" id="next-title">Next on the road</h2>
@@ -771,11 +837,12 @@ entry("oddway", "oddway", "Take The OddWay",
        ("Subject", "Cryptids, folklore and roadside Americana"),
        ("Categories", "Seven"),
        ("Built with", "Next.js, React, TypeScript, Tailwind CSS, Supabase"),
+       ("Advertising", f'<a href="{LINKS["oddway_ads"]}" rel="noopener">For brands that fit the road</a>'),
        ("Also", f'<a href="{LINKS["shop"]}" rel="noopener">The OddWay shop</a>')],
       [P("green-eyes", 5, "<em>Bigfoot, from Green Eyes</em>"),
        P("letchworth", 7, "<em>The gorge, from Letchworth</em>"),
        P("north-east", 2, "<em>Halloween, from North East</em>")],
-      [("Visit taketheoddway.com", LINKS["oddway"]), ("Shop the OddWay", LINKS["shop"])],
+      [("Visit taketheoddway.com", LINKS["oddway"]), ("Advertise on OddWay", LINKS["oddway_ads"]), ("Shop the OddWay", LINKS["shop"])],
       head_print=HP("green-eyes", 7),
       extra=odd_extra, js="detour.js",
       seo_title="Take The OddWay | A Road-Trip App by Dorian Bailey",
@@ -937,7 +1004,8 @@ page("photography/index.html", "photo", "Dorian Bailey Photography | Photographe
         <p class="entry-head__num">No. IV</p>
         <h1>Dorian Bailey Photography</h1>
         <p class="entry-head__standfirst">All types of photography offered, from events and festivals to portraits, families, products and real estate. Based in North East, Pennsylvania. Inquire for rates.</p>
-        <div class="btn-row"><a class="btn" href="{html.escape(MAILTO_PHOTO)}">Inquire for rates</a><a class="btn" href="#types">What I photograph</a></div>
+        <p class="service__status">Bookings available now</p>
+        <div class="btn-row"><button class="btn" type="button" data-book="photo">Book now</button><a class="btn" href="{html.escape(MAILTO_PHOTO)}">Inquire for rates</a><a class="btn" href="#types">What I photograph</a></div>
       </div>
     </header>
 
@@ -955,7 +1023,7 @@ page("photography/index.html", "photo", "Dorian Bailey Photography | Photographe
         <dl class="glossary">
 {chr(10).join(f"          <div><dt>{t}</dt><dd>{d}</dd></div>" for t, d in PHOTO_TYPES)}
         </dl>
-        <div class="btn-row"><a class="btn" href="{html.escape(MAILTO_PHOTO)}">Inquire for rates</a><a class="btn" href="mailto:{EMAIL}">{EMAIL}</a></div>
+        <div class="btn-row"><button class="btn" type="button" data-book="photo">Book now</button><a class="btn" href="{html.escape(MAILTO_PHOTO)}">Inquire for rates</a></div>
         <p class="services__note">Dorian Bailey is based in North East, Pennsylvania, photographs across Erie County, and travels for events.</p>
       </div>
     </section>
@@ -970,7 +1038,7 @@ page("photography/index.html", "photo", "Dorian Bailey Photography | Photographe
               <h3>MetaZoo TCG</h3>
               <p>Professional coverage of MetaZoo TCG at tournaments and cryptid festivals: players at the tables, the cards they pull, costumed cryptids, and the crowds that come to see them.</p>
               <ul class="events">
-                <li><a href="#legends">Legends</a> <em>MetaZoo TCG tournament, August 2026</em></li>
+                <li><a href="#legends">Legends Expo</a> <em>MetaZoo $10,000 cash tournament, Monroeville, Pennsylvania, August 2026</em></li>
                 <li><a href="#mothman">Mothman Festival</a> <em>Point Pleasant, West Virginia, September 2026</em></li>
                 <li><a href="#green-eyes">Green Eyes Festival</a> <em>Chickamauga, Georgia, October 2026</em></li>
               </ul>
@@ -1027,9 +1095,9 @@ page("photography/index.html", "photo", "Dorian Bailey Photography | Photographe
 
     <section class="correspondence band--raised" aria-labelledby="hire-title">
       <div class="wrap wrap--narrow">
-        <h2 class="section-title" id="hire-title">Hire Dorian Bailey</h2>
-        <p>Events, portraits, seniors, families, sports, products, real estate or something else entirely: all types of photography offered. Tell me the date, the place and what you need, and I&rsquo;ll reply with rates.</p>
-        <div class="btn-row"><a class="btn" href="{html.escape(MAILTO_PHOTO)}">Inquire for rates</a></div>
+        <h2 class="section-title" id="hire-title">Book Dorian Bailey</h2>
+        <p>Events, portraits, seniors, families, sports, products, real estate or something else entirely: all types of photography offered, and bookings are available now. Pick a date and I&rsquo;ll reply to confirm, with rates.</p>
+        <div class="btn-row"><button class="btn" type="button" data-book="photo">Book now</button><a class="btn" href="{html.escape(MAILTO_PHOTO)}">Inquire for rates</a></div>
         <p class="correspondence__more">Based in North East, Pennsylvania. Photographing across Erie County and travelling for events.</p>
       </div>
     </section>
@@ -1088,7 +1156,7 @@ page("record/index.html", "record", "The Record of Dorian Bailey | Resume",
               <h3><a href="{LINKS['vanta']}" rel="noopener">Vanta House</a></h3>
               <p><em>Marketing assistant, June 2026 to present.</em> A video-first content studio in North East. Content strategy and social campaigns across client accounts, SEO and digital campaigns, campaign analysis, and support on shoots and video production.</p>
               <h3><a href="../photography/">MetaZoo TCG</a></h3>
-              <p><em>Event photographer.</em> Commissioned coverage at the Legends tournament, the Mothman Festival and the Green Eyes Festival.</p>
+              <p><em>Event photographer.</em> Commissioned coverage of the MetaZoo $10,000 cash tournament at the Legends Expo Card Show in Monroeville, the Mothman Festival and the Green Eyes Festival.</p>
             </dd>
           </div>
           <div class="ledger__row">
@@ -1140,7 +1208,7 @@ page("privacy/index.html", "privacy", "Privacy | Dorian Bailey",
       <div class="wrap">
         <p class="entry-head__num">Privacy</p>
         <h1>What this site keeps</h1>
-        <p class="entry-head__standfirst">Very little. No cookies, no tracking, no analytics and no advertising, and nothing on the site asks for your personal information.</p>
+        <p class="entry-head__standfirst">Very little. No cookies, no tracking and no analytics. The only personal information the site asks for is in a booking request, and that goes straight to Dorian Bailey.</p>
       </div>
     </header>
 
@@ -1170,6 +1238,10 @@ page("privacy/index.html", "privacy", "Privacy | Dorian Bailey",
             </dd>
           </div>
           <div class="ledger__row">
+            <dt>Booking requests</dt>
+            <dd><p>When you book a date, your name, email, phone (if you give it), the date and your message are sent to Dorian Bailey&rsquo;s inbox through <a href="https://formsubmit.co" rel="noopener">FormSubmit</a>, a form-to-email service, and used only to reply to you. If that service can&rsquo;t be reached, your own email app opens with the request written out instead.</p></dd>
+          </div>
+          <div class="ledger__row">
             <dt>Correspondence</dt>
             <dd><p>If you email me, I&rsquo;ll use your address and what you write only to reply. I don&rsquo;t share or sell it, or add it to any list.</p></dd>
           </div>
@@ -1179,7 +1251,7 @@ page("privacy/index.html", "privacy", "Privacy | Dorian Bailey",
           </div>
           <div class="ledger__row">
             <dt>Changes</dt>
-            <dd><p>If this site ever adds analytics, a form or anything else that collects information, this page will say so first, with a new date.</p></dd>
+            <dd><p>If this site ever adds analytics or anything else that collects information, this page will say so first, with a new date.</p></dd>
           </div>
           <div class="ledger__row">
             <dt>Questions<em>Effective {PRIVACY_DATE}</em></dt>
@@ -1212,7 +1284,7 @@ import datetime
 TODAY = datetime.date.today().isoformat()
 PAGE_IMAGES = {
     "": ["assets/img/dorian-bailey.jpg", "assets/photos/" + FEAT["file"]],
-    "better-selling/": ["assets/img/dorian-bailey.jpg"],
+    "better-selling/": ["assets/img/dorian-bailey.jpg"] + ["assets/photos/" + ph["file"] for ph in ES["photos"]],
     "oddway/": ["assets/photos/" + COLL["green-eyes"]["photos"][6]["file"]],
     "metazoo/": ["assets/photos/" + COLL["legends"]["photos"][1]["file"]],
     "photography/": ["assets/photos/" + ph["file"] for c in M["collections"] for ph in c["photos"]],
