@@ -100,9 +100,10 @@ def v(rel):
     return hashlib.md5((ROOT / rel).read_bytes()).hexdigest()[:8]
 
 
-# The mark: Dorian's signature, re-inked as a pointed-pen stroke. tools/signature.json holds the
-# path data (built from the original drawing): 'refined_text' for small sizes, 'refined_display'
-# for the frontispiece, 'refined_icon' for the favicon, and 'centre' lines for the signing animation.
+# The mark: Dorian's signature, traced from his drawing (tools/signature-source.png).
+# tools/signature.json holds the path data: 'refined_display' as drawn, for the frontispiece;
+# 'refined_text', a hair heavier so the fine tips hold up at header and footer sizes;
+# 'refined_icon', much heavier, for the tab icons; and 'centre' lines for the signing animation.
 SIG = json.load(open(ROOT / "tools/signature.json"))
 SIG_VB = SIG["viewBox"]
 _vb = [float(n) for n in SIG_VB.split()]
@@ -121,7 +122,7 @@ def sig(height, cls="sig"):
 def sig_signing(cls="sig sig--hero"):
     """The large signature for the frontispiece. A mask of the pen's centre lines draws it on, stroke by stroke."""
     c = SIG["centre"]
-    ink = lambda k, d: f'<path class="sig__ink sig__ink--{k}" d="{d}" pathLength="1" fill="none" stroke="#fff" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>'
+    ink = lambda k, d: f'<path class="sig__ink sig__ink--{k}" d="{d}" pathLength="1" fill="none" stroke="#fff" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>'
     return (f'<svg class="{cls}" width="{round(120 * SIG_RATIO)}" height="120" viewBox="{SIG_VB}" role="img" aria-label="Dorian Bailey&rsquo;s signature">'
             f'<mask id="sig-pen" maskUnits="userSpaceOnUse" x="{_vb[0]}" y="{_vb[1]}" width="{_vb[2]}" height="{_vb[3]}">'
             f'{ink("main", c["main"])}{ink("hook", c["hook"])}{ink("underline", c["underline"])}</mask>'
