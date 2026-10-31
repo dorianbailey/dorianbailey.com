@@ -166,6 +166,9 @@ GAME_TEMPLATE = """    <template id="cryptid-highway">
     </template>"""
 
 
+CHANGED = {}
+
+
 def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card.jpg", ld=None, crumb=None, noindex=False):
     depth = path.count("/")
     p = "/" if path == "404.html" else "../" * depth
@@ -257,6 +260,7 @@ def page(path, key, title, desc, body, extra_js="", og_image="assets/img/og-card
 </html>
 """
     f = ROOT / path
+    CHANGED[path] = not f.exists() or f.read_text() != out    # for honest sitemap dates
     f.parent.mkdir(parents=True, exist_ok=True)
     f.write_text(out)
     print("wrote", path)
@@ -1280,7 +1284,11 @@ page("404.html", "", "Not found | Dorian Bailey", "This page is not in the colle
 # Every public page with today's date, and the photographs on each page, so search engines
 # can find them for image search. (The 404 page is left out on purpose.)
 import datetime
+import re as _re
 TODAY = datetime.date.today().isoformat()
+# Keep each page's previous date unless its HTML actually changed in this build
+_old = (ROOT / "sitemap.xml").read_text() if (ROOT / "sitemap.xml").exists() else ""
+PREV = dict(_re.findall(r"<loc>" + _re.escape(SITE) + r"/([^<]*)</loc>\s*<lastmod>([^<]+)</lastmod>", _old))
 PAGE_IMAGES = {
     "": ["assets/img/dorian-bailey.jpg", "assets/photos/" + FEAT["file"]],
     "better-selling/": ["assets/img/dorian-bailey.jpg"] + ["assets/photos/" + ph["file"] for ph in ES["photos"]],
@@ -1293,7 +1301,9 @@ PAGE_IMAGES = {
 urls = []
 for path, imgs in PAGE_IMAGES.items():
     im = "".join(f"\n    <image:image><image:loc>{SITE}/{i}</image:loc></image:image>" for i in imgs)
-    urls.append(f"  <url>\n    <loc>{SITE}/{path}</loc>\n    <lastmod>{TODAY}</lastmod>{im}\n  </url>")
+    page_file = (path or "") + "index.html"
+    lastmod = TODAY if CHANGED.get(page_file, True) or path not in PREV else PREV[path]
+    urls.append(f"  <url>\n    <loc>{SITE}/{path}</loc>\n    <lastmod>{lastmod}</lastmod>{im}\n  </url>")
 (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
                                   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
                                   'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n' + "\n".join(urls) + "\n</urlset>\n")
