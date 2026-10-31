@@ -376,9 +376,12 @@ SERVICES = f"""
             <h3><a href="photography/">Dorian Bailey Photography</a></h3>
             <p class="service__status">Bookings available now</p>
             <p>All types of photography offered, from events and festivals to portraits, seniors, families, products and real estate. Inquire for rates.</p>
-            <ul class="service__list">
-{chr(10).join(f"              <li>{t}</li>" for t, _ in PHOTO_TYPES)}
-            </ul>
+            <details class="service__more">
+              <summary>Photography offered <span>{len(PHOTO_TYPES)}</span></summary>
+              <ul class="service__list">
+{chr(10).join(f"                <li>{t}</li>" for t, _ in PHOTO_TYPES)}
+              </ul>
+            </details>
             <div class="btn-row"><button class="btn" type="button" data-book="photo">Book now</button><a class="btn" href="{html.escape(MAILTO_PHOTO)}">Inquire for rates</a></div>
           </article>
           <article class="service">
@@ -386,13 +389,16 @@ SERVICES = f"""
             <h3><a href="better-selling/">Better Selling With Bailey</a></h3>
             <p class="service__status">Bookings available now</p>
             <p>Estate sales across Erie County, priced, staged, promoted and run by Dorian Bailey in your own home, with whatever is left removed free. A $995 flat fee plus 20% of sales.</p>
-            <ul class="service__list">
-              <li>Walkthrough and pricing</li>
-              <li>Staging</li>
-              <li>Promotion</li>
-              <li>Running the sale days</li>
-              <li>Cleanup and removal</li>
-            </ul>
+            <details class="service__more">
+              <summary>Services offered <span>5</span></summary>
+              <ul class="service__list">
+                <li>Walkthrough and pricing</li>
+                <li>Staging</li>
+                <li>Promotion</li>
+                <li>Running the sale days</li>
+                <li>Cleanup and removal</li>
+              </ul>
+            </details>
             <div class="btn-row"><button class="btn" type="button" data-book="estate">Book now</button><a class="btn" href="{TEL}">Call {PHONE}</a></div>
           </article>
           <article class="service">
@@ -400,12 +406,14 @@ SERVICES = f"""
             <h3><a href="oddway/#advertise">Advertise on Take The OddWay</a></h3>
             <p class="service__status">Bookings available now</p>
             <p>Banner and featured map placements on OddWay for brands that fit the road it maps: roadside attractions, small museums, diners and motels, festivals and haunted tours, and makers of strange things.</p>
-            <ul class="service__list">
-              <li>Banner on the home and stop pages</li>
-              <li>Featured marker on the map</li>
-              <li>Seen by people planning a detour</li>
-              <li>Listings are never for sale</li>
-            </ul>
+            <details class="service__more">
+              <summary>Placements offered <span>2</span></summary>
+              <ul class="service__list">
+                <li>Banner on the home and stop pages</li>
+                <li>Featured marker on the map</li>
+              </ul>
+              <p class="service__fine">Seen by people planning a detour. Listings themselves are never for sale.</p>
+            </details>
             <div class="btn-row"><button class="btn" type="button" data-book="ads">Book a call</button><a class="btn" href="{LINKS['oddway_ads']}" rel="noopener">Advertising options</a></div>
           </article>
         </div>
