@@ -26,8 +26,8 @@ post(dict(
 {jpair((jph("legends", 11), "The commentary desk"), (jph("legends", 22), "A match beneath the stream camera"))}
 
           <h2>The cards themselves</h2>
-          <p>It&rsquo;s a trading card game, so the cards get photographs of their own: rows of Old Green Eyes, a Mothman Festival edition card in its sleeve, a Loveland Frogman, and cards being signed at the table.</p>
-{jfig(jph("legends", 24), "A Mothman Festival edition card", cls="article__fig--narrow", sizes="(max-width: 820px) 70vw, 400px")}
+          <p>It&rsquo;s a trading card game, so the cards get photographs of their own: rows of Mothman Museum cards, a holographic Mothman Festival Statue card, a Loveland Frogman, and cards being signed at the table.</p>
+{jfig(jph("legends", 24), "The Mothman Festival Statue card", cls="article__fig--narrow", sizes="(max-width: 820px) 70vw, 400px")}
 
           <h2>The last photograph</h2>
           <p>When play was done, the whole field gathered beneath the inflatable cryptid for one last photograph. It&rsquo;s the picture that sums up an event, so it&rsquo;s worth getting everyone in place for it before anyone heads for the door.</p>

@@ -26,5 +26,145 @@
   "sub": "Better Selling With Bailey &middot; May 2026",
   "image": "estate-sales/estate-sale-crowd.jpg",
   "pos": "center 35%"
+ },
+ {
+  "slug": "halloween-costume-portraits",
+  "title": "Halloween Costume Portraits at Golden Hour",
+  "sub": "Two couples, twenty minutes of golden hour",
+  "image": "halloween/halloween-02.jpg",
+  "pos": "center 30%"
+ },
+ {
+  "slug": "prepare-home-for-estate-sale",
+  "title": "How to Get Your Home Ready for an Estate Sale",
+  "sub": "What to keep, what to leave, what to expect",
+  "image": null,
+  "pos": "center"
+ },
+ {
+  "slug": "take-the-oddway-road-trip-planner",
+  "title": "Plan a Road Trip Around the Strange",
+  "sub": "Take The OddWay, a road-trip app",
+  "image": "green-eyes/green-eyes-07.jpg",
+  "pos": "center 35%"
+ },
+ {
+  "slug": "what-is-metazoo",
+  "title": "What Is MetaZoo?",
+  "sub": "The cryptid trading card game, explained",
+  "image": "legends/legends-02.jpg",
+  "pos": "center 40%"
+ },
+ {
+  "slug": "mothman-festival-photos",
+  "title": "Photographing MetaZoo at the Mothman Festival",
+  "sub": "Point Pleasant, West Virginia, September 2026",
+  "image": "mothman/mothman-01.jpg",
+  "pos": "center 40%"
+ },
+ {
+  "slug": "estate-sale-vs-garage-sale",
+  "title": "Estate Sale or Garage Sale: Which One You Need",
+  "sub": "An honest comparison, side by side",
+  "image": "estate-sales/estate-sale-garage.jpg",
+  "pos": "50% center"
+ },
+ {
+  "slug": "the-squonk-pennsylvania-cryptid",
+  "title": "The Squonk, Pennsylvania’s Saddest Cryptid",
+  "sub": "A weeping legend of the hemlock woods",
+  "image": null,
+  "pos": "center"
+ },
+ {
+  "slug": "loveland-frogman-ohio",
+  "title": "The Loveland Frogman: A Road Stop in Ohio",
+  "sub": "Loveland, Ohio, on the Little Miami River",
+  "image": "legends/legends-25.jpg",
+  "pos": "center 40%"
+ },
+ {
+  "slug": "green-eyes-festival-chickamauga",
+  "title": "Photographing the Green Eyes Festival",
+  "sub": "Chickamauga, Georgia, October 2026",
+  "image": "green-eyes/green-eyes-06.jpg",
+  "pos": "center 35%"
+ },
+ {
+  "slug": "selling-toy-lego-video-game-collections",
+  "title": "Selling a Toy, LEGO or Video Game Collection",
+  "sub": "What collectors look for, and how to sell",
+  "image": "estate-sales/estate-sale-garage-collectibles.jpg",
+  "pos": "78% center"
+ },
+ {
+  "slug": "mothman-road-trip-point-pleasant",
+  "title": "A Mothman Road Trip to Point Pleasant",
+  "sub": "Point Pleasant, West Virginia",
+  "image": "mothman/mothman-02.jpg",
+  "pos": "center 40%"
+ },
+ {
+  "slug": "metazoo-vhs-card-reveals",
+  "title": "MetaZoo Packs on Tape",
+  "sub": "VHS pack reveals on Bailey MetaZoo",
+  "image": "mothman/mothman-15.jpg",
+  "pos": "center 45%"
+ },
+ {
+  "slug": "couples-photos-erie-county",
+  "title": "Couples and Engagement Photos in Erie County",
+  "sub": "Where, when and what to wear",
+  "image": "halloween/halloween-07.jpg",
+  "pos": "center 30%"
+ },
+ {
+  "slug": "lake-erie-monster-bessie",
+  "title": "Bessie, the Lake Erie Monster",
+  "sub": "South Bay Bessie and the Lake Erie shore",
+  "image": null,
+  "pos": "center"
+ },
+ {
+  "slug": "ole-green-eyes-chickamauga-legend",
+  "title": "Ole’ Green Eyes of Chickamauga",
+  "sub": "The legend of the Chickamauga battlefield",
+  "image": null,
+  "pos": "center"
+ },
+ {
+  "slug": "close-up-photography-penn-state-behrend",
+  "title": "Small Things in the Woods at Penn State Behrend",
+  "sub": "Fungi, asters, a beetle and a plant in shale",
+  "image": "studies/studies-04.jpg",
+  "pos": "center 40%"
+ },
+ {
+  "slug": "selling-trading-card-collections",
+  "title": "Selling a Sports Card or Trading Card Collection",
+  "sub": "Sorting, condition, grading, lots and singles",
+  "image": "green-eyes/green-eyes-03.jpg",
+  "pos": "center 60%"
+ },
+ {
+  "slug": "bigfoot-in-pennsylvania",
+  "title": "Bigfoot in Pennsylvania",
+  "sub": "Pennsylvania’s forests, and how to look",
+  "image": "green-eyes/green-eyes-05.jpg",
+  "pos": "center 30%"
+ },
+ {
+  "slug": "first-metazoo-tournament",
+  "title": "What to Expect at Your First MetaZoo Tournament",
+  "sub": "Registration, decks, rounds and etiquette",
+  "image": "legends/legends-20.jpg",
+  "pos": "center 35%"
+ },
+ {
+  "slug": "letchworth-state-park-day-trip",
+  "title": "Letchworth State Park: A Day Trip from Erie",
+  "sub": "The Genesee gorge, the falls and the bridge",
+  "image": "letchworth/letchworth-05.jpg",
+  "pos": "center 45%"
  }
 ]
