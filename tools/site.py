@@ -1112,7 +1112,7 @@ page("photography/index.html", "photo", "Dorian Bailey Photography | Photographe
         <div class="measure">
           <h2 class="section-title" id="approach-title">Approach</h2>
           <p class="lede">Most of this is event work: long days on a festival street or a tournament floor, close to the people and the cards.</p>
-          <p>The personal collections are where the slower pictures live: a gorge in October, a cat in window light, fungi on a fallen log.</p>
+          <p>The personal collections are where the slower pictures live: <a href="#halloween">couples in costume on Halloween</a>, a gorge in October, a cat in window light, fungi on a fallen log.</p>
           <p>From the journal: <a href="../journal/legends-expo-metazoo-tournament/">photographing the MetaZoo $10,000 tournament</a>, and <a href="../journal/senior-pictures-erie-county/">where to take senior pictures in Erie County</a>.</p>
         </div>
       </div>

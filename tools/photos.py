@@ -7,9 +7,9 @@ OUT = "/home/claude/dorianbailey.com/assets/photos"
 SRGB = ImageCms.createProfile("sRGB")
 
 C = [
- dict(id="legends", numeral="I", title="Legends", place="Two-day tournament", date="August 2026",
+ dict(id="legends", numeral="I", title="Legends", place="Legends Expo Card Show, Monroeville, Pennsylvania", date="August 2026",
       commission="MetaZoo TCG", root="/mnt/user-data/uploads/Dropbox/Legends Edits (Photo)/Legends Edits",
-      note="Tournament play under convention-hall lights: the prize cards on their easels, players at the tables, the commentary desk, and the whole field together for one last photograph.",
+      note="The MetaZoo $10,000 cash tournament: two days of play under convention-hall lights, the prize cards on their easels, players at the tables, the commentary desk, and the whole field together for one last photograph.",
       cover="IMG_0208", photos=[
   ("IMG_0123","An inflatable winged cryptid on a MetaZoo base"),
   ("IMG_0128","The first-place prize card on an easel"),
@@ -79,7 +79,22 @@ C = [
   ("Green Eyes Edited/IMG_2364","A MetaZoo card in a binder sleeve"),
   ("Green Eyes Edited/IMG_2381","A Jigsaw puppet on a tricycle with a smiling fan"),
  ]),
- dict(id="letchworth", numeral="IV", title="Letchworth", place="Letchworth State Park, New York", date="October 2026",
+ dict(id="halloween", numeral="IV", title="Halloween", place="Costume portraits", date="October 31, 2026",
+      note="Portraits at golden hour on Halloween: Freddy Krueger and a pink sweater, Clark Kent mid-change with Supergirl, and all four together under the October leaves.",
+      cover="IMG_2564", photos=[
+  ("Halloween Edited/IMG_2529","Freddy Krueger tilting up the chin of a woman in a pink sweater"),
+  ("Halloween Edited/IMG_2564","A mock gasp on the porch as Freddy Krueger’s claws reach over her shoulder"),
+  ("Halloween Edited/IMG_2586","Freddy Krueger among the autumn trees, claws out"),
+  ("Halloween Edited/IMG_2592","Freddy Krueger’s claws resting on her shoulder"),
+  ("Halloween Edited/IMG_2598","Freddy Krueger behind her, his glove across her sweater"),
+  ("Halloween Edited/IMG_2601","Freddy Krueger’s arm around her shoulders from behind"),
+  ("Halloween Edited/IMG_2609","Supergirl and Clark Kent smiling at each other"),
+  ("Halloween Edited/IMG_2620","Fists raised as Clark Kent pulls open his shirt to show the Superman S"),
+  ("Halloween Edited/IMG_2631","Superman carrying Supergirl, both smiling"),
+  ("Halloween Edited/IMG_2646","Supergirl and Superman posing among the leaves"),
+  ("Halloween Edited/IMG_2648","Both couples together beneath the autumn trees"),
+ ]),
+ dict(id="letchworth", numeral="V", title="Letchworth", place="Letchworth State Park, New York", date="October 2026",
       note="The Genesee River gorge in early autumn: high falls, a railroad bridge, a passing rainbow, and the friends on the trail.",
       cover="IMG_1811", photos=[
   ("Letchworth Edited/IMG_1699","On a fallen log in the forest"),
@@ -92,7 +107,7 @@ C = [
   ("Letchworth Edited/IMG_1816","Arms crossed at the overlook below the bridge"),
   ("Letchworth Edited/IMG_1822","A hiker in red at the stone railing below the bridge"),
  ]),
- dict(id="north-east", numeral="V", title="North East", place="North East, Pennsylvania", date="September–October 2026",
+ dict(id="north-east", numeral="VI", title="North East", place="North East, Pennsylvania", date="September–October 2026",
       note="Home: Halloween porches after dark, the park in full color, and the Wine Fest run through town.",
       cover="Ne-Night5", photos=[
   ("NE Night + Random/Ne-Night1","Street signs at the corner of Gibson and North Mill at night"),
@@ -108,7 +123,7 @@ C = [
   ("Winefest Run Edited/WineFest3","Walking the course with a setter"),
   ("Winefest Run Edited/WineFest4","A shaggy black dog on the course"),
  ]),
- dict(id="creatures", numeral="VI", title="Creatures", place="Pennsylvania", date="September–October 2026",
+ dict(id="creatures", numeral="VII", title="Creatures", place="Pennsylvania", date="September–October 2026",
       note="Cats in window light, a poodle at the water bowl, horses, goats, and one woolly bear crossing the leaves.",
       cover="IMG_1048", photos=[
   ("Cats-Edited/IMG_1008","A cream cat resting on a leather chair"),
@@ -126,7 +141,7 @@ C = [
   ("NE Night + Random/Random2","A brown goat at the fence"),
   ("NE Night + Random/Random3","A black goat in dappled light"),
  ]),
- dict(id="studies", numeral="VII", title="Studies", place="Penn State Behrend and elsewhere", date="September–October 2026",
+ dict(id="studies", numeral="VIII", title="Studies", place="Penn State Behrend and elsewhere", date="September–October 2026",
       note="Close looks at small things: fungi on fallen wood, asters, a weed in shale, and an eye.",
       cover="IMG_1551", photos=[
   ("Behrend Edited/IMG_1468","Ferns and fallen logs in the woods"),
@@ -159,8 +174,18 @@ def save(im, path, long_edge, q):
     im.save(path, "JPEG", quality=q, optimize=True, progressive=True)  # no exif/icc -> metadata stripped
     return im.size
 
+# python3 tools/photos.py halloween  -> process only that collection and merge it into photos.json,
+# leaving every other collection (and any hand edits to it) untouched. No arguments: rebuild all.
+ONLY = set(sys.argv[1:])
+existing = {}
+if ONLY and os.path.exists(os.path.join(OUT, "photos.json")):
+    existing = {x["id"]: x for x in json.load(open(os.path.join(OUT, "photos.json")))["collections"]}
 manifest = {"collections": []}
 for c in C:
+    if ONLY and c["id"] not in ONLY:
+        if c["id"] in existing:
+            manifest["collections"].append(existing[c["id"]] | {"numeral": c["numeral"]})
+        continue
     d = os.path.join(OUT, c["id"]); os.makedirs(d, exist_ok=True)
     entries = []
     for i, (src, alt) in enumerate(c["photos"], 1):

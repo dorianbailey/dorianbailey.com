@@ -436,8 +436,96 @@
    ]
   },
   {
-   "id": "letchworth",
+   "id": "halloween",
    "numeral": "IV",
+   "title": "Halloween",
+   "place": "Costume portraits",
+   "date": "October 31, 2026",
+   "note": "Portraits at golden hour on Halloween: Freddy Krueger and a pink sweater, Clark Kent mid-change with Supergirl, and all four together under the October leaves.",
+   "cover": "halloween/t-halloween-02.jpg",
+   "photos": [
+    {
+     "file": "halloween/halloween-01.jpg",
+     "thumb": "halloween/t-halloween-01.jpg",
+     "alt": "Freddy Krueger tilting up the chin of a woman in a pink sweater",
+     "w": 1333,
+     "h": 2000
+    },
+    {
+     "file": "halloween/halloween-02.jpg",
+     "thumb": "halloween/t-halloween-02.jpg",
+     "alt": "A mock gasp on the porch as Freddy Krueger’s claws reach over her shoulder",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "halloween/halloween-03.jpg",
+     "thumb": "halloween/t-halloween-03.jpg",
+     "alt": "Freddy Krueger among the autumn trees, claws out",
+     "w": 1600,
+     "h": 2000
+    },
+    {
+     "file": "halloween/halloween-04.jpg",
+     "thumb": "halloween/t-halloween-04.jpg",
+     "alt": "Freddy Krueger’s claws resting on her shoulder",
+     "w": 1500,
+     "h": 2000
+    },
+    {
+     "file": "halloween/halloween-05.jpg",
+     "thumb": "halloween/t-halloween-05.jpg",
+     "alt": "Freddy Krueger behind her, his glove across her sweater",
+     "w": 1500,
+     "h": 2000
+    },
+    {
+     "file": "halloween/halloween-06.jpg",
+     "thumb": "halloween/t-halloween-06.jpg",
+     "alt": "Freddy Krueger’s arm around her shoulders from behind",
+     "w": 1500,
+     "h": 2000
+    },
+    {
+     "file": "halloween/halloween-07.jpg",
+     "thumb": "halloween/t-halloween-07.jpg",
+     "alt": "Supergirl and Clark Kent smiling at each other",
+     "w": 1333,
+     "h": 2000
+    },
+    {
+     "file": "halloween/halloween-08.jpg",
+     "thumb": "halloween/t-halloween-08.jpg",
+     "alt": "Fists raised as Clark Kent pulls open his shirt to show the Superman S",
+     "w": 1500,
+     "h": 2000
+    },
+    {
+     "file": "halloween/halloween-09.jpg",
+     "thumb": "halloween/t-halloween-09.jpg",
+     "alt": "Superman carrying Supergirl, both smiling",
+     "w": 1500,
+     "h": 2000
+    },
+    {
+     "file": "halloween/halloween-10.jpg",
+     "thumb": "halloween/t-halloween-10.jpg",
+     "alt": "Supergirl and Superman posing among the leaves",
+     "w": 1500,
+     "h": 2000
+    },
+    {
+     "file": "halloween/halloween-11.jpg",
+     "thumb": "halloween/t-halloween-11.jpg",
+     "alt": "Both couples together beneath the autumn trees",
+     "w": 2000,
+     "h": 1500
+    }
+   ]
+  },
+  {
+   "id": "letchworth",
+   "numeral": "V",
    "title": "Letchworth",
    "place": "Letchworth State Park, New York",
    "date": "October 2026",
@@ -511,7 +599,7 @@
   },
   {
    "id": "north-east",
-   "numeral": "V",
+   "numeral": "VI",
    "title": "North East",
    "place": "North East, Pennsylvania",
    "date": "September–October 2026",
@@ -606,7 +694,7 @@
   },
   {
    "id": "creatures",
-   "numeral": "VI",
+   "numeral": "VII",
    "title": "Creatures",
    "place": "Pennsylvania",
    "date": "September–October 2026",
@@ -715,7 +803,7 @@
   },
   {
    "id": "studies",
-   "numeral": "VII",
+   "numeral": "VIII",
    "title": "Studies",
    "place": "Penn State Behrend and elsewhere",
    "date": "September–October 2026",
