@@ -1010,3 +1010,7 @@ p, dd, li, blockquote { text-wrap: pretty; }
 .nowrap, .article a[href^="tel:"], .article__byline time, .journal-list__kicker time { white-space: nowrap; }
 .journal-list__mark { display: flex; align-items: center; justify-content: center; aspect-ratio: 4 / 3; color: var(--brass-ink); }
 .journal-list__mark .sig { width: 70%; height: auto; }
+/* A table of words rather than figures: everything reads left to right */
+.article__table--text th, .article__table--text td { text-align: left; vertical-align: top; padding-right: 0.75rem; }
+.article__table--text td:last-child { font-family: inherit; font-size: inherit; }
+.article__table--text tbody th { font-style: italic; font-weight: 400; color: var(--ink-soft); font-size: var(--s-14); border-bottom: 1px solid var(--rule); padding: 0.6rem 0.75rem 0.6rem 0; }
