@@ -1,0 +1,30 @@
+[
+ {
+  "slug": "legends-expo-metazoo-tournament",
+  "title": "Photographing the MetaZoo $10,000 Tournament",
+  "sub": "Legends Expo Card Show, Monroeville, PA",
+  "image": "legends/legends-26.jpg",
+  "pos": "center 30%"
+ },
+ {
+  "slug": "senior-pictures-erie-county",
+  "title": "Where to Take Senior Pictures in Erie County",
+  "sub": "Presque Isle, the lighthouses, the bluffs and the gorges",
+  "image": "north-east/north-east-08.jpg",
+  "pos": "center 50%"
+ },
+ {
+  "slug": "how-estate-sales-work-erie-county",
+  "title": "How an Estate Sale Works in Erie County",
+  "sub": "Better Selling With Bailey, start to finish",
+  "image": "estate-sales/estate-sale-canopy.jpg",
+  "pos": "center 40%"
+ },
+ {
+  "slug": "star-wars-collectors-sale-north-east",
+  "title": "A Star Wars Collector’s Sale in North East",
+  "sub": "Better Selling With Bailey &middot; May 2026",
+  "image": "estate-sales/estate-sale-crowd.jpg",
+  "pos": "center 35%"
+ }
+]

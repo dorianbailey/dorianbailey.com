@@ -1,8 +1,9 @@
-name: Refresh Bailey MetaZoo videos
+name: Refresh videos and publish scheduled posts
 
-# Every six hours, read the channel's public feed. If there is a new video,
-# rebuild the pages so the MetaZoo television shows it, commit, and ask
-# GitHub Pages to publish.
+# Every six hours, read the channel's public feed and rebuild the pages, so the
+# MetaZoo television shows any new video and any journal post whose date has
+# arrived (in Eastern time) goes live. Commit whatever changed, including new
+# post pages, and ask GitHub Pages to publish.
 on:
   schedule:
     - cron: "17 */6 * * *"
@@ -23,17 +24,19 @@ jobs:
       - name: Fetch the feed and rebuild pages
         run: |
           python3 tools/youtube.py
-          python3 tools/site.py .
+          JOURNAL_TODAY=$(TZ=America/New_York date +%F) python3 tools/site.py .
       - name: Commit if anything changed
         id: commit
         run: |
-          if git diff --quiet; then
+          git add -A
+          if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
-            echo "No new videos."
+            echo "Nothing new."
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -am "Refresh Bailey MetaZoo videos"
+            git commit -m "Refresh videos and scheduled journal posts"
+            git pull --rebase -q origin main
             git push
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi

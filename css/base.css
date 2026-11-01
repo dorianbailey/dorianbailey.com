@@ -1008,3 +1008,5 @@ p, dd, li, blockquote { text-wrap: pretty; }
   .journal-list__dek { display: none; }
 }
 .nowrap, .article a[href^="tel:"], .article__byline time, .journal-list__kicker time { white-space: nowrap; }
+.journal-list__mark { display: flex; align-items: center; justify-content: center; aspect-ratio: 4 / 3; color: var(--brass-ink); }
+.journal-list__mark .sig { width: 70%; height: auto; }

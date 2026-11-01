@@ -1325,7 +1325,6 @@ page("404.html", "", "Not found | Dorian Bailey", "This page is not in the colle
 # Written pieces about the work: an index at /journal/ and one page per article.
 # Every fact in these pieces comes from the work itself, the clients' published reviews,
 # the press coverage, or the parks' own published information.
-J_DATE, J_DATE_LONG = "2026-10-31", "October 31, 2026"
 J = "../../"                                     # article pages sit two folders deep
 
 
@@ -1347,9 +1346,9 @@ def jpair(a, b):
     return (f'          <div class="article__pair">\n{jfig(a[0], a[1], sizes=small)}\n{jfig(b[0], b[1], sizes=small)}\n          </div>')
 
 
-def cta(title, text, buttons):
-    return f"""          <aside class="article__cta" aria-labelledby="cta-title">
-            <p class="service__status">Bookings available now</p>
+def cta(title, text, buttons, status=True):
+    st = '\n            <p class="service__status">Bookings available now</p>' if status else ""
+    return f"""          <aside class="article__cta" aria-labelledby="cta-title">{st}
             <h2 id="cta-title">{title}</h2>
             <p>{text}</p>
             <div class="btn-row">{''.join(buttons)}</div>
@@ -1362,206 +1361,53 @@ BOOK_ESTATE = '<button class="btn" type="button" data-book="estate">Book now</bu
 RATES = f'<a class="btn" href="{html.escape(MAILTO_PHOTO)}">Inquire for rates</a>'
 EMAIL_BSWB = f'<a class="btn" href="{html.escape(MAILTO_BSWB)}">Email me</a>'
 
-JOURNAL = []
+ODDWAY_BTN = f'<a class="btn" href="{LINKS["oddway"]}" rel="noopener">Plan a trip on Take The OddWay</a>'
+YOUTUBE_BTN = f'<a class="btn" href="{LINKS["yt"]}" rel="noopener">Watch Bailey MetaZoo</a>'
+BOOK_ADS = '<button class="btn" type="button" data-book="ads">Book a call</button>'
 
-# ---------------------------------------------------------------- 1. Legends
-JOURNAL.append(dict(
-    slug="legends-expo-metazoo-tournament", section="Event photography",
-    title="Photographing the MetaZoo $10,000 Tournament at the Legends Expo",
-    seo="Photographing the MetaZoo $10,000 Tournament | Dorian Bailey",
-    desc="Event photographer Dorian Bailey on covering the MetaZoo $10,000 cash tournament at the Legends Expo Card Show in Monroeville, Pennsylvania, for MetaZoo TCG.",
-    standfirst="Two days of play at the Legends Expo Card Show in Monroeville, Pennsylvania, photographed for MetaZoo TCG.",
-    dek="Two days of play in Monroeville, photographed for MetaZoo TCG: the prizes, the players, the broadcast and the last photograph of the weekend.",
-    head=jph("legends", 26), card_pos="center 30%",
-    about=["Event photography", "MetaZoo", "Trading card game tournaments"],
-    body=f"""          <p class="article__lede">In August 2026, MetaZoo TCG commissioned me to photograph its $10,000 cash tournament at the Legends Expo Card Show in Monroeville, Pennsylvania. It was two days of play under convention-hall lights, and the job was to come away with everything the company would need afterward: the prizes, the booth, the players, the broadcast, and one photograph of everyone together at the end.</p>
 
-          <h2>Before the first round</h2>
-          <p>The quiet minutes before play starts are when the details get photographed. The first-, second- and third-place prize cards stood on their easels, the MetaZoo booth was set, and an inflatable winged cryptid towered over the hall on its MetaZoo base.</p>
-          <p>Those pictures are easy to skip and hard to replace. They&rsquo;re what a brand reaches for when it announces the next event, and once the hall fills up they&rsquo;re much harder to take cleanly.</p>
-{jpair((jph("legends", 2), "The first-place prize card"), (jph("legends", 5), "The MetaZoo Trading Card Game booth"))}
+def yt(video_id, text):
+    """A link to one of Dorian's videos on YouTube."""
+    return f'<a href="https://www.youtube.com/shorts/{video_id}" rel="noopener">{text}</a>'
 
-          <h2>At the tables</h2>
-          <p>A card tournament is a quiet kind of sport. There&rsquo;s no ball to follow, so the story is in hands and faces: a player fanning a hand of cards, another weighing his next move, a reaction across the table when a play lands.</p>
-          <p>I worked along the rows through the day, close enough to read the moment and far enough back to stay out of the way. Players are concentrating, and the photographs only work if they forget you&rsquo;re there.</p>
-{jpair((jph("legends", 13), "Weighing the next move"), (jph("legends", 17), "A reaction across the table"))}
 
-          <h2>The broadcast</h2>
-          <p>Part of the coverage was the production itself: the commentary desk in front of the MetaZoo backdrop, and matches at the feature table played beneath the stream camera. For a brand, those pictures say the event reached people well beyond the hall.</p>
-{jpair((jph("legends", 11), "The commentary desk"), (jph("legends", 22), "A match beneath the stream camera"))}
+# Posts live in tools/journal/, one file each, and call post(dict(...)) with a 'date'.
+# A post goes live on its date: the six-hourly GitHub Action rebuilds the site, so scheduled
+# posts publish themselves. JOURNAL_TODAY=YYYY-MM-DD previews the site as of another day.
+import datetime, os
+import re as _re
+JOURNAL_ALL = []
 
-          <h2>The cards themselves</h2>
-          <p>It&rsquo;s a trading card game, so the cards get photographs of their own: rows of Old Green Eyes, a Mothman Festival edition card in its sleeve, a Loveland Frogman, and cards being signed at the table.</p>
-{jfig(jph("legends", 24), "A Mothman Festival edition card", cls="article__fig--narrow", sizes="(max-width: 820px) 70vw, 400px")}
 
-          <h2>The last photograph</h2>
-          <p>When play was done, the whole field gathered beneath the inflatable cryptid for one last photograph. It&rsquo;s the picture that sums up an event, so it&rsquo;s worth getting everyone in place for it before anyone heads for the door.</p>
+def post(d):
+    JOURNAL_ALL.append(d)
 
-          <h2>Covering your event</h2>
-          <p>Legends was the first of three events I photographed for MetaZoo TCG in three months, followed by the <a href="{J}photography/#mothman">Mothman Festival</a> in Point Pleasant, West Virginia, and the <a href="{J}photography/#green-eyes">Green Eyes Festival</a> in Chickamauga, Georgia. <a href="{J}photography/#legends">The full Legends collection</a> is on the photography page.</p>
-          <p>If you&rsquo;re running a tournament, convention, festival or other event, in Erie County or farther afield, I travel for event work.</p>
-{cta("Book event photography", "Pick a date and I&rsquo;ll reply to confirm, with rates. Tournaments, conventions, festivals and parties.", [BOOK_PHOTO, RATES])}""",
-    particulars=[("Event", "MetaZoo $10,000 cash tournament"), ("Where", "Legends Expo Card Show, Monroeville, Pennsylvania"),
-                 ("When", "August 2026"), ("Commissioned by", "MetaZoo TCG"), ("Photographs", "Dorian Bailey"),
-                 ("See also", f'<a href="{J}photography/#legends">The Legends collection</a>, <a href="{J}metazoo/">Bailey MetaZoo</a>')],
-    images=[jph("legends", n) for n in (26, 2, 5, 13, 17, 11, 22, 24)],
-))
 
-# ---------------------------------------------------------------- 2. Senior pictures
-JOURNAL.append(dict(
-    slug="senior-pictures-erie-county", section="Senior pictures",
-    title="Where to Take Senior Pictures in Erie County",
-    seo="Where to Take Senior Pictures in Erie County, PA | Dorian Bailey",
-    desc="Senior picture locations around Erie, PA, from Presque Isle sunsets and the Erie Land Lighthouse to Wintergreen Gorge, suggested by Dorian Bailey, a photographer in North East.",
-    standfirst="Beaches, lighthouses, bluffs and woods around Erie and North East, Pennsylvania, and how to get the best light at each.",
-    dek="Presque Isle at sunset, the lighthouses, the bluffs over the bay, the gorges and the vineyards: the places I&rsquo;d suggest, and when to go.",
-    head=jph("north-east", 8), card_pos="center 50%",
-    about=["Senior pictures", "Portrait photography", "Erie, Pennsylvania", "Presque Isle State Park"],
-    body=f"""          <p class="article__lede">Erie County packs a lot into a short drive: a sand peninsula on Lake Erie, lighthouses, bluffs over the bay, wooded gorges and vineyards. These are the places I&rsquo;d suggest for senior pictures, from the classics to the quieter spots, with a note on light and timing.</p>
+for _f in sorted((ROOT / "tools/journal").glob("*.py")):
+    exec(compile(_f.read_text(), str(_f), "exec"), globals())
+_slugs = [a["slug"] for a in JOURNAL_ALL]
+assert len(_slugs) == len(set(_slugs)), "two journal posts share a slug"
+# Every post's share-card details, scheduled ones included, for tools/ogcards.py
+(ROOT / "tools/journal-cards.json").write_text(json.dumps(
+    [{"slug": a["slug"], "title": a.get("card_title") or a["title"], "sub": a.get("card_sub") or a["section"],
+      "image": a["head"]["file"] if a.get("head") else None, "pos": a.get("card_pos", "center")} for a in JOURNAL_ALL],
+    indent=1, ensure_ascii=False) + "\n")
+J_TODAY = os.environ.get("JOURNAL_TODAY") or datetime.date.today().isoformat()
+JOURNAL = [a for a in JOURNAL_ALL if a["date"] <= J_TODAY]       # oldest first; the index lists newest first
 
-          <h2>Presque Isle State Park</h2>
-          <p>Presque Isle is the obvious choice for a reason. The peninsula is Pennsylvania&rsquo;s only &ldquo;seashore&rdquo;: sand beaches and open water, joined to the mainland about four miles west of downtown Erie, with a road looping roughly thirteen miles around it. For senior pictures, a few spots stand out:</p>
-          <ul>
-            <li><strong>Sunset Point</strong>, between Beaches 9 and 10, is known for exactly what the name promises. Plan the session to end as the sun drops toward the lake.</li>
-            <li><strong>Presque Isle Lighthouse</strong>, for a classic lighthouse portrait.</li>
-            <li><strong>The North Pier Light</strong>, which marks the channel, for a pier and open water behind you.</li>
-            <li><strong>The beaches themselves</strong>, for sand, water and nothing but sky.</li>
-          </ul>
-          <p>The park opens at 5 a.m. and its day-use areas close at dusk, so a sunset session needs to finish on time. It&rsquo;s a state park, so check with the park office (<a href="tel:+18148337424">814-833-7424</a>) about current guidelines for photo sessions before you settle on a date.</p>
 
-          <h2>Lighthouses and the bayfront</h2>
-          <ul>
-            <li><strong>Erie Land Lighthouse</strong>, in east Erie, looks out over the city and Presque Isle.</li>
-            <li><strong>The ERIE sign</strong> on the west bluffs of Bayview Park overlooks Presque Isle Bay: a senior photo that says exactly where it was taken.</li>
-            <li><strong>Bicentennial Tower</strong> has two observation decks, the higher one 138 feet up, with views over the bay.</li>
-            <li><strong>Tom Ridge Environmental Center</strong> has a 75-foot observation tower above the peninsula.</li>
-            <li><strong>Downtown murals.</strong> Erie&rsquo;s murals can be seen on a self-guided tour, and a bright wall makes a bold background for a senior who wants something less traditional.</li>
-          </ul>
+PUBLISHED = {a["slug"] for a in JOURNAL}
 
-          <h2>Woods, waterfalls and trails</h2>
-          <p><strong>Wintergreen Gorge</strong>, east of Erie, has greenery, waterfalls and rock formations; wear real shoes for the walk in and carry the photo shoes in a bag. <strong>Asbury Woods</strong> has trails through the trees, which soften the light on a bright day.</p>
 
-          <h2>Closer to North East</h2>
-          <p>North East is grape country, and the rows of vines in late summer and early fall make a backdrop that says Lake Erie wine country. Vineyards are private property, so always ask the owner first. The town itself is worth a look in October, when the trees along its streets and park turn.</p>
-{jfig(jph("north-east", 7), "Red maples in North East, Pennsylvania, October 2026")}
+def resolve_links(body):
+    """[[slug|text]] links to another journal post once it's published, and is plain text until then."""
+    return _re.sub(r"\[\[([a-z0-9-]+)\|([^\]]+)\]\]",
+                   lambda m: f'<a href="../{m[1]}/">{m[2]}</a>' if m[1] in PUBLISHED else m[2], body)
 
-          <h2>When to go</h2>
-          <ul>
-            <li><strong>Golden hour.</strong> The hour or so before sunset gives warm, soft light that flatters everyone. On the lake, it&rsquo;s the best light of the day.</li>
-            <li><strong>Overcast days</strong> are underrated: even light, no squinting, and colors that stay true.</li>
-            <li><strong>October</strong> is when fall color in Erie County tends to peak, and it books up for that reason.</li>
-            <li><strong>Two locations, not five.</strong> Driving between spots eats the light. Pick two that are close together and spend the time on photographs.</li>
-            <li><strong>Bring a jacket for the lake.</strong> It&rsquo;s windier by the water, so plan hair and layers for it.</li>
-          </ul>
 
-          <h2>Booking senior pictures</h2>
-          <p>I photograph seniors and graduates on location around Erie County. Tell me the places you have in mind, or let me suggest a pair that work well together, and I&rsquo;ll reply with rates.</p>
-{cta("Book senior pictures", "Pick a date and I&rsquo;ll reply to confirm, with rates. Sessions on location around Erie and North East.", [BOOK_SENIOR, RATES])}""",
-    particulars=[("Area", "Erie County, Pennsylvania"),
-                 ("Places", "Presque Isle State Park, Erie Land Lighthouse, Bayview Park, Bicentennial Tower, Tom Ridge Environmental Center, Wintergreen Gorge, Asbury Woods and North East"),
-                 ("Photographs", "North East in October, by Dorian Bailey"),
-                 ("Service", f'<a href="{J}photography/#types">Seniors and graduates</a>')],
-    images=[jph("north-east", 8), jph("north-east", 7)],
-))
-
-# ---------------------------------------------------------------- 3. How an estate sale works
-_rows = "".join(f"<tr><td>${t:,}</td><td>&minus;${round(t * 0.2):,}</td><td>&minus;$995</td><td>${t - round(t * 0.2) - 995:,}</td></tr>" for t in (10000, 16000))
-JOURNAL.append(dict(
-    slug="how-estate-sales-work-erie-county", section="Estate sales",
-    title="How an Estate Sale Works in Erie County",
-    seo="How an Estate Sale Works in Erie County, PA | Dorian Bailey",
-    desc="How Better Selling With Bailey runs an estate sale in Erie County, PA: walkthrough and pricing, staging, promotion, sale days, cleanup and what you keep, explained by Dorian Bailey.",
-    standfirst="From the first walkthrough to the last box out the door: what happens, what it costs, and what you keep.",
-    dek="Walkthrough, pricing, staging, promotion, sale days and cleanup, with the fees worked out: an estate sale with Better Selling With Bailey, start to finish.",
-    head=jph(5), card_pos="center 40%",
-    about=["Estate sales", "Erie County, Pennsylvania", "Better Selling With Bailey"],
-    body=f"""          <p class="article__lede">An estate sale is a sale of a home&rsquo;s contents, held in the home itself. It isn&rsquo;t only for after a loss: people hold them when they move or downsize, and many of my clients treat a sale as a cleanout of a garage, basement or collection that happens to pay. Here is how a sale works with Better Selling With Bailey, start to finish.</p>
-
-          <h2>Six steps</h2>
-          <ol class="article__steps">
-            <li><strong>Walkthrough and pricing.</strong> I walk through the home with you, assess everything to be sold and price it to sell. You can be involved in every pricing decision or none of them. Before the walkthrough, set aside anything you&rsquo;re keeping: family photographs, papers, and anything with sentimental value.</li>
-            <li><strong>Staging.</strong> Rooms are organized and merchandise is laid out so buyers can browse easily and find what they came for. When a sale outgrows the house, tables go outside under a canopy.</li>
-            <li><strong>Promotion.</strong> Listings, Facebook events and local outreach bring the right buyers to the door, whatever the weather.</li>
-            <li><strong>Sale days.</strong> I run the floor: every customer, every sale and every question.</li>
-            <li><strong>Cleanup.</strong> Teardown at the end of the sale, and free removal of whatever is left if you want it gone.</li>
-            <li><strong>Proceeds.</strong> The earnings go to you, minus the flat fee and commission agreed before the sale began.</li>
-          </ol>
-
-          <h2>What it costs</h2>
-          <p>The terms are simple: a $995 flat fee plus 20% of total sales, agreed before the sale begins. Removing whatever is left afterward is free. Here is the math on two sale totals:</p>
-          <div class="article__table">
-            <table>
-              <thead><tr><th scope="col">Total sales</th><th scope="col">Commission, 20%</th><th scope="col">Flat fee</th><th scope="col">You keep</th></tr></thead>
-              <tbody>{_rows}</tbody>
-            </table>
-          </div>
-          <p>The best weekend so far brought in more than $16,000. To try your own number, use <a href="{J}better-selling/#calc-title">the calculator on the Better Selling With Bailey page</a>.</p>
-
-          <h2>What sells</h2>
-          <p>These are the categories that consistently draw buyers at Erie County sales:</p>
-          <ul class="article__cols">
-{chr(10).join(f"            <li>{x}</li>" for x in SELLS)}
-          </ul>
-          <p>Collections do especially well when they&rsquo;re promoted to the people who collect them, as at <a href="../star-wars-collectors-sale-north-east/">a Star Wars collector&rsquo;s sale in North East</a> in May 2026.</p>
-
-          <h2>Do you need to be there?</h2>
-          <p>No. Some clients like to be on hand for every minute; others would rather hand everything over and come back when it&rsquo;s done. Either works.</p>
-
-          <h2>Where</h2>
-          <p>Better Selling With Bailey is based in North East and runs sales in clients&rsquo; homes across Erie County, including Erie.</p>
-{cta("Book an estate sale", "Pick a date and I&rsquo;ll reply to set up a walkthrough.", [BOOK_ESTATE, EMAIL_BSWB])}""",
-    particulars=[("Company", f'<a href="{J}better-selling/">Better Selling With Bailey</a>'), ("Region", "Erie County, Pennsylvania"),
-                 ("Terms", "$995 flat fee plus 20% commission; leftover removal free"),
-                 ("Email", f'<a href="mailto:{BSWB_EMAIL}">{BSWB_EMAIL}</a>'), ("Photograph", "Ben and Andy Nagle")],
-    images=[jph(5)],
-))
-
-# ---------------------------------------------------------------- 4. The Star Wars sale
-JOURNAL.append(dict(
-    slug="star-wars-collectors-sale-north-east", section="Estate sales",
-    title="A Star Wars Collector’s Sale in North East",
-    seo="Star Wars Collector’s Sale in North East, PA | Better Selling With Bailey",
-    desc="A Better Selling With Bailey sale in North East, Pennsylvania: a Star Wars collection of action figures, books and sealed LEGO sets that drew a crowd through the rain and the local news.",
-    standfirst="In May 2026, a collection of action figures, books and sealed LEGO sets drew a line of buyers through heavy rain and wind, and the local news came out to film it.",
-    dek="Action figures, books and sealed LEGO sets, a line of buyers in the rain, and a story on the local news.",
-    head=jph(2), card_pos="center 35%",
-    about=["Estate sales", "Star Wars collectibles", "North East, Pennsylvania"],
-    body=f"""          <p class="article__lede">Some sales sell themselves once the right people hear about them. This one was a Star Wars collection in North East: boxed action figures by the hundred, books and sealed LEGO sets, staged across a garage and down the side of the house.</p>
-
-          <h2>The setup</h2>
-          <p>The garage was staged wall to wall, with boxed figures on racks and LEGO sets stacked where buyers could see the boxes. More tables ran down the side of the house under a canopy, which mattered once the rain came in.</p>
-{jfig(jph(0), "The garage, staged")}
-{jpair((jph(1), "Tables down the side of the house"), (jph(4), "Racks of boxed figures"))}
-
-          <h2>Rain, and a crowd anyway</h2>
-          <p><a href="{LINKS['erie']}" rel="noopener">YourErie.com reported</a> an eager crowd through heavy rain and wind. Buyers lined up on the wet sale morning and browsed the tables under the canopy.</p>
-{jpair((jph(5), "Under the canopy"), (jph(3), "The local news, filming the sale"))}
-
-          <h2>On the news</h2>
-          <p>The local TV news came out to film the sale, and YourErie.com ran the story in May 2026.</p>
-
-          <h2>What the clients said</h2>
-          <blockquote class="quote">
-            <p>Everything was done for me. Great turnout for the sale. Was better than I hoped for. The local TV station even came out and did a story on the sale.</p>
-            <cite>Andy N., Google review</cite>
-          </blockquote>
-          <blockquote class="quote">
-            <p>Ran a giant garage sale for me and it went off without a hitch. Great advertising and phenomenal work setting things up and execution of the sale.</p>
-            <cite>Ben N., Google review</cite>
-          </blockquote>
-
-          <h2>Why it worked</h2>
-          <p>A collection sells when it&rsquo;s laid out so buyers can take it in at a glance, and promoted to the people who collect it. Staging, promotion and running the floor are the whole job; <a href="../how-estate-sales-work-erie-county/">here is how a sale works</a>, step by step.</p>
-          <p class="article__credit">Photographs of the sale by clients Ben and Andy Nagle, from their Google reviews.</p>
-{cta("Book an estate sale", "Have a collection, a garage or a whole house to sell? Pick a date and I&rsquo;ll reply to set up a walkthrough.", [BOOK_ESTATE, EMAIL_BSWB])}""",
-    particulars=[("Where", "North East, Pennsylvania"), ("When", "May 2026"),
-                 ("Collection", "Star Wars action figures, books and sealed LEGO sets"),
-                 ("Press", f'<a href="{LINKS["erie"]}" rel="noopener">YourErie.com, May 2026</a>'),
-                 ("Company", f'<a href="{J}better-selling/">Better Selling With Bailey</a>'),
-                 ("Photographs", "Ben and Andy Nagle")],
-    images=[jph(i) for i in (2, 0, 1, 4, 5, 3)],
-))
-
+def long_day(d):
+    y, m, dd = (int(x) for x in d.split("-"))
+    return f"{MONTHS[m - 1]} {dd}, {y}"
 
 def words(s):
     return len(_re.sub(r"<[^>]+>|&[a-z]+;", " ", s).split())
@@ -1569,50 +1415,57 @@ def words(s):
 
 import re as _re
 BLOG_ID = SITE + "/journal/#journal"
+
+
+def head_fig(a):
+    hd = a.get("head")
+    if not hd:
+        return ""
+    return f"""
+        <figure class="entry-head__print">
+          <div class="frame"><img src="{J}assets/photos/{hd['file']}" srcset="{srcset(hd, J, full=True)}" sizes="(max-width: 900px) 320px, 420px" alt="{html.escape(hd['alt'])}" width="{hd['w']}" height="{hd['h']}" style="object-position:{a.get('card_pos', 'center')}" fetchpriority="high" decoding="async"></div>
+        </figure>"""
 for i, a in enumerate(JOURNAL):
     url = f"{SITE}/journal/{a['slug']}/"
     a["url"] = url
     a["mins"] = max(1, round(words(a["body"]) / 230))
-    hd = a["head"]
+    hd = a.get("head")
     prev_ = JOURNAL[i - 1] if i > 0 else None
     next_ = JOURNAL[i + 1] if i + 1 < len(JOURNAL) else None
     nav_prev = (f'<a class="entry-nav__prev" href="../{prev_["slug"]}/"><em>Previous</em> {html.escape(prev_["title"])}</a>' if prev_
                 else '<a class="entry-nav__prev" href="../"><em>Back to</em> the Journal</a>')
     nav_next = (f'<a class="entry-nav__next" href="../{next_["slug"]}/"><em>Next</em> {html.escape(next_["title"])}</a>' if next_
                 else '<a class="entry-nav__next" href="../"><em>Back to</em> the Journal</a>')
-    parts = [("Published", f'<time datetime="{J_DATE}">{J_DATE_LONG}</time>'),
+    parts = [("Published", f'<time datetime="{a["date"]}">{long_day(a["date"])}</time>'),
              ("Written by", f'<a href="{J}" rel="author">Dorian Bailey</a>, North East, Pennsylvania')] + a["particulars"]
     dl = "\n".join(f"            <div><dt>{k}</dt><dd>{v_}</dd></div>" for k, v_ in parts)
     post = {"@type": "BlogPosting", "@id": url + "#article", "headline": a["title"], "description": a["desc"],
-            "url": url, "mainEntityOfPage": url, "datePublished": J_DATE, "dateModified": J_DATE, "inLanguage": "en-US",
+            "url": url, "mainEntityOfPage": url, "datePublished": a["date"], "dateModified": a["date"], "inLanguage": "en-US",
             "author": {"@id": PERSON_ID}, "publisher": {"@id": PERSON_ID}, "isPartOf": {"@id": BLOG_ID},
-            "image": [f"{SITE}/assets/photos/{ph['file']}" for ph in a["images"][:3]],
+            "image": [f"{SITE}/assets/photos/{ph['file']}" for ph in a["images"][:3]] or [f"{SITE}/assets/img/og-journal-{a['slug']}.jpg"],
             "articleSection": a["section"], "keywords": a["about"], "wordCount": words(a["body"])}
     page(f"journal/{a['slug']}/index.html", "journal-post", a["seo"], html.escape(a["desc"]),
          og_image=f"assets/img/og-journal-{a['slug']}.jpg", og_type="article",
          head_extra=(f'\n  <link rel="preload" href="{J}assets/fonts/libre-caslon-text-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>'
-                     f'\n  <meta property="article:published_time" content="{J_DATE}">'
+                     f'\n  <meta property="article:published_time" content="{a["date"]}">'
                      f'\n  <meta property="article:author" content="{SITE}/">'
                      f'\n  <meta property="article:section" content="{a["section"]}">'),
          ld=[PERSON, post], crumb=[("Journal", SITE + "/journal/"), (a["title"], url)], body=f"""    <article>
-    <header class="entry-head entry-head--figure entry-head--article">
+    <header class="entry-head {'entry-head--figure ' if hd else ''}entry-head--article">
       <div class="wrap">
         <div class="entry-head__text">
           <p class="entry-head__num"><a href="../">Journal</a> <span aria-hidden="true">&middot;</span> {a['section']}</p>
           <h1>{html.escape(a['title'])}</h1>
           <p class="entry-head__standfirst">{a['standfirst']}</p>
-          <p class="article__byline">By <a href="{J}" rel="author">Dorian Bailey</a> <span aria-hidden="true">&middot;</span> <time datetime="{J_DATE}">{J_DATE_LONG}</time> <span aria-hidden="true">&middot;</span> <span class="nowrap">{a['mins']} minute read</span></p>
-        </div>
-        <figure class="entry-head__print">
-          <div class="frame"><img src="{J}assets/photos/{hd['file']}" srcset="{srcset(hd, J, full=True)}" sizes="(max-width: 900px) 320px, 420px" alt="{html.escape(hd['alt'])}" width="{hd['w']}" height="{hd['h']}" style="object-position:{a['card_pos']}" fetchpriority="high" decoding="async"></div>
-        </figure>
+          <p class="article__byline">By <a href="{J}" rel="author">Dorian Bailey</a> <span aria-hidden="true">&middot;</span> <time datetime="{a['date']}">{long_day(a['date'])}</time> <span aria-hidden="true">&middot;</span> <span class="nowrap">{a['mins']} minute read</span></p>
+        </div>{head_fig(a)}
       </div>
     </header>
 
     <section class="section">
       <div class="wrap entry">
         <div class="entry__prose article">
-{a['body']}
+{resolve_links(a['body'])}
         </div>
         <aside class="particulars" aria-labelledby="particulars-title">
           <h2 id="particulars-title">Particulars</h2>
@@ -1631,12 +1484,14 @@ for i, a in enumerate(JOURNAL):
 
 # ---------------------------------------------------------------- Journal index
 def j_item(a):
-    ph = a["head"]
+    ph = a.get("head")
+    img = (f'<div class="frame"><img src="../assets/photos/{ph['thumb']}" srcset="{srcset(ph, '../')}" sizes="(max-width: 640px) 120px, 220px" alt="" width="{thumb_dims(ph)[0]}" height="{thumb_dims(ph)[1]}" style="object-position:{a.get('card_pos', 'center')}" loading="lazy" decoding="async"></div>'
+           if ph else '<div class="frame journal-list__mark">' + sig(40) + '</div>')
     return f"""          <li>
             <a href="{a['slug']}/">
-              <div class="frame"><img src="../assets/photos/{ph['thumb']}" srcset="{srcset(ph, '../')}" sizes="(max-width: 640px) 120px, 220px" alt="" width="{thumb_dims(ph)[0]}" height="{thumb_dims(ph)[1]}" style="object-position:{a['card_pos']}" loading="lazy" decoding="async"></div>
+              {img}
               <div class="journal-list__text">
-                <p class="journal-list__kicker">{a['section']} <span aria-hidden="true">&middot;</span> <time datetime="{J_DATE}">{J_DATE_LONG}</time></p>
+                <p class="journal-list__kicker">{a['section']} <span aria-hidden="true">&middot;</span> <time datetime="{a['date']}">{long_day(a['date'])}</time></p>
                 <h2 class="journal-list__title">{html.escape(a['title'])}</h2>
                 <p class="journal-list__dek">{a['dek']}</p>
               </div>
@@ -1647,8 +1502,8 @@ def j_item(a):
 BLOG = {"@type": "Blog", "@id": BLOG_ID, "url": SITE + "/journal/", "name": "The Journal of Dorian Bailey", "inLanguage": "en-US",
         "description": "Notes from Dorian Bailey's work in photography and estate sales around Erie County, Pennsylvania.",
         "author": {"@id": PERSON_ID}, "publisher": {"@id": PERSON_ID},
-        "blogPost": [{"@type": "BlogPosting", "@id": a["url"] + "#article", "headline": a["title"], "url": a["url"], "datePublished": J_DATE}
-                     for a in JOURNAL]}
+        "blogPost": [{"@type": "BlogPosting", "@id": a["url"] + "#article", "headline": a["title"], "url": a["url"], "datePublished": a["date"]}
+                     for a in sorted(JOURNAL, key=lambda a: a["date"], reverse=True)]}
 page("journal/index.html", "journal", "Journal | Dorian Bailey, Photographer and Estate Sales in Erie, PA",
      "The journal of Dorian Bailey: notes on event photography, senior pictures and estate sales around Erie County and North East, Pennsylvania.",
      f"""    <header class="entry-head">
@@ -1662,7 +1517,7 @@ page("journal/index.html", "journal", "Journal | Dorian Bailey, Photographer and
     <section class="section">
       <div class="wrap">
         <ol class="journal-list">
-{chr(10).join(j_item(a) for a in JOURNAL)}
+{chr(10).join(j_item(a) for a in sorted(JOURNAL, key=lambda a: a['date'], reverse=True))}
         </ol>
       </div>
     </section>
@@ -1690,7 +1545,7 @@ PAGE_IMAGES = {
     "photography/": ["assets/photos/" + ph["file"] for c in M["collections"] for ph in c["photos"]],
     "record/": ["assets/img/dorian-bailey.jpg"],
     "privacy/": [],
-    "journal/": ["assets/photos/" + a["head"]["file"] for a in JOURNAL],
+    "journal/": ["assets/photos/" + a["head"]["file"] for a in JOURNAL if a.get("head")],
 }
 for a in JOURNAL:
     PAGE_IMAGES[f"journal/{a['slug']}/"] = ["assets/photos/" + ph["file"] for ph in a["images"]]
