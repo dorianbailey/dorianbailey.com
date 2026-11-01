@@ -441,20 +441,20 @@
    "title": "Halloween",
    "place": "Costume portraits",
    "date": "October 31, 2026",
-   "note": "Portraits at golden hour on Halloween: Freddy Krueger and a pink sweater, Clark Kent mid-change with Supergirl, and all four together under the October leaves.",
-   "cover": "halloween/t-halloween-02.jpg",
+   "note": "Portraits at golden hour on Halloween: Freddy and Nancy from A Nightmare on Elm Street, Clark Kent mid-change with Supergirl, and all four together under the October leaves.",
+   "cover": "halloween/t-halloween-11.jpg",
    "photos": [
     {
      "file": "halloween/halloween-01.jpg",
      "thumb": "halloween/t-halloween-01.jpg",
-     "alt": "Freddy Krueger tilting up the chin of a woman in a pink sweater",
+     "alt": "Freddy Krueger tilting up Nancy’s chin",
      "w": 1333,
      "h": 2000
     },
     {
      "file": "halloween/halloween-02.jpg",
      "thumb": "halloween/t-halloween-02.jpg",
-     "alt": "A mock gasp on the porch as Freddy Krueger’s claws reach over her shoulder",
+     "alt": "Nancy’s mock gasp on the porch as Freddy Krueger’s claws reach over her shoulder",
      "w": 1600,
      "h": 2000
     },
@@ -468,21 +468,21 @@
     {
      "file": "halloween/halloween-04.jpg",
      "thumb": "halloween/t-halloween-04.jpg",
-     "alt": "Freddy Krueger’s claws resting on her shoulder",
+     "alt": "Freddy Krueger’s claws resting on Nancy’s shoulder",
      "w": 1500,
      "h": 2000
     },
     {
      "file": "halloween/halloween-05.jpg",
      "thumb": "halloween/t-halloween-05.jpg",
-     "alt": "Freddy Krueger behind her, his glove across her sweater",
+     "alt": "Freddy Krueger behind Nancy, his glove across her sweater",
      "w": 1500,
      "h": 2000
     },
     {
      "file": "halloween/halloween-06.jpg",
      "thumb": "halloween/t-halloween-06.jpg",
-     "alt": "Freddy Krueger’s arm around her shoulders from behind",
+     "alt": "Freddy Krueger’s arm around Nancy’s shoulders from behind",
      "w": 1500,
      "h": 2000
     },
@@ -517,7 +517,7 @@
     {
      "file": "halloween/halloween-11.jpg",
      "thumb": "halloween/t-halloween-11.jpg",
-     "alt": "Both couples together beneath the autumn trees",
+     "alt": "Freddy, Nancy, Supergirl and Clark Kent together beneath the autumn trees",
      "w": 2000,
      "h": 1500
     }
