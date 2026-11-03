@@ -24,7 +24,7 @@
   </url>
   <url>
     <loc>https://dorianbailey.com/metazoo/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-02.jpg</image:loc></image:image>
   </url>
   <url>
@@ -154,11 +154,12 @@
   </url>
   <url>
     <loc>https://dorianbailey.com/journal/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-26.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/north-east/north-east-08.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-canopy.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-crowd.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/halloween/halloween-02.jpg</image:loc></image:image>
   </url>
   <url>
     <loc>https://dorianbailey.com/journal/legends-expo-metazoo-tournament/</loc>
@@ -185,12 +186,22 @@
   </url>
   <url>
     <loc>https://dorianbailey.com/journal/star-wars-collectors-sale-north-east/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-crowd.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-garage-collectibles.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-tables.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-garage.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-canopy.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-news.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://dorianbailey.com/journal/halloween-costume-portraits/</loc>
+    <lastmod>2026-11-03</lastmod>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/halloween/halloween-02.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/halloween/halloween-01.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/halloween/halloween-05.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/halloween/halloween-08.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/halloween/halloween-09.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/halloween/halloween-11.jpg</image:loc></image:image>
   </url>
 </urlset>
