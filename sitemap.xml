@@ -154,13 +154,14 @@
   </url>
   <url>
     <loc>https://dorianbailey.com/journal/</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-26.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/north-east/north-east-08.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-canopy.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/estate-sales/estate-sale-crowd.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/halloween/halloween-02.jpg</image:loc></image:image>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/green-eyes/green-eyes-07.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-02.jpg</image:loc></image:image>
   </url>
   <url>
     <loc>https://dorianbailey.com/journal/legends-expo-metazoo-tournament/</loc>
@@ -212,7 +213,13 @@
   </url>
   <url>
     <loc>https://dorianbailey.com/journal/take-the-oddway-road-trip-planner/</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <image:image><image:loc>https://dorianbailey.com/assets/photos/green-eyes/green-eyes-07.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://dorianbailey.com/journal/what-is-metazoo/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/legends/legends-02.jpg</image:loc></image:image>
+    <image:image><image:loc>https://dorianbailey.com/assets/photos/mothman/mothman-14.jpg</image:loc></image:image>
   </url>
 </urlset>
